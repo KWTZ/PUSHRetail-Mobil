@@ -13,6 +13,7 @@ import { DailyReportComponent } from './report/daily-report/daily-report.compone
 import { SalesResultComponent } from './sales/sales-result/sales-result.component';
 import { DailyWorkingHoursComponent } from './time-track/daily-working-hours/daily-working-hours.component';
 import { MessageComponent } from './communication/message/message.component';
+import { IntroComponent } from './intro/intro.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { MessageComponent } from './communication/message/message.component';
     SalesResultComponent,
     DailyWorkingHoursComponent,
     MessageComponent,
-    TopnavComponent
+    TopnavComponent,
+    IntroComponent
   ],
   imports: [
     BrowserModule,
