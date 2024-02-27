@@ -3,24 +3,24 @@
          <div class="container">
              <div class="header-inner">
                  <div class="logo">
-                     <a href="#"><img src="images/logo.png" alt=""></a>
+                     <a href="#"><img src="assets/logo_red_dot.png" alt="" style="height: 80px; margin-top: 10px"></a>
                  </div>
                  <div class="login-icon">
-                     <a href="login.html"><img src="images/user.png" alt=""></a>
+                     <a [routerLink]="['/', 'login']"><img src="assets/user.png" alt=""></a>
                  </div>
-                 <div class="humbarger-menu humbarger-menu-on">
+                 <div class="hamburger-menu hamburger-menu-on">
                      <div class="burger burger-squeeze"><div class="burger-lines"></div></div>
                  </div>
                  <div class="main-menu">
                      <ul>
-                         <li><a href="home.html">Start/ Home</a></li>                                
-                         <li><a href="working-hours.html">Zeiterfassung</a></li>
-                         <li><a href="sales-result.html">Verkäufe</a></li> 
-                         <li><a href="dailyreport.html">Berichte</a></li>                              
-                         <li><a href="communication.html">Mitteilungen</a></li>                                
-                         <li><a href="reward-competion.html">Gewinnspiel/ Prämie</a></li>
-                         <li><a href="placement.html">Einsätze</a></li>
-                         <li><a href="login.html">Abmelden</a></li>
+                         <li><a [routerLink]="['/', 'home']">Start/ Home</a></li>                                
+                         <li><a [routerLink]="['/', 'dailywork']">Zeiterfassung</a></li>
+                         <li><a [routerLink]="['/', 'sales']">Verkäufe</a></li> 
+                         <li><a [routerLink]="['/', 'dailyreport']">Berichte</a></li>                              
+                         <li><a [routerLink]="['/', 'message']">Mitteilungen</a></li>                                
+                         <li><a [routerLink]="['/', 'reward']">Gewinnspiel/ Prämie</a></li>
+                         <li><a [routerLink]="['/', 'placement']">Einsätze</a></li>
+                         <li><a [routerLink]="['/', 'login']">Abmelden</a></li>
                      </ul>
                  </div>
              </div>

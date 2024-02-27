@@ -1,0 +1,50 @@
+<app-topnav></app-topnav>
+<main>
+     <div class="main-part">
+           <section class="bg-white section-100">
+            <div class="container">
+                  <form class="glb-form reg-form" *ngIf="!isSuccessful" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+                  <div class="form-field">
+                    <label for="username">Benutzername</label>
+                    <input type="text" class="form-control" name="username" [(ngModel)]="form.username" required minlength="3" maxlength="10" #username="ngModel" />
+            
+                    <div class="alert alert-danger" *ngIf="username.errors && f.submitted">
+                          <div *ngIf="username.errors.required">Pflichtfeld Benutzername</div>
+                          <div *ngIf="username.errors.minlength">Benutzername muss mindestens 3  Zeichen beinhalten.</div>
+                          <div *ngIf="username.errors.maxlength">Benutzername darf nicht länger als 10 Zeichen sein!</div>
+                        </div>
+                  </div>
+                  <div class="form-field">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" name="email" [(ngModel)]="form.email" required email #email="ngModel" />
+            
+                      <div class="alert alert-danger" *ngIf="email.errors && f.submitted">
+                        <div *ngIf="email.errors.required">Pflichtfeld: eMail</div>
+                        <div *ngIf="email.errors.email">Das ist keine gültige eMail Adresse</div>
+                      </div>
+                  </div>
+                  <div class="form-field">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" name="password" [(ngModel)]="form.password" minlength="10" #password="ngModel" />
+            
+                    <div class="alert alert-danger" *ngIf="password.errors && f.submitted">
+                      <div *ngIf="password.errors.required">Pflichtfeld: Password</div>
+                      <div *ngIf="password.errors.minlength">Das Password muss mindestens 10 Zeichen beinhalten!</div>
+                    </div>
+                  </div>
+                  <div class="form-field">
+                    <button class="btn btn-primary btn-block">Registrieren</button>
+                  </div>
+            
+                  <div class="alert alert-warning" *ngIf="f.submitted && isSignUpFailed">Registierung fehlgeschlagen!<br />{{ errorMessage }}</div>
+                </form>
+            
+                <div class="alert alert-success" *ngIf="isSuccessful">Deine Registerung war erfolgreich!</div>
+            </div>
+            <div class="top-around-blue"></div>
+            <div class="bottom-around-blue"></div>
+
+          </section>
+     </div>
+</main>
+<app-footer></app-footer>

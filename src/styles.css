@@ -203,7 +203,7 @@ label {
 
 /*MOBILE HUMBERGER */
 
-.humbarger-menu{
+.hamburger-menu{
 display: flex;
 width: auto;
 position: relative;
@@ -215,7 +215,7 @@ z-index: 999999;
 transition: all 0.5s ease 0s;
 }
 
-.humbarger-menu a{
+.hamburger-menu a{
 display: inline-block;
 width: 40px;
 height: 35px;
@@ -265,18 +265,18 @@ display: block;
 content: "";
 width: 100%;
 border-radius: 0;
-background-color: #000000;
+background-color: var(--acc-blue);
 height: .30em;
 position: absolute;
 -webkit-transform: rotate(0);
 transform: rotate(0);
 }
 
-.humbarger-menu-on.active .burger .burger-lines, .humbarger-menu-on.active .burger .burger-lines::after, .humbarger-menu-on.active .burger .burger-lines::before{
+.hamburger-menu-on.active .burger .burger-lines, .hamburger-menu-on.active .burger .burger-lines::after, .hamburger-menu-on.active .burger .burger-lines::before{
 background: rgba(255, 255, 255, 0.3);
 }
 
-.humbarger-menu.humbarger-menu-on.active {
+.hamburger-menu.hamburger-menu-on.active {
 position: relative;
 margin-left: 15px;
 -webkit-transition: all 0.5s ease 0s;
@@ -332,7 +332,8 @@ background-color: initial;
 }
 
 .main-part{
-  padding: 45px 0 25px 0;
+  margin-top: 90px;
+  /* padding: 45px 0 25px 0; */
 }
 
 .network-part{
@@ -717,8 +718,16 @@ background-color: initial;
   bottom: 50px;
 }
 
-.verkaufe-form{
+.verkaufe-form, .login-form, .glb-form{
   padding-right: 52px;
+}
+
+.glb-form {  
+  padding-left: 52px;
+}
+
+.reg-form {
+  margin-top: 100px;
 }
 
 .verkaufe-table table{
@@ -794,7 +803,26 @@ background-color: initial;
   max-width: 22px;
 }
 
-.top-around {
+.top-around, .top-around-blue {
+  width: 90px;
+  height: 90px;
+  position: absolute;
+  left: -35px;
+  top: 50px;
+
+  border: 5px solid var(--acc-yellow);
+  -webkit-border-radius: 100px;
+  -moz-border-radius: 100px;
+  border-radius: 100px;
+  opacity: 0.75;
+}
+
+.top-around-blue {
+  bottom: 100px;
+  border: 5px solid var(--acc-blue);
+}
+
+.bottom-around, .bottom-around-blue {
   width: 90px;
   height: 90px;
   position: absolute;
@@ -807,17 +835,8 @@ background-color: initial;
   opacity: 0.75;
 }
 
-.bottom-around {
-  width: 90px;
-  height: 90px;
-  position: absolute;
-  left: -35px;
-  top: 20px;
-  border: 5px solid var(--acc-yellow);
-  -webkit-border-radius: 100px;
-  -moz-border-radius: 100px;
-  border-radius: 100px;
-  opacity: 0.75;
+.bottom-around-blue {
+  border: 5px solid var(--acc-blue);
 }
 
 .login-illution {
@@ -868,4 +887,13 @@ background-color: initial;
 /*Custom by dev*/
 #bus_img {
 display: none;
+}
+
+.alert {
+  padding: 0.5em;
+  min-height: 2.5em;
+}
+
+.alert-success {
+  margin-top: 150px;
 }
