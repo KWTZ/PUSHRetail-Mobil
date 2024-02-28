@@ -3,10 +3,10 @@
 
 	$(document).ready(function(){
 
-		$('.hamburger-menu').on('click',function(){
-    	$(this).parent().find('.main-menu').toggleClass('active');
-    	$(this).find('.burger').toggleClass('open');
-      $('body').toggleClass('body-hide-menu');
+    $(document).on("click",".hamburger-menu",function() {
+        $(this).parent().find('.main-menu').toggleClass('active');
+    	  $(this).find('.burger').toggleClass('open');
+        $('body').toggleClass('body-hide-menu');
     });
 
     setTimeout(function() {
