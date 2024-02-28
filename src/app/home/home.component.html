@@ -1,5 +1,42 @@
 <app-topnav></app-topnav>
-<div class="wrapper">
-
-</div>
+<main>
+    <div class="main-part">
+       <section class="network-part">
+           <div class="container">
+               <div class="" style="max-width: 290px; position:relative; top:-20px;">
+                    <a [routerLink]="['/', 'dailyreport']" >
+                        <div class="round-item round-item-sm round-item-yellow" style="position: absolute; left:30px; top:-100px; ">
+                            Berichte
+                        </div>
+                    </a>
+                    <a [routerLink]="['/', 'placement']">
+                        <div class="round-item round-item-md round-item-gray" style="position: absolute; top:-80px; right:-20px;">
+                            Einsätze
+                        </div>
+                    </a>
+                    <a [routerLink]="['/', 'sales']" style="position: absolute; left:40%; top:38%">
+                        <div class="round-item  round-item-blue" style="width: 120px; height: 120px;">
+                            Verkäufe
+                        </div>
+                    </a>
+                    <a [routerLink]="['/', 'reward']">
+                        <div class="round-item round-item-sm round-item-pink" style="position:absolute; left:0; top:80px;">
+                            Gewinn-<br>spiel/ Prämien
+                        </div>
+                    </a>
+                    <a [routerLink]="['/', 'dailywork']">
+                        <div class="round-item round-item-md round-item-perrot" style="position: absolute; left:180px; top:160px;">
+                            Zeit-<br> erfassung
+                        </div>
+                    </a>
+                    <a [routerLink]="['/', 'message']">
+                        <div class="round-item round-item-sm round-item-sky" style="position: absolute; right:-80px; top:40px;">
+                            Kommuni-<br>kation
+                        </div>
+                    </a>
+               </div>                       
+           </div>
+       </section>
+    </div>
+</main>
 <app-footer></app-footer>
