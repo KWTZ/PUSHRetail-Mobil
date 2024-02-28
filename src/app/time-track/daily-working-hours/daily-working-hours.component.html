@@ -1,1 +1,121 @@
-<p>daily-working-hours works!</p>
+<app-topnav></app-topnav>
+<main>
+     <div class="main-part">
+         <section class="bg-white section-100">               
+               <div class="container">
+                    <div class="glb-inner">
+                        <h3>Deine nächsten Einsätze:</h3>     
+                         <div class="placement"> 
+                            <div >                                
+                                <strong>{{ currentAssignment.operationDate }} {{ weekdayName }}</strong>
+                                <div>{{ currentAssignment.posName }} {{ currentAssignment.externalPOSNo }}</div>
+                                <div>{{ currentAssignment.posStreet }}</div>
+                                <div>{{ currentAssignment.postalcode }} {{ currentAssignment.city }}</div>
+                            </div>
+                            <div class="assign-navigation">
+                                <img src="assets/action-arrow.svg" alt="prev" class="action-btn action-arrow-left" (click)="setAssign(-1)"/>
+                                <img src="assets/action-arrow-active.svg" alt="prev" class="action-btn action-arrow-right" (click)="setAssign(1)" />
+                            </div>
+                         </div>
+                         <div class="action-icons">
+                            
+                             <div style="display:flex; flex-direction: row; margin-top: 10px; justify-content:space-around;">
+                                 <div class="item">
+                                     <div class="slider-icon">
+                                         <img src="assets/icon1.png" alt="" class="icon-normal" style="height:40px;">
+                                         <img src="assets/icon1-active.png" alt="" class="icon-active" style="height:40px;">
+                                     </div>
+                                 </div>
+                                 <div class="item">
+                                     <div class="slider-icon">
+                                         <img src="assets/icon2.png" alt="" class="icon-normal" style="height:40px;">
+                                         <img src="assets/icon2-active.png" alt="" class="icon-active" style="height:40px;">
+                                     </div>
+                                 </div>
+                                 <div class="item">
+                                     <div class="slider-icon">
+                                         <img src="assets/icon3.png" alt="" class="icon-normal" style="height:40px;">
+                                         <img src="assets/icon3-active.png" alt="" class="icon-active" style="height:40px;">
+                                     </div>
+                                 </div>
+                                 <div class="item">
+                                     <div class="slider-icon">
+                                         <img src="assets/icon4.png" alt="" class="icon-normal"  style="height:40px;">
+                                         <img src="assets/icon4-active.png" alt="" class="icon-active" style="height:40px;">
+                                     </div>
+                                 </div>                                  
+                             </div> 
+                         </div>
+                    </div>
+                         <div class="verkaufe-bottom">
+                             <form class="verkaufe-form" name="form" method="post">
+                                 <div class="form-field">
+                                     <label>Beginn (Uhrzeit):</label>
+                                     <input type="text" name="txt" placeholder="">
+                                 </div>
+                             </form>
+                         </div>
+                         <div class="verkaufe-table">
+                             <label>Pausen, von - bis</label>
+                             <table>
+                                 <thead>
+                                     <tr>
+                                         <th>Beginn</th>
+                                         <th>Ende</th>
+                                         <th>Std.</th>
+                                     </tr>
+                                 </thead>
+                                 <tbody>
+                                     <tr>
+                                         <td>10:30</td>
+                                         <td>19:15</td>
+                                         <td>8:45</td>
+                                     </tr>
+                                     <tr>
+                                         <td>Beginn</td>
+                                         <td>Ende</td>
+                                         <td>Std.</td>
+                                     </tr>
+                                     <tr>
+                                         <td>Beginn</td>
+                                         <td>Ende</td>
+                                         <td>Std.</td>
+                                     </tr>
+                                 </tbody>
+                             </table>
+                         </div>
+                         <div class="verkaufe-bottom">
+                             <form class="verkaufe-form" name="form" method="post">
+                                 <div class="form-field">
+                                     <label>Ende (Uhrzeit):</label>
+                                     <input type="text" name="txt" placeholder="">
+                                     <input type="submit" name="submit" value="">
+                                 </div>
+                             </form>
+                         </div>
+                         <div class="verkaufe-table-simple">
+                             <table>
+                                 <tr>
+                                     <td>Gesamtstd., Tag</td>
+                                     <td><strong>8:45</strong></td>
+                                 </tr>
+                                 <tr>
+                                     <td>Gesamtstd., Woche</td>
+                                     <td><strong>48:45</strong></td>
+                                 </tr>
+                                 <tr>
+                                     <td>Gesamtstd., Projekt</td>
+                                     <td><strong>8:45</strong></td>
+                                 </tr>
+                             </table>
+                         </div>
+                     </div>
+
+
+
+         </section>
+     </div>
+</main>
+<app-footer></app-footer>
+
+

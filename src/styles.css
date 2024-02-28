@@ -3,6 +3,8 @@
   --acc-blue: #042e50;
 }
 
+
+/*  GLOBAL */
 * {
   font-family: 'Century Gothic';
   font-weight: normal;
@@ -11,10 +13,7 @@
 
   margin: 0px;
   padding: 0px;
-
 }
-
-
 
 html , body{
   overflow-x: hidden;
@@ -165,6 +164,8 @@ label {
   background: var(--)
 }
 
+
+/* NAVIGATION */
 .main-menu {
   position: absolute;
   top: 100%;
@@ -201,7 +202,12 @@ label {
   margin-right: auto;
 }
 
-/*MOBILE HUMBERGER */
+.nav-line {
+  background-color: var(--acc-yellow);
+  max-height: 0.2em;
+}
+
+/*MOBILE HAMBERGER */
 
 .hamburger-menu{
 display: flex;
@@ -897,3 +903,23 @@ display: none;
 .alert-success {
   margin-top: 150px;
 }
+
+.signup {
+  margin-top: -10px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+/*** Action Buttons ****/
+.action-btn {
+  height: 30px;
+}
+
+.action-arrow-left {
+  -webkit-transform: rotate(-180deg);
+  -moz-transform: rotate(-180deg);
+  transform: rotate(-180deg);
+  margin-right: 0.2em;
+
+}
+

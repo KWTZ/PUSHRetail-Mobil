@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 
 
+
 import { TopnavComponent } from './_nav/topnav/topnav.component';
 
 
@@ -22,6 +23,7 @@ import { RegistrationComponent } from './login/registration/registration.compone
 import { FooterComponent } from './_nav/footer/footer.component';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,13 +38,14 @@ import { FooterComponent } from './_nav/footer/footer.component';
     HomeComponent,
     RewardCompetionComponent,
     RegistrationComponent,
-    FooterComponent
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]
