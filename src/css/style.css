@@ -658,7 +658,7 @@ label {
     visibility: hidden;
 }
 
-.verkaufe-table {
+.glb-table {
     margin-top:10px;
 }
 
@@ -781,32 +781,32 @@ label {
     padding-right: 52px;
 }
 
-.verkaufe-table table, .report-table table{
+.glb-table table, .report-table table{
     width: 100%;
     margin-bottom: 15px;
 }
 
-.verkaufe-table th, .report-table th, .report-table td , .verkaufe-table td{
+.glb-table th, .report-table th, .report-table td , .glb-table td{
     min-height: 34px;  
 }
 
-.verkaufe-table td {
+.glb-table td {
     font-size:0.9em;
 }
 
-.verkaufe-table th, .report-table th{
+.glb-table th, .report-table th{
     background: #ffc000;
     color: #ffffff;
     font-weight: bold;
     padding: 8px 10px;
 }
 
-.verkaufe-table td, .report-table td{
+.glb-table td, .report-table td{
     padding: 5px 10px;
     background: #e1e1e1;
 }
 
-.verkaufe-table tr:nth-child(even) td, .report-table tr:nth-child(even) td{
+.glb-table tr:nth-child(even) td, .report-table tr:nth-child(even) td{
     background: #f0f0f0;
 }
 
@@ -821,11 +821,11 @@ label {
     padding: 0px;
 }
 
-.verkaufe-table-simple table td{
+.glb-table-simple table td{
     padding: 5px 10px;
 }
 
-.verkaufe-table-simple tr td:last-child{
+.glb-table-simple tr td:last-child{
     text-align: right;
 }
 

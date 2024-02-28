@@ -13,49 +13,48 @@
                                 <div>{{ currentAssignment.postalcode }} {{ currentAssignment.city }}</div>
                             </div>
                             <div class="assign-navigation">
-                                <img src="assets/action-arrow.svg" alt="prev" class="action-btn action-arrow-left" (click)="setAssign(-1)"/>
-                                <img src="assets/action-arrow-active.svg" alt="prev" class="action-btn action-arrow-right" (click)="setAssign(1)" />
+                                <img src="assets/action-arrow.svg" alt="prev" class="action-btn action-arrow-left" *ngIf="assignNo==0" (click)="setAssign(-1)"/>
+                                <img src="assets/action-arrow-active.svg" alt="prev" class="action-btn action-arrow-left" *ngIf="assignNo!=0" (click)="setAssign(-1)"/>
+                                <img src="assets/action-arrow.svg" alt="prev" class="action-btn action-arrow-right" *ngIf="assignNo==noOfAssignment-1" (click)="setAssign(1)" />
+                                <img src="assets/action-arrow-active.svg" alt="prev" class="action-btn action-arrow-right" *ngIf="assignNo<noOfAssignment-1" (click)="setAssign(1)" />
                             </div>
                          </div>
-                         <div class="action-icons">
-                            
-                             <div style="display:flex; flex-direction: row; margin-top: 10px; justify-content:space-around;">
+                         <div class="action-icons-list">     
                                  <div class="item">
-                                     <div class="slider-icon">
-                                         <img src="assets/icon1.png" alt="" class="icon-normal" style="height:40px;">
-                                         <img src="assets/icon1-active.png" alt="" class="icon-active" style="height:40px;">
-                                     </div>
+                                         <img src="assets/action-arrow-active.svg" alt="" class="action-btn action-active" *ngIf="currentStatus=='working'" (click)="setStatus('working')" />
+                                         <img src="assets/action-arrow.svg" alt="" class="action-btn" *ngIf="currentStatus=='break' || currentStatus=='end'" (click)="setStatus('working')" />
                                  </div>
                                  <div class="item">
-                                     <div class="slider-icon">
-                                         <img src="assets/icon2.png" alt="" class="icon-normal" style="height:40px;">
-                                         <img src="assets/icon2-active.png" alt="" class="icon-active" style="height:40px;">
-                                     </div>
+                                    <img src="assets/action-break-active.svg" alt="" class="action-btn action-active" style="height:60px;" *ngIf="currentStatus=='break'" (click)="setStatus('working')" />
+                                    <img src="assets/action-break.svg" alt="" class="action-btn" style="height:50px;" *ngIf="currentStatus=='working' || currentStatus=='end'" (click)="setStatus('break')" />
                                  </div>
                                  <div class="item">
-                                     <div class="slider-icon">
-                                         <img src="assets/icon3.png" alt="" class="icon-normal" style="height:40px;">
-                                         <img src="assets/icon3-active.png" alt="" class="icon-active" style="height:40px;">
-                                     </div>
+                                        <img src="assets/action-end-active.svg" alt="" class="action-btn"  *ngIf="currentStatus=='ende'" (click)="setStatus('')" />
+                                        <img src="assets/action-end.svg" alt="" class="action-btn" *ngIf="currentStatus!='ende'" (click)="setStatus('ende')" />
                                  </div>
                                  <div class="item">
-                                     <div class="slider-icon">
-                                         <img src="assets/icon4.png" alt="" class="icon-normal"  style="height:40px;">
-                                         <img src="assets/icon4-active.png" alt="" class="icon-active" style="height:40px;">
-                                     </div>
+                                    <img src="assets/action-report-active.svg" alt="" class="action-btn"  *ngIf="currentStatus=='ende'" (click)="setStatus('report')" />
+                                    <img src="assets/action-report.svg" alt="" class="action-btn" *ngIf="currentStatus!='ende'" (click)="setStatus('ende')" />
                                  </div>                                  
-                             </div> 
                          </div>
                     </div>
-                         <div class="verkaufe-bottom">
-                             <form class="verkaufe-form" name="form" method="post">
-                                 <div class="form-field">
-                                     <label>Beginn (Uhrzeit):</label>
-                                     <input type="text" name="txt" placeholder="">
-                                 </div>
-                             </form>
-                         </div>
-                         <div class="verkaufe-table">
+                    <div class="working-hours">
+                        
+                            <div class="form-field">
+                                <label>Beginn (Uhrzeit):</label>
+                                <input type="text" name="txt" [(ngModel)]="workBegin" placeholder="">
+                                <img src="assets/action-arrow-active.svg" alt="" class="action-btn action-active" style="height:25px; margin-top: 2px; margin-left: 10px;" *ngIf="workBegin" />
+                                <img src="assets/action-arrow.svg" alt="" class="action-btn action-active" style="height:25px; margin-top: 2px; margin-left: 10px;" *ngIf="!workBegin" />
+                            </div>
+                            <div class="form-field">
+                                <label>Ende (Uhrzeit):</label>
+                                <input type="text" name="txt" [(ngModel)]="workEnd" placeholder="">
+                                <img src="assets/action-arrow-active.svg" alt="" class="action-btn action-active" style="height:25px; margin-top: 2px; margin-left: 10px;"  *ngIf="workEnd" />
+                                <img src="assets/action-arrow.svg" alt="" class="action-btn action-active" style="height:25px; margin-top: 2px; margin-left: 10px;"  *ngIf="!workEnd"/>
+                            </div>
+                     
+                    </div>                         
+                         <div class="glb-table">
                              <label>Pausen, von - bis</label>
                              <table>
                                  <thead>
@@ -93,7 +92,7 @@
                                  </div>
                              </form>
                          </div>
-                         <div class="verkaufe-table-simple">
+                         <div class="glb-table-simple">
                              <table>
                                  <tr>
                                      <td>Gesamtstd., Tag</td>

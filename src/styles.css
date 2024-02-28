@@ -650,7 +650,7 @@ background-color: initial;
   position: relative;
 }
 
-.owl-theme .owl-nav [class*='owl-'] {
+/* .owl-theme .owl-nav [class*='owl-'] {
   color: #FFF;
   font-size: 14px;
   margin: 0;
@@ -685,22 +685,30 @@ background-color: initial;
 
 .owl-theme .owl-nav .owl-next:hover{
   background: url('./assets/icon1-active.png') no-repeat center center;
-}
+} 
 
 .owl-theme .owl-nav {
   margin-top: 0px;
   position: absolute;
   right: 0;
   top: -46px;
+}*/
+
+
+
+.form-field {
+  display: flex;
+  padding-bottom: 0.7em;
 }
 
-.form-field{
-  margin-bottom: 15px;
-  position: relative;
+.form-field label {
+  min-width: 8em;
+  margin-right: 2em
 }
+
+
 
 .form-field input[type="text"] , .form-field input[type="password"] , .form-field textarea , .form-field input[type="tel"] , .form-field input[type="subject"] , .form-field input[type="email"] , .form-field select{
-  width: 100%;
   border: 1px solid #222222;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
@@ -736,28 +744,28 @@ background-color: initial;
   margin-top: 100px;
 }
 
-.verkaufe-table table{
+.glb-table table{
   width: 100%;
   margin-bottom: 15px;
 }
 
-.verkaufe-table th , .verkaufe-table td{
+.glb-table-table th , .glb-table td{
   min-height: 34px;
 }
 
-.verkaufe-table th{
+.glb-table th{
   background: #ffc000;
   color: #ffffff;
   font-weight: bold;
   padding: 8px 10px;
 }
 
-.verkaufe-table td{
+.glb-table td{
   padding: 5px 10px;
   background: #e1e1e1;
 }
 
-.verkaufe-table tr:nth-child(even) td{
+.glb-table tr:nth-child(even) td{
   background: #f0f0f0;
 }
 
@@ -772,11 +780,11 @@ background-color: initial;
   padding: 0px;
 }
 
-.verkaufe-table-simple table td{
+.glb-table-simple table td{
   padding: 5px 10px;
 }
 
-.verkaufe-table-simple tr td:last-child{
+.glb-table-simple tr td:last-child{
   text-align: right;
 }
 
@@ -923,31 +931,68 @@ display: none;
 
 }
 /* Daily Report */
-.verkaufe-table table, .report-table table{
+.glb-table table, .report-table table{
   width: 100%;
   margin-bottom: 15px;
 }
 
-.verkaufe-table th, .report-table th, .report-table td , .verkaufe-table td{
+.glb-table th, .report-table th, .report-table td , .glb-table td{
   min-height: 34px;  
 }
 
-.verkaufe-table td {
+.glb-table td {
   font-size:0.9em;
 }
 
-.verkaufe-table th, .report-table th{
+.glb-table th, .report-table th{
   background: #ffc000;
   color: #ffffff;
   font-weight: bold;
   padding: 8px 10px;
 }
 
-.verkaufe-table td, .report-table td{
+.glb-table td, .report-table td{
   padding: 5px 10px;
   background: #e1e1e1;
 }
 
-.verkaufe-table tr:nth-child(even) td, .report-table tr:nth-child(even) td{
+.glb-table tr:nth-child(even) td, .report-table tr:nth-child(even) td{
   background: #f0f0f0;
+}
+
+.alert-success {
+  margin-top: 150px;
+}
+
+.signup {
+  margin-top: -10px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+/*** Action Buttons ****/
+.action-icons-list {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: flex-end;
+
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.action-btn {
+  height: 40px;
+}
+
+.action-active {
+  height: 50px;
+}
+
+.action-arrow-left {
+  -webkit-transform: rotate(-180deg);
+  -moz-transform: rotate(-180deg);
+  transform: rotate(-180deg);
+  margin-right: 0.2em;
+
 }

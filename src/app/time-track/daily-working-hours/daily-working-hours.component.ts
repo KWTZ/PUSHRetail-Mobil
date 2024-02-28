@@ -32,8 +32,14 @@ export class DailyWorkingHoursComponent implements OnInit {
                         ' where promoterNo="' + localStorage.getItem('promoterNo') + '"';
 
   assignNo=0;  
-  weekdayName:string;                     
-  currentAssignment: Assignment;
+  noOfAssignment=0;
+  weekdayName:string;   
+  
+  workBegin;
+  workEnd;
+
+  currentAssignment:any=[];
+  currentStatus='end';
   listAssignemnts;
   promoterNo;
 
@@ -46,7 +52,7 @@ export class DailyWorkingHoursComponent implements OnInit {
   getData() { 
       this.dataservice.getAll(this.sqlString).subscribe( data => {
         this.listAssignemnts=data;
-
+        this.noOfAssignment=data.length;
         this.currentAssignment=data[this.assignNo];
         console.log(this.currentAssignment)
         this.weekdayName=weekdays[this.currentAssignment['weekdayNo']]
@@ -54,8 +60,23 @@ export class DailyWorkingHoursComponent implements OnInit {
   }
 
   setAssign(pos: number) {
-    this.currentAssignment=this.listAssignemnts[this.assignNo+pos]
+    this.assignNo+=pos;
+    if (this.assignNo<0)
+      this.assignNo=0;
+
+    if (this.assignNo>=this.noOfAssignment)
+      this.assignNo=this.noOfAssignment-1;
+
+    this.currentAssignment=this.listAssignemnts[this.assignNo]
     this.weekdayName=weekdays[this.currentAssignment['weekdayNo']]
+  }
+
+  setStatus(status: string) {
+    this.currentStatus=status;
+    if (status=='working') {
+      let now = new Date();
+      this.workBegin = now.toLocaleString('de-DE').substring(11,16);
+    }
   }
 
 }
