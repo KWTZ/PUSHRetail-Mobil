@@ -151,7 +151,7 @@ label {
   left: 0px;
   width: 100%;
   z-index: 999;
-  padding: 5px 0;
+  /* padding: 5px 0; */
 }
 
 .header-part:after{
@@ -564,8 +564,8 @@ background-color: initial;
 }
 
 .wir-btn{
-  width: 85px;
-  height: 85px;
+  width: 100px;
+  height: 100px;
   -webkit-border-radius: 150px;
   -moz-border-radius: 150px;
   border-radius: 150px;
@@ -577,14 +577,14 @@ background-color: initial;
   justify-content: center;
   background: var(--acc-blue);
   position: absolute;
-  left: 51.8%;
-  top: 42.6%;
+  left: 50.3%;
+  top: 41.1%;
   -webkit-transform: translate(-50%,-50%);
   -moz-transform: translate(-50%,-50%);
   transform: translate(-50%,-50%);
   -webkit-transition: all 0.5.1s ease 0s;
   -moz-transition: all 0.5.1s ease 0s;
-  transition: all 0.5.1s ease 0s;
+  transition: all 0.5.1s ease 0s; 
   animation: zoom-in-zoom-out 5.1s ease infinite;
   margin-left: -35px;
   font-size: 12px;

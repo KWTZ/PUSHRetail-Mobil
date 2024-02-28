@@ -3,3 +3,23 @@
      flex-direction: row;
      justify-content: space-between;
 }
+
+.working-hours {
+     margin-bottom: 20px;
+}
+
+.time-table {
+     border: 1px solid silver;
+     border-radius: 10px;
+}
+
+.time-table-group {
+     display: flex;
+     flex-direction: row;
+     padding: 5px;
+     padding-left: 10px;
+}
+
+.time-table-item {
+     min-width: 8em;
+}

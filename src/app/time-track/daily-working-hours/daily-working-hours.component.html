@@ -21,77 +21,71 @@
                          </div>
                          <div class="action-icons-list">     
                                  <div class="item">
-                                         <img src="assets/action-arrow-active.svg" alt="" class="action-btn action-active" *ngIf="currentStatus=='working'" (click)="setStatus('working')" />
-                                         <img src="assets/action-arrow.svg" alt="" class="action-btn" *ngIf="currentStatus=='break' || currentStatus=='end'" (click)="setStatus('working')" />
+                                         <img src="assets/action-arrow-active.svg" alt="" class="action-btn action-active" *ngIf="currentStatus=='clockInDay'" (click)="setStatus('clockOutDay')" />
+                                         <img src="assets/action-arrow.svg" alt="" class="action-btn" *ngIf="currentStatus!='clockInDay'" (click)="setStatus('clockInDay')" />
                                  </div>
                                  <div class="item">
-                                    <img src="assets/action-break-active.svg" alt="" class="action-btn action-active" style="height:60px;" *ngIf="currentStatus=='break'" (click)="setStatus('working')" />
-                                    <img src="assets/action-break.svg" alt="" class="action-btn" style="height:50px;" *ngIf="currentStatus=='working' || currentStatus=='end'" (click)="setStatus('break')" />
+                                    <img src="assets/action-break-active.svg" alt="" class="action-btn action-active" style="height:60px;" 
+                                                *ngIf="currentStatus=='clockInBreak'" (click)="setStatus('clockOutBreak')" />
+                                    <img src="assets/action-break.svg" alt="" class="action-btn" style="height:50px;"  *ngIf="currentStatus!='clockInBreak'"
+                                                 (click)="setStatus('clockInBreak')" />
                                  </div>
                                  <div class="item">
-                                        <img src="assets/action-end-active.svg" alt="" class="action-btn"  *ngIf="currentStatus=='ende'" (click)="setStatus('')" />
-                                        <img src="assets/action-end.svg" alt="" class="action-btn" *ngIf="currentStatus!='ende'" (click)="setStatus('ende')" />
+                                        <img src="assets/action-end-active.svg" alt="" class="action-btn"  *ngIf="currentStatus=='clockOutDay'"  (click)="setStatus('')" />
+                                        <img src="assets/action-end.svg" alt="" class="action-btn" *ngIf="currentStatus!='clockOutDay'" (click)="setStatus('clockOutDay')" />
                                  </div>
                                  <div class="item">
-                                    <img src="assets/action-report-active.svg" alt="" class="action-btn"  *ngIf="currentStatus=='ende'" (click)="setStatus('report')" />
-                                    <img src="assets/action-report.svg" alt="" class="action-btn" *ngIf="currentStatus!='ende'" (click)="setStatus('ende')" />
-                                 </div>                                  
+                                    <img src="assets/action-report-active.svg" alt="" class="action-btn"  *ngIf="currentStatus=='reportDone'" (click)="setStatus('')" />
+                                    <img src="assets/action-report.svg" alt="" class="action-btn" *ngIf="currentStatus!='reportDone'" (click)="setStatus('reportDone')" />
+                                 </div>                               
                          </div>
                     </div>
-                    <div class="working-hours">
-                        
+                    <div class="working-hours">                        
                             <div class="form-field">
                                 <label>Beginn (Uhrzeit):</label>
                                 <input type="text" name="txt" [(ngModel)]="workBegin" placeholder="">
-                                <img src="assets/action-arrow-active.svg" alt="" class="action-btn action-active" style="height:25px; margin-top: 2px; margin-left: 10px;" *ngIf="workBegin" />
-                                <img src="assets/action-arrow.svg" alt="" class="action-btn action-active" style="height:25px; margin-top: 2px; margin-left: 10px;" *ngIf="!workBegin" />
+                                <!-- <img src="assets/action-arrow-active.svg" alt="" class="action-btn action-active" style="height:25px; margin-top: 2px; margin-left: 10px;" *ngIf="workBegin" /> -->
+                                <!-- <img src="assets/action-arrow.svg" alt="" class="action-btn action-active" style="height:25px; margin-top: 2px; margin-left: 10px;" *ngIf="!workBegin" /> -->
                             </div>
                             <div class="form-field">
                                 <label>Ende (Uhrzeit):</label>
                                 <input type="text" name="txt" [(ngModel)]="workEnd" placeholder="">
-                                <img src="assets/action-arrow-active.svg" alt="" class="action-btn action-active" style="height:25px; margin-top: 2px; margin-left: 10px;"  *ngIf="workEnd" />
-                                <img src="assets/action-arrow.svg" alt="" class="action-btn action-active" style="height:25px; margin-top: 2px; margin-left: 10px;"  *ngIf="!workEnd"/>
+                                <!-- <img src="assets/action-arrow-active.svg" alt="" class="action-btn action-active" style="height:25px; margin-top: 2px; margin-left: 10px;"  *ngIf="workEnd" /> -->
+                                <!-- <img src="assets/action-arrow.svg" alt="" class="action-btn action-active" style="height:25px; margin-top: 2px; margin-left: 10px;"  *ngIf="!workEnd"/> -->
                             </div>
                      
-                    </div>                         
-                         <div class="glb-table">
-                             <label>Pausen, von - bis</label>
-                             <table>
-                                 <thead>
-                                     <tr>
-                                         <th>Beginn</th>
-                                         <th>Ende</th>
-                                         <th>Std.</th>
-                                     </tr>
-                                 </thead>
-                                 <tbody>
-                                     <tr>
-                                         <td>10:30</td>
-                                         <td>19:15</td>
-                                         <td>8:45</td>
-                                     </tr>
-                                     <tr>
-                                         <td>Beginn</td>
-                                         <td>Ende</td>
-                                         <td>Std.</td>
-                                     </tr>
-                                     <tr>
-                                         <td>Beginn</td>
-                                         <td>Ende</td>
-                                         <td>Std.</td>
-                                     </tr>
-                                 </tbody>
-                             </table>
-                         </div>
-                         <div class="verkaufe-bottom">
-                             <form class="verkaufe-form" name="form" method="post">
-                                 <div class="form-field">
-                                     <label>Ende (Uhrzeit):</label>
-                                     <input type="text" name="txt" placeholder="">
-                                     <input type="submit" name="submit" value="">
-                                 </div>
-                             </form>
-                         </div>
+                    </div> 
+                    <div style="margin-left:10px;"><strong>Dein heutiger Tag:</strong></div>   
+                    <div class="time-table">
+                           
+                            <div class="time-table-group">
+                                <div class="time-table-item">Einsatz-Beginn:</div>
+                                <div  class="time-table-item"><strong>{{ clockInDay }}</strong></div>
+                            </div>
+                            <div class="time-table-group">
+                                <div class="time-table-item">Einsatz-Ende:</div>
+                                <div class="time-table-item"><strong>{{ clockOutDay }}</strong></div>
+                            </div>
+
+                            <div class="break-table">
+                                <table>
+                                    <thead>
+                                        <th>Beginn</th>
+                                        <th>Ende</th>
+                                        <th>Std.</th>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let b of workBreaks">
+                                            <td>{{ b.breakIn }}</td>
+                                            <td>{{ b.breakOut }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+
+                    </div>                     
+                    
                          <div class="glb-table-simple">
                              <table>
                                  <tr>

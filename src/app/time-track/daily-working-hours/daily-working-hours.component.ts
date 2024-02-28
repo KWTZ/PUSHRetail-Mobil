@@ -25,8 +25,15 @@ export class DailyWorkingHoursComponent implements OnInit {
   workBegin;
   workEnd;
 
+  currentStatus=null;
+  clockInDay;
+  clockOutDay;
+
+  workTime=[];
+  workBreaks=[];
+
   currentAssignment:any=[];
-  currentStatus='end';
+
   listAssignemnts;
   promoterNo;
 
@@ -60,19 +67,38 @@ export class DailyWorkingHoursComponent implements OnInit {
 
   setStatus(status: string) {
     this.currentStatus=status;
-    if (status=='working') {
-      let now = new Date();
-      this.workBegin = now.toLocaleString('de-DE').substring(11,16);
+    let now = new Date();
+    let currentTime =now.toLocaleString('de-DE').substring(11,16);
+    switch (status) {
+      case 'clockInDay':
+        this.workBegin =currentTime;
+        this.clockInDay=currentTime;
+        this.workTime.push({ clockInDay: currentTime, clockOutDay: null});
+        break; 
+      case 'clockOutDay':
+        this.workEnd = currentTime;
+        this.clockOutDay=currentTime;
+        let wt = this.workTime[this.workTime.length-1];
+        wt.clockOutDay=currentTime;
+        break;
+        
+      case 'clockInBreak':
+          this.workEnd = currentTime;
+          this.workBreaks.push({ breakIn: currentTime, breakOut: null, breakhours: null});
+          break;
+      case 'clockOutBreak':
+        this.workEnd = currentTime;
+        let wb = this.workBreaks[this.workBreaks.length-1];
+        wb.breakOut=currentTime;
+        break;
+
     }
+
+    console.log("dailyWork", this.workTime, (new Date('2024-01-01 23:00:00').getTime()- new Date('2024-01-01').getTime())/1000/60/60);
+    console.log("breaks", this.workBreaks);
   }
 
 }
 
-export interface Assignment {
-  idAssignment: number,
-  internalPosNo: string,
-  externalPosNo: string,
-  operationDate: string
-}
 const weekdays = [ 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag', 'Sonntag' ];
 
