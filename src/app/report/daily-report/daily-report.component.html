@@ -1,1 +1,97 @@
-<p>daily-report works!</p>
+<app-topnav></app-topnav>
+<main>
+    <div class="main-part">
+        <section class="verkaufe-part reward-part bg-white section-100">
+            <div class="container">
+                <div class="verkaufe-inner">
+                    <h2>Tagesbericht:</h2>
+                    <p><strong>Kundenfrequenz (volle Zahl!)</strong></p>
+                    <div class="report-table">
+                        <label>Bitte ausfüllen:</label>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ja/ nein</th>
+                                    <th></th>
+                                    <th>Anzahl</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><input type="checkbox" name="kundenfrequenz" /></td>
+                                    <td>Heutige Kundenfrequenz?</td>
+                                    <td><input type="number" name="valKundenfrequenz" style="width: 30px;"/></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" name="leads" /></td>
+                                    <td>... davon angesprochene Kunden?</td>
+                                    <td><input type="number" name="valLeads" style="width: 30px;"/></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" name="talks" /></td>
+                                    <td>... davon Verkaufsgespräche?</td>
+                                    <td><input type="number" name="valTalks" style="width: 30px;"/></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" name="proben" /></td>
+                                    <td>Ausgegebene Proben</td>
+                                    <td><input type="number" name="valProben" style="width: 30px;"/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p><strong>Ausstattung (volle Zahl!)</strong></p>
+                    <div class="report-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th style="width:50px;">ja/ nein</th>
+                                    <th></th>                                            
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><input type="checkbox" name="kundenfrequenz" /></td>
+                                    <td>Pop-up Display</td>                                            
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" name="kundenfrequenz" /></td>
+                                    <td>Namensschild</td>                                           
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" name="kundenfrequenz" /></td>
+                                    <td>Ausreichende Tester</td>                                            
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="verkaufe-inner">
+                        <div class="login-inner">
+                            <div class="verkaufe-bottom">
+                                <form class="verkaufe-form" name="form" method="post" enctype="multipart/form-data">
+                                    <div class="form-field">
+                                        <input type="text" name="txt" placeholder="Tagesumsatz D&G, brutto">
+                                    </div>
+                                    <div class="form-field camera-product">
+                                        <div class="camera-left">
+                                            <label for="bus_img">
+                                                <img src="assets/camero.png"/>
+                                            </label>
+                                            <span>Foto Verkaufsumsatz, <br> mit Stempel und Unterschrift</span>
+                                            <input type="file" name="bus_img" id="bus_img" accept="image/*;capture=camera">
+                                        </div>
+
+                                        <div class="camera-right">
+                                            <button><img src="assets/icon1-active.png" alt=""></button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</main>
+<app-footer></app-footer>

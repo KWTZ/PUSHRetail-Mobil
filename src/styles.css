@@ -922,4 +922,32 @@ display: none;
   margin-right: 0.2em;
 
 }
+/* Daily Report */
+.verkaufe-table table, .report-table table{
+  width: 100%;
+  margin-bottom: 15px;
+}
 
+.verkaufe-table th, .report-table th, .report-table td , .verkaufe-table td{
+  min-height: 34px;  
+}
+
+.verkaufe-table td {
+  font-size:0.9em;
+}
+
+.verkaufe-table th, .report-table th{
+  background: #ffc000;
+  color: #ffffff;
+  font-weight: bold;
+  padding: 8px 10px;
+}
+
+.verkaufe-table td, .report-table td{
+  padding: 5px 10px;
+  background: #e1e1e1;
+}
+
+.verkaufe-table tr:nth-child(even) td, .report-table tr:nth-child(even) td{
+  background: #f0f0f0;
+}
