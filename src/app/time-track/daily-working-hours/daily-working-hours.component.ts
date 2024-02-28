@@ -44,7 +44,6 @@ export class DailyWorkingHoursComponent implements OnInit {
   }
 
   getData() { 
-      console.log(this.sqlString);
       this.dataservice.getAll(this.sqlString).subscribe( data => {
         this.listAssignemnts=data;
 
