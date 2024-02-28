@@ -996,3 +996,16 @@ display: none;
   margin-right: 0.2em;
 
 }
+
+/* Home Network Element */
+.network-inner-home {
+  height: 350px;
+  position: relative;
+  width: 100%;
+}
+
+.network-inner-home{
+  max-width: 290px;
+  margin: 0 auto;
+  font-size: 12px;
+}
