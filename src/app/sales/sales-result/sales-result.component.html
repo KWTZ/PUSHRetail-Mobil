@@ -8,6 +8,12 @@
                         <div class="verkaufe-bottom">
                             <form class="verkaufe-form" name="form" method="post">
                                 <div class="form-field">
+                                    <label for="">Produktkategorie:</label>
+                                    <select>
+                                        <option>( bitte wählen )</option>
+                                    </select>
+                                </div>
+                                <div class="form-field">
                                     <label>Produkt:</label>
                                     <select>
                                         <option>( bitte wählen )</option>
@@ -337,8 +343,8 @@
                             </form>
                         </div>
                     </div>
-                    <div class="verkaufe-table">
-                        <label>Meine Verkäufe</label>
+                    <div class="glb-table">
+                        <label>Meine heutigen Verkäufe</label>
                         <table>
                             <thead>
                                 <tr>
@@ -352,14 +358,14 @@
                                 <tr>
                                     <td>PH INTENSO EDP 200ML</td>
                                     <td>1</td>
-                                    <td>146,00</td>
-                                    <td>146,00</td>
+                                    <td>146,00 €</td>
+                                    <td>146,00 €</td>
                                 </tr>
                                 <tr>
                                     <td>LB EAU INTENSE EDPI 100ML</td>
                                     <td>1</td>
-                                    <td>133,00</td>
-                                    <td>133,00</td>
+                                    <td>133,00 €</td>
+                                    <td>133,00 €</td>
                                 </tr>
                                 <tr>
                                     <td>Produkt</td>
@@ -367,31 +373,46 @@
                                     <td>Preis</td>
                                     <td>Umsatz</td>
                                 </tr>
+                                <tr>
+                                    <td>Gesamt</td>
+                                    <td>Summe Menge</td>
+                                    <td></td>
+                                    <td>Summe Umsatz</td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
                     <div class="verkaufe-table-simple" style="border: 1px solid silver; border-radius: 10px;">
                         <table >
+                            <thead>
                             <tr>
-                                <th></th>
-                                <th style="border-right: 1px solid silver; padding: 5px;">Gesamtumsatz</th>
-                                <th>... davon Focusprodukte</th>
+                                <th ></th>
+                                <th colspan="2">Gesamtumsatz</th>
+                                <th colspan="2">... davon<br>Focusprodukte</th>
                             </tr>
                             <tr>
-                                <td>Tag</td>
-                                <td  style="border-right: 1px solid silver; padding: 5px; text-align: right;"><strong>125,50</strong></td>
-                                <td><strong>0</strong></td>
+                                <th ></th>
+                                <th >Soll</th>
+                                <th >Ist</th>
+                                <th>Soll</th>
+                                <th>Ist</th>
+                            </tr>
+                            </thead>
+                            <tr>
+                                <td >Tag <strong>&#8960;</strong></td>
+                                <td></td>
+                                <td  ><strong>125,50 €</strong></td>
+                                <td></td>
+                                <td><strong>0,00 €</strong></td>
                             </tr>
                             <tr>
-                                <td> Woche</td>
-                                <td  style="border-right: 1px solid silver; padding: 5px; text-align: right;"><strong>725,00</strong></td>
-                                <td><strong>425,00</strong></td>
+                                <td > Monat</td>
+                                <td></td>
+                                <td  ><strong>725,00 €</strong></td>
+                                <td></td>
+                                <td><strong>425,00 €</strong></td>
                             </tr>
-                            <tr>
-                                <td>Projekt</td>
-                                <td  style="border-right: 1px solid silver; padding: 5px; text-align: right;"><strong>1.325,00</strong></td>
-                                <td><strong>634,50</strong></td>
-                            </tr>
+                            
                         </table>
                     </div>
                 </div>

@@ -10,30 +10,25 @@
                         <label>Bitte ausfüllen:</label>
                         <table>
                             <thead>
-                                <tr>
-                                    <th>ja/ nein</th>
+                                <tr>                                    
                                     <th></th>
                                     <th>Anzahl</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td><input type="checkbox" name="kundenfrequenz" /></td>
                                     <td>Heutige Kundenfrequenz?</td>
                                     <td><input type="number" name="valKundenfrequenz" style="width: 30px;"/></td>
                                 </tr>
                                 <tr>
-                                    <td><input type="checkbox" name="leads" /></td>
                                     <td>... davon angesprochene Kunden?</td>
                                     <td><input type="number" name="valLeads" style="width: 30px;"/></td>
                                 </tr>
-                                <tr>
-                                    <td><input type="checkbox" name="talks" /></td>
+                                <tr>                                    
                                     <td>... davon Verkaufsgespräche?</td>
                                     <td><input type="number" name="valTalks" style="width: 30px;"/></td>
                                 </tr>
-                                <tr>
-                                    <td><input type="checkbox" name="proben" /></td>
+                                <tr>                                    
                                     <td>Ausgegebene Proben</td>
                                     <td><input type="number" name="valProben" style="width: 30px;"/></td>
                                 </tr>
@@ -44,34 +39,49 @@
                     <div class="report-table">
                         <table>
                             <thead>
-                                <tr>
-                                    <th style="width:50px;">ja/ nein</th>
+                                <tr>                                   
                                     <th></th>                                            
+                                    <th>OK</th>                                            
+                                    <th>nicht OK</th>                                            
+                                    <th>fehlt</th>                                            
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td><input type="checkbox" name="kundenfrequenz" /></td>
-                                    <td>Pop-up Display</td>                                            
+                                <tr>                                   
+                                    <td>Pop-up Display</td>  
+                                    <td><input type="checkbox" /></td>                                          
+                                    <td style="text-align:center;"><input type="checkbox" /></td>                                          
+                                    <td><input type="checkbox" /></td>                                          
                                 </tr>
-                                <tr>
-                                    <td><input type="checkbox" name="kundenfrequenz" /></td>
-                                    <td>Namensschild</td>                                           
+                                <tr>                                    
+                                    <td>Namensschild</td>    
+                                    <td><input type="checkbox" /></td>                                          
+                                    <td style="text-align:center;"><input type="checkbox" /></td>                                          
+                                    <td><input type="checkbox" /></td>                                           
                                 </tr>
-                                <tr>
-                                    <td><input type="checkbox" name="kundenfrequenz" /></td>
-                                    <td>Ausreichende Tester</td>                                            
+                                <tr>                                   
+                                    <td>Ausreichende Tester</td>
+                                    <td><input type="checkbox" /></td>                                          
+                                    <td style="text-align:center;"><input type="checkbox" /></td>                                          
+                                    <td><input type="checkbox" /></td>    
                                 </tr>
                             </tbody>
                         </table>
+                    </div>
+                    <div class="questions">
+                        <div style="width: 100px;">Außendienst vor Ort</div>
+                        <div>ja   <input type="checkbox" /></div>
+                        <div>nein   <input type="checkbox" /></div>
                     </div>
                     <div class="verkaufe-inner">
                         <div class="login-inner">
                             <div class="verkaufe-bottom">
                                 <form class="verkaufe-form" name="form" method="post" enctype="multipart/form-data">
                                     <div class="form-field">
-                                        <input type="text" name="txt" placeholder="Tagesumsatz D&G, brutto">
+                                        <label for=""  style="margin-top: 5px;"><strong>Tagesumsatz D&G, brutto</strong></label>
+                                        <input type="text" name="txt" placeholder="" style="width: 10em;">
                                     </div>
+
                                     <div class="form-field camera-product">
                                         <div class="camera-left">
                                             <label for="bus_img">

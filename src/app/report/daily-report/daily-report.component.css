@@ -1,0 +1,12 @@
+.form-field label {
+     white-space: nowrap;
+     min-width: unset;
+}
+.questions {
+     display: flex;
+     flex-direction: row;
+}
+.questions div {
+     white-space: nowrap;
+     flex: 1;
+}

@@ -1,0 +1,17 @@
+label, input, select {
+     width:  10em;
+}
+
+.verkaufe-table-simple table{
+     width: 100%;
+}
+
+.verkaufe-table-simple th {
+     text-align: center;
+     width: 20%;
+}
+
+.verkaufe-table-simple td  {
+     text-align: right;
+     padding-right: 10px;
+}
