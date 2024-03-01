@@ -1,17 +1,18 @@
-label, input, select {
-     width:  10em;
-}
 
-.verkaufe-table-simple table{
+.glb-table-simple table{
      width: 100%;
 }
 
-.verkaufe-table-simple th {
+.glb-table-simple th {
      text-align: center;
      width: 20%;
+     border-bottom: 1px solid silver;
 }
 
-.verkaufe-table-simple td  {
+.glb-table-simple td  {
      text-align: right;
+     white-space: nowrap;
+     border-right: 1px solid silver;
      padding-right: 10px;
+
 }

@@ -1,0 +1,15 @@
+.glb-form {
+     padding-left: 20px;
+     display: flex;
+     flex-direction: row;
+     align-items: flex-end;
+}
+.form-field label {
+     width: 10em;
+     margin-right:0px;
+}
+.form-field select {
+     width: 10em;
+}
+
+.glb-table { padding: 10px;}

@@ -21,6 +21,7 @@ import { HomeComponent } from './home/home.component';
 import { RewardCompetionComponent } from './reward-competion/reward-competion.component';
 import { RegistrationComponent } from './login/registration/registration.component';
 import { FooterComponent } from './_nav/footer/footer.component';
+import { OutofstockComponent } from './outofstock/outofstock.component';
 
 
 
@@ -39,6 +40,7 @@ import { FooterComponent } from './_nav/footer/footer.component';
     RewardCompetionComponent,
     RegistrationComponent,
     FooterComponent,
+    OutofstockComponent,
   ],
   imports: [
     BrowserModule,

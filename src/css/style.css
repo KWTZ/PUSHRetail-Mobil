@@ -662,11 +662,11 @@ label {
     margin-top:10px;
 }
 
-.verkaufe-top{
+.glb-top{
     padding-right: 55px;
 }
 
-.verkaufe-top h3 , .verkaufe-top p{
+.glb-top h3 , .glb-top p{
     margin-bottom: 0px;
 }
 
@@ -697,7 +697,7 @@ label {
     width: 100%;
 }
 
-.verkaufe-slider{
+.glb-slider{
     margin-top: 20px;
     margin-bottom: 25px;
     position: relative;
@@ -777,7 +777,7 @@ label {
     bottom: 50px;
 }
 
-.verkaufe-form{
+.glb-form{
     padding-right: 52px;
 }
 
@@ -841,7 +841,7 @@ label {
     top: 28px;
 }
 
-.login-inner .verkaufe-form{
+.login-inner .glb-form{
     margin-bottom: 25px;
 }
 
@@ -850,7 +850,7 @@ label {
     margin-bottom: 0px;
 }
 
-.verkaufe-part .verkaufe-inner .login-inner .verkaufe-form{
+.glb-part .glb-inner .login-inner .glb-form{
     margin-bottom: 15px;
 }
 
@@ -892,7 +892,7 @@ label {
     max-width: 200px;
 }
 
-.verkaufe-part .login-inner{
+.glb-part .login-inner{
     margin-top: 30px;
 }
 
@@ -906,7 +906,7 @@ label {
     right: 15px;
 }
 
-.reward-part.verkaufe-part .verkaufe-inner .login-inner .verkaufe-form{
+.reward-part.glb-part .glb-inner .login-inner .glb-form{
     padding-right: 0;
 }
 

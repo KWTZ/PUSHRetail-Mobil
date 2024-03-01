@@ -76,7 +76,7 @@ export class DailyWorkingHoursComponent implements OnInit {
   setStatus(status: string) {
     this.currentStatus=status;
     let now = new Date();
-    let currentTime =now.toLocaleString('de-DE').substring(11,16);
+    let currentTime =now.toLocaleString('de-DE').substring(11,15);
     switch (status) {
       case 'clockInDay':
         this.workBegin =currentTime;

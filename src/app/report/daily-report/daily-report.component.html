@@ -1,13 +1,12 @@
 <app-topnav></app-topnav>
 <main>
     <div class="main-part">
-        <section class="verkaufe-part reward-part bg-white section-100">
+        <section class="glb-part reward-part bg-white section-100">
             <div class="container">
-                <div class="verkaufe-inner">
+                <div class="glb-inner">
                     <h2>Tagesbericht:</h2>
-                    <p><strong>Kundenfrequenz (volle Zahl!)</strong></p>
-                    <div class="report-table">
-                        <label>Bitte ausfüllen:</label>
+                    <p><strong>Kundenfrequenz  <span style="color: red; font-weight: bold;">(volle Zahl)</span></strong></p>
+                    <div class="report-table">                       
                         <table>
                             <thead>
                                 <tr>                                    
@@ -18,19 +17,19 @@
                             <tbody>
                                 <tr>
                                     <td>Heutige Kundenfrequenz?</td>
-                                    <td><input type="number" name="valKundenfrequenz" style="width: 30px;"/></td>
+                                    <td><input type="number" name="valKundenfrequenz"/></td>
                                 </tr>
                                 <tr>
                                     <td>... davon angesprochene Kunden?</td>
-                                    <td><input type="number" name="valLeads" style="width: 30px;"/></td>
+                                    <td><input type="number" name="valLeads" /></td>
                                 </tr>
                                 <tr>                                    
                                     <td>... davon Verkaufsgespräche?</td>
-                                    <td><input type="number" name="valTalks" style="width: 30px;"/></td>
+                                    <td><input type="number" name="valTalks" /></td>
                                 </tr>
                                 <tr>                                    
                                     <td>Ausgegebene Proben</td>
-                                    <td><input type="number" name="valProben" style="width: 30px;"/></td>
+                                    <td><input type="number" name="valProben" /></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -42,7 +41,7 @@
                                 <tr>                                   
                                     <th></th>                                            
                                     <th>OK</th>                                            
-                                    <th>nicht OK</th>                                            
+                                    <th >nicht OK</th>                                            
                                     <th>fehlt</th>                                            
                                 </tr>
                             </thead>
@@ -50,37 +49,45 @@
                                 <tr>                                   
                                     <td>Pop-up Display</td>  
                                     <td><input type="checkbox" /></td>                                          
-                                    <td style="text-align:center;"><input type="checkbox" /></td>                                          
-                                    <td><input type="checkbox" /></td>                                          
+                                    <td style="text-align:right;"><input type="checkbox" /></td>                                          
+                                    <td style="text-align:right;"><input type="checkbox" /></td>                                          
                                 </tr>
                                 <tr>                                    
                                     <td>Namensschild</td>    
                                     <td><input type="checkbox" /></td>                                          
-                                    <td style="text-align:center;"><input type="checkbox" /></td>                                          
-                                    <td><input type="checkbox" /></td>                                           
+                                    <td style="text-align:right;"><input type="checkbox" /></td>                                          
+                                    <td style="text-align:right;"><input type="checkbox" /></td>                                           
                                 </tr>
                                 <tr>                                   
                                     <td>Ausreichende Tester</td>
                                     <td><input type="checkbox" /></td>                                          
-                                    <td style="text-align:center;"><input type="checkbox" /></td>                                          
-                                    <td><input type="checkbox" /></td>    
+                                    <td style="text-align:right;"><input type="checkbox" /></td>                                          
+                                    <td style="text-align:right;"><input type="checkbox" /></td>    
+                                </tr>
+                                <tr style="height:30px;">                                   
+                                    <td colspan="2">Außendienst vor Ort?</td>
+                                    
+                                    <td style="white-space: nowrap;">ja   <input type="checkbox" /></td>                                          
+                                    <td style="white-space: nowrap;">nein   <input type="checkbox" /></td>                                          
+                                      
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                     <div class="questions">
-                        <div style="width: 100px;">Außendienst vor Ort</div>
-                        <div>ja   <input type="checkbox" /></div>
-                        <div>nein   <input type="checkbox" /></div>
+                        <div style="width: 100px;">Außendienst vor Ort?</div>
+                        <div></div>
+                        <div></div>
                     </div>
-                    <div class="verkaufe-inner">
+                    <div class="glb-inner">
                         <div class="login-inner">
-                            <div class="verkaufe-bottom">
-                                <form class="verkaufe-form" name="form" method="post" enctype="multipart/form-data">
+                            <div class="glb-bottom">
+                                <form class="glb-form" name="form" method="post" enctype="multipart/form-data">
                                     <div class="form-field">
                                         <label for=""  style="margin-top: 5px;"><strong>Tagesumsatz D&G, brutto</strong></label>
                                         <input type="text" name="txt" placeholder="" style="width: 10em;">
                                     </div>
+                                    <div style="float: right; font-size: 0.7em; margin-top: -15px; padding-right:20px;">ohne Sonderzeichen</div>
 
                                     <div class="form-field camera-product">
                                         <div class="camera-left">
@@ -94,6 +101,10 @@
                                         <div class="camera-right">
                                             <button><img src="assets/icon1-active.png" alt=""></button>
                                         </div>
+                                    </div>
+                                    <div>
+                                        <div>Sontiges:</div>
+                                        <textarea></textarea>
                                     </div>
                                 </form>
                             </div>

@@ -1,0 +1,30 @@
+.glb-form {
+     padding: 10px;
+}
+
+.form-field {
+     padding-bottom: 0.2em;
+}
+
+.form-field input[type="text"], 
+.form-field input[type="password"], 
+.form-field textarea, 
+.form-field input[type="tel"], 
+.form-field input[type="subject"], 
+.form-field input[type="email"], 
+.form-field select
+ {
+     border: 1px solid silver; 
+     width: 350px;
+     margin-left: 0px;    
+}
+
+.form-field input[type="text"]::-webkit-input-placeholder,
+.form-field select::-webkit-input-placeholder {
+     color: #042e50;
+     font-size: 0.8em;
+ }
+
+ .form-field select {
+     font-size: 0.7em;
+ }

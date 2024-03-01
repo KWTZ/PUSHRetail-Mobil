@@ -1,20 +1,20 @@
 <app-topnav></app-topnav>
 <main>
     <div class="main-part">
-        <section class="verkaufe-part bg-white section-100">
+        <section class="glb-part bg-white section-100">
             <div class="container">
-                <div class="verkaufe-inner">
+                <div class="glb-inner">
                     <h2>Mitteilungen/ Ereignisse:</h2>
                     <p>Sollte mal etwas schief gehen, setze uns bitte umgehend in Kenntnis und sende <strong>bei Bekanntwerden</strong> eine Nachricht mit folgenden Inhalten:</p>
                     <div class="login-inner">
-                        <div class="verkaufe-bottom">
-                            <form class="verkaufe-form" name="form" method="post">
+                        <div class="glb-bottom">
+                            <form class="glb-form" name="form" method="post">
                                 <div class="form-field">
                                     <label>Mitteilung-Typ:</label>
                                     <select>
                                             <option>( bitte wählen )</option>
                                             <option>Anforderung</option>
-                                            <option>Ereignis/ Problem</option>
+                                            <option style="color: red;">Ereignis/ Problem</option>
                                             <option>Sonstiges</option>
                                     </select>
                                 </div>
@@ -26,9 +26,9 @@
                                     <label>Was ist passiert</label>
                                     <input type="text" name="txt" placeholder="">
                                 </div>
-                                <div class="form-field">
+                                <div class="form-field" style="flex-direction: column">
                                     <label>Beschreibung</label>
-                                    <textarea style="height: 300px;"></textarea>
+                                    <textarea style="height: 160px;"></textarea>
                                 </div>
                                 <!-- <div class="form-field">
                                     <label>Lösung vorhanden?</label>
@@ -42,8 +42,8 @@
                 </div>
             </div>
             <div class="whatsapp-icon">
-                <img src="assets/icon1-active.png" alt="" />
-                <a href="#"><img src="assets/whatsapp.png" alt=""></a>
+                <img src="assets/action-arrow-active.svg" alt="" *ngIf="isSend==false" (click)="setSend()" style="width:20px;"/>
+                <img src="assets/phone-red.svg" alt="" *ngIf="isSend" style="height:40px;" />                
             </div>
             
         </section>

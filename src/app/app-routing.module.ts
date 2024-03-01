@@ -10,12 +10,14 @@ import { RewardCompetionComponent } from './reward-competion/reward-competion.co
 import { PlacementComponent } from './placement/placement.component';
 import { LoginComponent } from './login/login/login.component';
 import { RegistrationComponent } from './login/registration/registration.component';
+import { OutofstockComponent } from './outofstock/outofstock.component';
 
 const routes: Routes = [
   { path: '',  component: IntroComponent, pathMatch: 'full' },
   { path: 'home',  component: HomeComponent, pathMatch: 'full' },
   { path: 'dailywork',  component: DailyWorkingHoursComponent, pathMatch: 'full' },
   { path: 'sales',  component: SalesResultComponent, pathMatch: 'full' },
+  { path: 'outofstock',  component: OutofstockComponent, pathMatch: 'full' },
   { path: 'dailyreport',  component: DailyReportComponent , pathMatch: 'full' },
   { path: 'message',  component: MessageComponent , pathMatch: 'full' },
   { path: 'reward',  component: RewardCompetionComponent , pathMatch: 'full' },

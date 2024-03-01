@@ -7,9 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MessageComponent implements OnInit {
 
+  isSend=false;
   constructor() { }
 
   ngOnInit(): void {
   }
+
+  setSend() {
+    this.isSend=true;
+  }
+  
 
 }

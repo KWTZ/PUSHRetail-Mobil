@@ -1,7 +1,25 @@
+.glb-form {
+     padding-left:0px !important;
+}
+
 .form-field label {
      white-space: nowrap;
      min-width: unset;
 }
+
+.report-table input {
+     width: 40px;
+}
+
+.report-table th {
+     white-space: nowrap;
+     text-align: center;
+}
+.report-table td {
+     border: 1px solid silver;
+}
+
+
 .questions {
      display: flex;
      flex-direction: row;
@@ -9,4 +27,9 @@
 .questions div {
      white-space: nowrap;
      flex: 1;
+}
+
+textarea {
+     width: 350px;
+     height: 150px;
 }
