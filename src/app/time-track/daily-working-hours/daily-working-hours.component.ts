@@ -44,13 +44,21 @@ export class DailyWorkingHoursComponent implements OnInit {
   }
 
   getData() { 
-      this.dataservice.getAll(this.sqlString).subscribe( data => {
-        this.listAssignemnts=data;
-        this.noOfAssignment=data.length;
-        this.currentAssignment=data[this.assignNo];
-        console.log(this.currentAssignment)
-        this.weekdayName=weekdays[this.currentAssignment['weekdayNo']]
-    });
+    //   this.dataservice.getAll(this.sqlString).subscribe( data => {
+    //     console.log(data);
+    //     // this.listAssignemnts=data;
+    //     this.listAssignemnts=Assignments;
+    //     this.noOfAssignment=data.length;
+    //     this.currentAssignment=data[this.assignNo];
+    //     console.log(this.currentAssignment)
+    //     this.weekdayName=weekdays[this.currentAssignment['weekdayNo']]
+    // });
+
+    this.listAssignemnts=Assignments;
+    this.noOfAssignment=this.listAssignemnts.length;
+    this.currentAssignment=this.listAssignemnts[this.assignNo];
+    console.log(this.currentAssignment)
+    this.weekdayName=weekdays[this.currentAssignment['weekdayNo']]
   }
 
   setAssign(pos: number) {
@@ -101,4 +109,13 @@ export class DailyWorkingHoursComponent implements OnInit {
 }
 
 const weekdays = [ 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag', 'Sonntag' ];
+
+const Assignments = [
+  {begin: "11:00", city: "Frankfurt", end: "19:00", externalPOSNo: "", idAssignment: 169, internalPOSNo: "109", operationDate: "07.03.2024", posName: "Douglas", posStreet: "Zeil 98-102", postalcode: "60313", weekdayNo: 3},
+  {begin: "11:00", city: "Frankfurt", end: "19:00", externalPOSNo: "", idAssignment: 169, internalPOSNo: "109", operationDate: "14.03.2024", posName: "Douglas", posStreet: "Zeil 98-102", postalcode: "60313", weekdayNo: 3},
+  {begin: "11:00", city: "Frankfurt", end: "19:00", externalPOSNo: "", idAssignment: 169, internalPOSNo: "109", operationDate: "21.03.2024", posName: "Douglas", posStreet: "Zeil 98-102", postalcode: "60313", weekdayNo: 3},
+  {begin: "11:00", city: "Frankfurt", end: "19:00", externalPOSNo: "", idAssignment: 169, internalPOSNo: "109", operationDate: "27.03.2024", posName: "Douglas", posStreet: "Zeil 98-102", postalcode: "60313", weekdayNo: 3},
+  {begin: "11:00", city: "Frankfurt", end: "19:00", externalPOSNo: "", idAssignment: 169, internalPOSNo: "109", operationDate: "28.03.2024", posName: "Douglas", posStreet: "Zeil 98-102", postalcode: "60313", weekdayNo: 3},
+  {begin: "11:00", city: "Frankfurt", end: "19:00", externalPOSNo: "", idAssignment: 169, internalPOSNo: "109", operationDate: "30.03.2024", posName: "Douglas", posStreet: "Zeil 98-102", postalcode: "60313", weekdayNo: 3}
+]
 

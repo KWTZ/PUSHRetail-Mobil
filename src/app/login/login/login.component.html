@@ -10,20 +10,25 @@
                      <div class="verkaufe-bottom">
                          <h2>Login:</h2>
                             <form class="login-form" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate >
-                                    <div class="form-field">
-                                        <label>Benutzername:</label>
-                                        <input type="text" class="form-control" name="username" [(ngModel)]="form.username" required #username="ngModel" />
-                                        <div class="alert alert-danger" role="alert" *ngIf="username.errors && f.submitted">Benutzername erforderlich!</div>
-                                    </div>
-                                    <div class="form-field">
-                                        <label>Kennwort:</label>
-                                        <input type="password" class="form-control" name="password" [(ngModel)]="form.password" required minlength="10" #password="ngModel"/> 
-                                        <div class="alert alert-danger" role="alert" *ngIf="password.errors && f.submitted">
-                                          <div *ngIf="password.errors.required">Password erforderlich</div>
-                                          <div *ngIf="password.errors.minlength"> mindestens 10 Zeichen</div>    
+                                <div style="display:flex; flex-direction: row; align-items:center">
+                                    <div style="min-width: 320px;">
+                                        <div class="form-field">
+                                            <label>Benutzername:</label>
+                                            <input type="text" class="form-control" name="username" [(ngModel)]="form.username" required #username="ngModel" />
+                                            <div class="alert alert-danger" role="alert" *ngIf="username.errors && f.submitted">Benutzername erforderlich!</div>
                                         </div>
-                                        <input type="submit" name="submit" value="">
-                                    </div>                                
+                                        <div class="form-field">
+                                            <label>Kennwort:</label>
+                                            <input type="password" class="form-control" name="password" [(ngModel)]="form.password" required minlength="10" #password="ngModel"/> 
+                                            <div class="alert alert-danger" role="alert" *ngIf="password.errors && f.submitted">
+                                            <div *ngIf="password.errors.required">Password erforderlich</div>
+                                            <div *ngIf="password.errors.minlength"> mindestens 10 Zeichen</div>    
+                                            </div>                                        
+                                        </div>   
+                                    </div>                                   
+                                    <img src="assets/action-arrow-active.svg" alt="prev" class="action-btn action-arrow-right" (click)="onSubmit()"/>
+                                </div>
+                                                          
                             </form>
                             <div class="signup"><a [routerLink]="['/', 'register']">Deine erste Anmeldung? -- Bitte hier registrieren!</a></div>
 
