@@ -1,4 +1,8 @@
 
+.glb-form {
+     padding-left: 0;
+}
+
 .glb-table-simple table{
      width: 100%;
 }
@@ -15,4 +19,8 @@
      border-right: 1px solid silver;
      padding-right: 10px;
 
+}
+
+.form-field label {
+     min-width: 9em;
 }

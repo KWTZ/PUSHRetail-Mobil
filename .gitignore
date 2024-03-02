@@ -43,3 +43,8 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+src/app/time-track/daily-working-hours/daily-working-hours.component.html
+src/app/time-track/daily-working-hours/daily-working-hours.component.html
+src/app/time-track/daily-working-hours/daily-working-hours.component.ts
+src/app/time-track/daily-working-hours/daily-working-hours.component.html
+src/app/time-track/daily-working-hours/daily-working-hours.component.ts
