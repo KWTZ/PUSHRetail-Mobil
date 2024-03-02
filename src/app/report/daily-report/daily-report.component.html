@@ -5,7 +5,7 @@
             <div class="container">
                 <div class="glb-inner">
                     <h2>Tagesbericht:</h2>
-                    <p><strong>Kundenfrequenz  <span style="color: red; font-weight: bold;">(volle Zahl)</span></strong></p>
+                    <p><strong>Kundenfrequenz  <span style="color: red; font-weight: bold;">(Zahl)</span></strong></p>
                     <div class="report-table">                       
                         <table>
                             <thead>
@@ -17,24 +17,24 @@
                             <tbody>
                                 <tr>
                                     <td>Heutige Kundenfrequenz?</td>
-                                    <td><input type="number" name="valKundenfrequenz"/></td>
+                                    <td><input type="number" name="valKundenfrequenz" placeholder="0" style="text-align: right; padding-right: 5px;"/></td>
                                 </tr>
                                 <tr>
                                     <td>... davon angesprochene Kunden?</td>
-                                    <td><input type="number" name="valLeads" /></td>
+                                    <td><input type="number" name="valLeads"  placeholder="0" style="text-align: right; padding-right: 5px;"/></td>
                                 </tr>
                                 <tr>                                    
                                     <td>... davon Verkaufsgespräche?</td>
-                                    <td><input type="number" name="valTalks" /></td>
+                                    <td><input type="number" name="valTalks"  placeholder="0" style="text-align: right; padding-right: 5px;"/></td>
                                 </tr>
                                 <tr>                                    
                                     <td>Ausgegebene Proben</td>
-                                    <td><input type="number" name="valProben" /></td>
+                                    <td><input type="number" name="valProben"  placeholder="0" style="text-align: right; padding-right: 5px;"/></td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
-                    <p><strong>Ausstattung (volle Zahl!)</strong></p>
+                    <p><strong>Ausstattung</strong></p>
                     <div class="report-table">
                         <table>
                             <thead>
@@ -80,27 +80,24 @@
                             <div class="glb-bottom">
                                 <form class="glb-form" name="form" method="post" enctype="multipart/form-data">
                                     <div class="form-field">
-                                        <label for=""  style="margin-top: 5px;"><strong>Tagesumsatz D&G, brutto</strong></label>
-                                        <input type="text" name="txt" placeholder="" style="width: 10em;">
+                                        <label for=""  style="margin-top: 5px; white-space: nowrap;"><strong>Tagesumsatz D&G, brutto €</strong></label>
+                                        <input type="text" name="txt" placeholder="0,00" style="width: 10em; text-align: right; padding-right: 5px;">
                                     </div>
-                                    <div style="float: right; font-size: 0.7em; margin-top: -15px; padding-right:20px;">ohne Sonderzeichen</div>
+                                    <div style="float: right; font-size: 0.7em; margin-top: -15px; padding-right:45px;">ohne Sonderzeichen</div>
 
-                                    <div class="form-field camera-product">
-                                        <div class="camera-left">
+
+                                        <div style="display: flex; justify-content: space-between; width:98%;">
                                             <label for="bus_img">
-                                                <img src="assets/camero.png"/>
+                                                <img src="assets/camera-active.svg" style="height: 40px;"/>
                                             </label>
-                                            <span>Foto Verkaufsumsatz, <br> mit Stempel und Unterschrift</span>
+                                            <span style="width: 270px;">Foto Verkaufsumsatz, <br> mit Stempel und Unterschrift</span>
                                             <input type="file" name="bus_img" id="bus_img" accept="image/*;capture=camera">
+                                            <img src="assets/action-arrow-active.svg" alt="" style="height:40px;">
                                         </div>
 
-                                        <div class="camera-right">
-                                            <button><img src="assets/icon1-active.png" alt=""></button>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div>Sontiges:</div>
-                                        <textarea></textarea>
+                                    <div style="margin-top: 10px;">
+                                        <div>Sonstiges:</div>
+                                        <textarea placeholder="max. 300 Zeichen"></textarea>
                                     </div>
                                 </form>
                             </div>

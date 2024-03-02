@@ -109,13 +109,19 @@ strong{
 }
 
 select {
+min-width: 10em;
 -webkit-appearance: none;
 -moz-appearance: none;
+
 }
 
 label {
   display: inline-block;
   margin-bottom: 0.25rem;
+}
+
+textarea::placeholder, input::placeholder {
+  font-size: 12px !important;
 }
 
 .theme-btn{
@@ -125,11 +131,11 @@ label {
   text-align: center;
   color: #ffffff;
   background:var(--acc-blue);
-  -webkit-transition: all 0.5s ease 0s;
+  /* -webkit-transition: all 0.5s ease 0s;
   -moz-transition: all 0.5s ease 0s;
   -ms-transition: all 0.5s ease 0s;
   -o-transition: all 0.5s ease 0s;
-  transition: all 0.5s ease 0s;
+  transition: all 0.5s ease 0s; */
   font-weight: bold;
   height: 35px;
   line-height: 35px;
@@ -549,12 +555,13 @@ background-color: initial;
 .network-inner{
   max-width: 290px;
   margin: 0 auto;
-  -webkit-transform: scale(0);
+  /* -webkit-transform: scale(0);
   -moz-transform: scale(0);
   transform: scale(0);
   -webkit-transition: all 0.5s ease 0s;
   -moz-transition: all 0.5s ease 0s;
-  transition: all 0.5s ease 0s;
+  transition: all 0.5s ease 0s; */
+  transform: opacity 0.2;
   font-size: 12px;
 }
 
@@ -564,7 +571,7 @@ background-color: initial;
   transform: scale(1);
 }
 
-.wir-btn{
+/* .wir-btn{
   width: 100px;
   height: 100px;
   -webkit-border-radius: 150px;
@@ -591,8 +598,8 @@ background-color: initial;
   font-size: 12px;
   flex-direction: column;
   line-height: normal;
-}
-
+} */
+/* 
 .wir-btn small{
   display: block;
 }
@@ -609,7 +616,7 @@ background-color: initial;
 .wir-btn.blind{
   opacity: 0;
   visibility: hidden;
-}
+} */
 
 .glb-top{
   padding-right: 55px;
@@ -725,7 +732,7 @@ background-color: initial;
 
 .form-field textarea{
   height: 105px;
-  padding: 20px;
+  padding: 5px 20px;
 }
 
 .whatsapp-icon {

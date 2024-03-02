@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -22,6 +23,7 @@ import { RewardCompetionComponent } from './reward-competion/reward-competion.co
 import { RegistrationComponent } from './login/registration/registration.component';
 import { FooterComponent } from './_nav/footer/footer.component';
 import { OutofstockComponent } from './outofstock/outofstock.component';
+import { TargetModalComponent } from './target-modal/target-modal.component';
 
 
 
@@ -41,12 +43,16 @@ import { OutofstockComponent } from './outofstock/outofstock.component';
     RegistrationComponent,
     FooterComponent,
     OutofstockComponent,
+    TargetModalComponent,
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    NgbModule
+
 
   ],
   providers: [],

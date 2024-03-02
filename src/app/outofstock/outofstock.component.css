@@ -12,4 +12,8 @@
      width: 10em;
 }
 
+select, input {
+     min-width: 14em;
+}
+
 .glb-table { padding: 10px;}

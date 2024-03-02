@@ -31,6 +31,8 @@ export class DailyWorkingHoursComponent implements OnInit {
 
   workTime=[];
   workBreaks=[];
+  totalbreaks="";
+  totalbreaksMilliDiff=0;
 
   currentAssignment:any=[];
 
@@ -76,34 +78,80 @@ export class DailyWorkingHoursComponent implements OnInit {
   setStatus(status: string) {
     this.currentStatus=status;
     let now = new Date();
-    let currentTime =now.toLocaleString('de-DE').substring(11,15);
+    let currentTime =now.toLocaleString('de-DE').substring(10,15);
     switch (status) {
       case 'clockInDay':
         this.workBegin =currentTime;
         this.clockInDay=currentTime;
-        this.workTime.push({ clockInDay: currentTime, clockOutDay: null});
+        this.workTime.push({ clockInDay: currentTime, clockOutDay: null, workingHours: null});
         break; 
       case 'clockOutDay':
         this.workEnd = currentTime;
         this.clockOutDay=currentTime;
         let wt = this.workTime[this.workTime.length-1];
         wt.clockOutDay=currentTime;
+        wt.workingHours=this.berechnenTimeDifferenz(wt.clockInDay, wt.clockOutDay);
         break;
         
       case 'clockInBreak':
-          this.workEnd = currentTime;
-          this.workBreaks.push({ breakIn: currentTime, breakOut: null, breakhours: null});
+          this.workBegin = currentTime;
+          this.workBreaks.push({ breakIn: currentTime, breakOut: null, breakduration: null});
           break;
       case 'clockOutBreak':
         this.workEnd = currentTime;
         let wb = this.workBreaks[this.workBreaks.length-1];
         wb.breakOut=currentTime;
+        wb.breakduration=this.berechnenTimeDifferenz(wb.breakIn, wb.breakOut);
         break;
 
     }
 
     console.log("dailyWork", this.workTime, (new Date('2024-01-01 23:00:00').getTime()- new Date('2024-01-01').getTime())/1000/60/60);
     console.log("breaks", this.workBreaks);
+  }
+
+  berechnenTimeDifferenz(beginn, ende) {
+    var help = new Date();
+    var arrStart = beginn.split(":");
+    var arrEnd = ende.split(":");
+
+    help.setHours(arrStart[0]);
+    help.setMinutes(arrStart[1]);
+    help.setSeconds(0);
+    help.setMilliseconds(0);
+    var start = help.getTime();
+    
+    help.setHours(arrEnd[0]);
+    help.setMinutes(arrEnd[1]);
+    var end = help.getTime()
+    var milliDiff = end - start; // Differenz in Millisekunden
+    this.totalbreaksMilliDiff+=milliDiff;
+
+    this.totalbreaks=this.formatTime(this.totalbreaksMilliDiff);
+    return this.formatTime(milliDiff);
+
+  }
+
+  formatTime(milliDiff) {
+      // Total number of seconds in the difference
+      const totalSeconds = Math.floor(milliDiff / 1000);
+    
+      // Total number of minutes in the difference
+      const totalMinutes = Math.floor(totalSeconds / 60);
+      
+      // Total number of hours in the difference
+      const totalHours = Math.floor(totalMinutes / 60);
+      
+      // Getting the number of seconds left in one minute
+      const remSeconds = totalSeconds % 60;
+      
+      // Getting the number of minutes left in one hour
+      const remMinutes = totalMinutes % 60;
+
+      console.log(`${("00" + totalHours).slice(-2)}:${("00"+remMinutes).slice(-2)}`);
+      console.log(`${totalHours}:${remMinutes}:${remSeconds}`);
+
+      return `${("00" + totalHours).slice(-2)}:${("00"+remMinutes).slice(-2)}`
   }
 
 }

@@ -23,3 +23,7 @@
 .time-table-item {
      min-width: 8em;
 }
+
+.total {
+     font-weight: bold;
+}

@@ -2,3 +2,11 @@
      margin-left: 10px;
      float: right;
 }
+
+div.modal-dialog {
+     margin-top: 150px;
+     background-color: red !important;
+}
+.modal-content {
+     align-items: center !important;
+}

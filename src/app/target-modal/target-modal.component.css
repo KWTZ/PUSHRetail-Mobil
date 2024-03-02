@@ -1,0 +1,13 @@
+main {
+     display: flex;
+     flex-direction: row;
+     align-items: center;
+
+     padding: 20px;
+}
+
+.content {
+     display: flex;
+     flex-direction: column;
+
+}

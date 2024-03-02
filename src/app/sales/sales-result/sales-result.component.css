@@ -24,3 +24,7 @@
 .form-field label {
      min-width: 9em;
 }
+
+.total {
+     font-weight: bold;
+}

@@ -68,7 +68,10 @@
                             </div>
 
                             <div class="break-table">
-                                <div style="margin-left: 10px; padding-bottom: 5px;">Deine Pausen:</div>
+                                <div class="time-table-group">
+                                    <div class="time-table-item">Deine Pausen:</div>
+                                    <div class="time-table-item"><strong>{{ totalbreaks }}</strong></div>
+                                </div>
                                 <table>
                                     <thead>
                                         <th>Beginn</th>
@@ -79,6 +82,12 @@
                                         <tr *ngFor="let b of workBreaks">
                                             <td>{{ b.breakIn }}</td>
                                             <td>{{ b.breakOut }}</td>
+                                            <td>{{ b.breakduration }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="total">Gesamt:</td>
+                                            <td></td>
+                                            <td class="total">{{ totalbreaks }}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -100,10 +109,8 @@
                                  </tr>
                              </table>
                          </div>
+                         <div style="height:40px;">&nbsp;</div>
                      </div>
-
-
-
          </section>
      </div>
 </main>

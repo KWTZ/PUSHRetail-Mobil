@@ -6,332 +6,21 @@
                 <div class="glb-inner">
                     <div class="login-inner">
                         <div class="glb-bottom">
-                            <form class="glb-form" name="form" >
+
                                 <div style="display: flex; flex-direction: row; align-items: flex-end;">
                                     <div>
                                             <div class="form-field">
                                             <label>Produktkategorie:</label>
-                                            <select>
-                                                <option>( bitte wählen )</option>
-                                                <option>Kosmetik</option>
+                                            <select [(ngModel)]="selectedLine" (change)="filterProductLine()">
+                                                <option>&nbsp;</option>
+                                                <option *ngFor="let line of productline" [ngValue]="line">{{ line }}</option>
                                             </select>                                
                                             </div>
                                             <div class="form-field">
                                                     <label>Produkt:</label>
-                                                    <select>
-                                                        <option>( bitte wählen )</option>
-                                                        <option>PH INTENSO EDP 200ML</option>
-                                                        <option>PH EDT 200ML</option>
-                                                        <option>PH EDT 125ML</option>
-                                                        <option>PH EDT 75ML</option>
-                                                        <option>PH INTENSO EDP 125ML</option>
-                                                        <option>PH INTENSO EDP 75ML</option>
-                                                        <option>PH INTENSO EDP 200ML</option>
-                                                        <option>PARFUM ORIGINAL EDT 100ML</option>
-                                                        <option>PARFUM ORIGINAL EDT 100ML</option>
-                                                        <option>PF EDP 100ML</option>
-                                                        <option>VELVET BLACK PATCHOULI EDP 100ML</option>
-                                                        <option>VELVET AMBER SKIN EDP 100ML</option>
-                                                        <option>VELVET AMBER SUN EDP 100ML</option>
-                                                        <option>VELVET DESERT OUD EDP 100ML</option>
-                                                        <option>VELVET DESIRE EDP 100ML</option>
-                                                        <option>VELVET INCENSO EDP 100ML</option>
-                                                        <option>VELVET EXOTIC LEATHER EDP 100ML</option>
-                                                        <option>VELVET MUGHETTO EDP 100ML</option>
-                                                        <option>VELVET BLUE MUSK EDP 100ML</option>
-                                                        <option>VELVET ROSE EDP 100ML</option>
-                                                        <option>VELVET SICILY EDP 100ML</option>
-                                                        <option>VELVET TENDER OUD EDP 100ML</option>
-                                                        <option>VELVET VETIVER EDP 100ML</option>
-                                                        <option>DEVOTION EDP 30ML</option>
-                                                        <option>DEVOTION EDP 50ML</option>
-                                                        <option>DEVOTION EDP 100ML</option>
-                                                        <option>DEVOTION EDP REFILL 150ML</option>
-                                                        <option>DOLCE BLUE JASMINE EDP 50ML</option>
-                                                        <option>DOLCE BLUE JASMINE EDP 75ML</option>
-                                                        <option>DOLCE BLUE JASMINE EDP 30ML</option>
-                                                        <option>DOLCE EDP 75ML</option>
-                                                        <option>DOLCE EDP 50ML</option>
-                                                        <option>DOLCE GARDEN EDP 50ML</option>
-                                                        <option>DOLCE GARDEN EDP 75ML</option>
-                                                        <option>DOLCE LILY EDT 75ML</option>
-                                                        <option>DOLCE LILY EDT 50ML</option>
-                                                        <option>DOLCE PEONY EDP 75ML</option>
-                                                        <option>DOLCE PEONY EDP 50ML</option>
-                                                        <option>DOLCE ROSE EDT 75ML</option>
-                                                        <option>DOLCE ROSE EDT 75ML</option>
-                                                        <option>DOLCE ROSE EDT 50ML</option>
-                                                        <option>DOLCE SHINE EDP 50ML</option>
-                                                        <option>DOLCE SHINE EDP 50ML</option>
-                                                        <option>DOLCE SHINE EDP 75ML</option>
-                                                        <option>DOLCE VIOLET EDT 30ML</option>
-                                                        <option>DOLCE VIOLET EDT 50ML</option>
-                                                        <option>DOLCE VIOLET EDT 75ML</option>
-                                                        <option>K EDT 50ML</option>
-                                                        <option>K EDT 100ML</option>
-                                                        <option>K EDT 150ML</option>
-                                                        <option>K EDP 150ML</option>
-                                                        <option>K DEO STICK 75ML</option>
-                                                        <option>K SHOWER GEL 200ML</option>
-                                                        <option>K ASB 100ML</option>
-                                                        <option>K EDP 50ML</option>
-                                                        <option>K EDP 100ML</option>
-                                                        <option>K EDT 200ML</option>
-                                                        <option>K EDP 200ML</option>
-                                                        <option>K BEARD OIL 25ML</option>
-                                                        <option>K EDPI INTENSE 100ML</option>
-                                                        <option>K EDPI INTENSE 50ML</option>
-                                                        <option>Q BY DG EDP 30ML</option>
-                                                        <option>Q BY DG EDP 50ML</option>
-                                                        <option>Q BY DG EDP 100ML</option>
-                                                        <option>Q BY DG EDPI INTENSE 100ML</option>
-                                                        <option>Q BY DG EDPI INTENSE 50ML</option>
-                                                        <option>Q BY DG EDPI INTENSE 30ML</option>
-                                                        <option>Q BY DG EDP REFILL 150ML</option>
-                                                        <option>LB EAU INTENSE EDPI 25ML</option>
-                                                        <option>LB EAU INTENSE EDPI 50ML</option>
-                                                        <option>LB EAU INTENSE EDPI 100ML</option>
-                                                        <option>LBPH EDT 200ML</option>
-                                                        <option>LBPH EDT 75ML</option>
-                                                        <option>LBPH EDT 125ML</option>
-                                                        <option>LBPH EDT 40ML</option>
-                                                        <option>LBPH EAU INTENSE EDPI 50ML</option>
-                                                        <option>LBPH EAU INTENSE EDPI 100ML</option>
-                                                        <option>LBPH EAU INTENSE EDPI 200ML</option>
-                                                        <option>LBPH EDT 75ML SUMMER VIBES LE2023</option>
-                                                        <option>LBPH EDT 125ML SUMMER VIBES LE2023</option>
-                                                        <option>LB BODY CREAM 200ML</option>
-                                                        <option>LB EDT 100ML</option>
-                                                        <option>LB EDT 200ML</option>
-                                                        <option>LB EDT 25ML</option>
-                                                        <option>LB EDT 50ML</option>
-                                                        <option>LB EDT 50ML SUMMER VIBES LE2023</option>
-                                                        <option>LB EDT 100ML SUMMER VIBES LE2023</option>
-                                                        <option>IMPERATRICE EDT 50ML</option>
-                                                        <option>IMPERATRICE EDT 100ML</option>
-                                                        <option>TOPH EDT 100ML</option>
-                                                        <option>TOPH EDT 150ML</option>
-                                                        <option>TOPH EDT 50ML</option>
-                                                        <option>TOPH EDP 100ML</option>
-                                                        <option>TOPH EDP 150ML</option>
-                                                        <option>TOPH EDP 50ML</option>
-                                                        <option>TOPH EDPI 100ML</option>
-                                                        <option>TOPH EDPI 50ML</option>
-                                                        <option>TOPH GOLD EDPI 100ML</option>
-                                                        <option>TOPH GOLD EDPI 50ML</option>
-                                                        <option>TO EDP 30ML</option>
-                                                        <option>TO EDP 50ML</option>
-                                                        <option>TO EDP 75ML</option>
-                                                        <option>TO GOLD EDPI 50ML</option>
-                                                        <option>TO GOLD EDPI 75ML</option>
-                                                        <option>TOO EDP 30ML</option>
-                                                        <option>TOO EDP 50ML</option>
-                                                        <option>TOO EDP 100ML</option>
-                                                        <option>TOO EDPI 100ML</option>
-                                                        <option>TOO EDPI 50ML</option>
-                                                        <option>TOO EDPI 30ML</option>
-                                                        <option>DG XMAS23 DEVOTION EDP 50ML+MIN MASC DEL</option>
-                                                        <option>DG SPRING24 DEVOTION EDP 50ML+TS 10ML</option>
-                                                        <option>DG SPRING24 DOLCE VIOL EDT 75ML+TS 10ML</option>
-                                                        <option>DG SPRING23 K EDT 50ML+ASB50 NO SLEEVE</option>
-                                                        <option>DG SPRING24 K EDT 100ML+SG 50ML+ASB 50ML</option>
-                                                        <option>DG SPRING24 K EDP 50ML+SG 50ML</option>
-                                                        <option>DG SPRING24 Q EDP 50ML+Q EDP TS 10ML</option>
-                                                        <option>DG SPRING24 LBPH EDT 125ML+EDT TS 10ML</option>
-                                                        <option>DG SPRING23 LB EDT 25ML+TS 10ML NO SLEEVE</option>
-                                                        <option>DG SPRING23 LB EDT 50ML+BC50+SG50 NO SLE</option>
-                                                        <option>DG SPRING24 LB EDT 100ML+BC 50ML+TS 10ML</option>
-                                                        <option>DG SPRING24 LB EDT 50ML+BC 50ML</option>
-                                                        <option>DG SPRING24 IMPERATR EDT 100ML+EDT TS 10</option>
-                                                        <option>DG SPRING24 TOPH EDT 100ML+TOPH EDT 50ML</option>
-                                                        <option>DG SPRING24 TO EDP 75ML+BL 50ML+EDP TS</option>
-                                                        <option>DG SPRING24 TO EDP 30ML+TO EDP TS 10ML</option>
-                                                        <option>BLUSH OF ROSES CARAMEL 120</option>
-                                                        <option>BLUSH OF ROSES PROVOCATIVE 200</option>
-                                                        <option>BLUSH OF ROSES APRICOT 500</option>
-                                                        <option>BROW LINER SOFT BROWN 1</option>
-                                                        <option>BROW LINER CHESTNUT 2</option>
-                                                        <option>BROW LINER MOCHA 3</option>
-                                                        <option>DEVOTION MASCARA ULTRA NERO 01</option>
-                                                        <option>DEVOTION UNIVERSAL LUMINIZER</option>
-                                                        <option>DEVOTION LIP LAC SPERANZA 100</option>
-                                                        <option>DEVOTION LIP LAC RISPETTO 105</option>
-                                                        <option>DEVOTION LIP LAC GENEROSITA' 110</option>
-                                                        <option>DEVOTION LIP LAC GRATITUDINE 200</option>
-                                                        <option>DEVOTION LIP LAC AFFETTO 205</option>
-                                                        <option>DEVOTION LIP LAC FELICITA' 300</option>
-                                                        <option>DEVOTION LIP LAC ORGOGLIO 400</option>
-                                                        <option>DEVOTION LIP LAC DEVOZIONE 405</option>
-                                                        <option>DEVOTION LIP LAC AUDACIA 410</option>
-                                                        <option>DOLCISSIMO LIQUID LIP NATURAL 1</option>
-                                                        <option>DOLCISSIMO LIQUID LIP CARAMEL 2</option>
-                                                        <option>DOLCISSIMO LIQUID LIP ROSEBUD 3</option>
-                                                        <option>DOLCISSIMO LIQUID LIP FUCHSIA 6</option>
-                                                        <option>DOLCISSIMO LIQUID LIP ORANGE 7</option>
-                                                        <option>DOLCISSIMO LIQUID LIP DAHLIA 11</option>
-                                                        <option>DOLCISSIMO LIQUID LIP PURPLE 12</option>
-                                                        <option>EYE BRUSH EYES BLENDING</option>
-                                                        <option>EYE BRUSH DEFINER</option>
-                                                        <option>EYE BRUSH EYELINER BROW</option>
-                                                        <option>FACE BRUSH FDT</option>
-                                                        <option>FACE BRUSH CONCEALER</option>
-                                                        <option>FACE BRUSH PWDR</option>
-                                                        <option>FACE BRUSH BLUSH&HIGHLIGHT</option>
-                                                        <option>FACE BRUSH RETRACT KABUKI FDT</option>
-                                                        <option>FELINEYES EYELINER NERO 1</option>
-                                                        <option>EYE BRUSH SHADER</option>
-                                                        <option>FELIN EYESHW QUAD STROMBOLI 1</option>
-                                                        <option>FELIN EYESHW QUAD SWEET COCOA 2</option>
-                                                        <option>FELIN EYESHW QUAD SMOKY TAUPE 3</option>
-                                                        <option>FELIN EYESHW QUAD ROMANTIC ROSE 6</option>
-                                                        <option>FELIN EYESHW QUAD PASS DAHLIA 7</option>
-                                                        <option>FELIN EYESHW QUAD MED BLUE 8</option>
-                                                        <option>INTENSEYES EYESHW STICK BLACK 1</option>
-                                                        <option>INTENSEYES EYESHW STICK NUDE 2</option>
-                                                        <option>INTENSEYES EYESHW STICK COCOA 3</option>
-                                                        <option>INTENSEYES EYESHW STICK BRONZE 4</option>
-                                                        <option>INTENSEYES EYESHW STICK TAUPE 5</option>
-                                                        <option>INTENSEYES EYESHW STICK GOLD 6</option>
-                                                        <option>INTENSEYES EYESHW STICK SHIMMER 7</option>
-                                                        <option>INTENSEYES EYESHW STICK PINK 8</option>
-                                                        <option>INTENSEYES EYESHW STICK DAHLIA 9</option>
-                                                        <option>INTENSEYES EYESHW STICK NAVY 10</option>
-                                                        <option>INTENSEYES EYESHW STICK KHAKI 12</option>
-                                                        <option>INTENSEYES EYESHW STICK EMERALD 11</option>
-                                                        <option>KHOL PENCIL TRUE BLACK 1</option>
-                                                        <option>KHOL PENCIL TRUE WHITE 2</option>
-                                                        <option>KHOL PENCIL PEACOCK 3</option>
-                                                        <option>KHOL PENCIL CHOCOLATE 4</option>
-                                                        <option>KHOL PENCIL DAHLIA 5</option>
-                                                        <option>KHOL PENCIL GRAPHITE 6</option>
-                                                        <option>LIP BRUSH</option>
-                                                        <option>LIP DEFINER UNIVERSAL</option>
-                                                        <option>LIP LINER NUDE 1</option>
-                                                        <option>LIP LINER DESIRE 14</option>
-                                                        <option>LIP LINER RUBY 3</option>
-                                                        <option>LIP LINER DAHLIA 4</option>
-                                                        <option>LIP LINER SOFT 6</option>
-                                                        <option>LIP LINER ROSA 16</option>
-                                                        <option>MSKIN TINTMOIST MOCHA 530</option>
-                                                        <option>MSKIN TINTMOIST EBONY 510</option>
-                                                        <option>MSKIN TINTMOIST CINNAMON 355</option>
-                                                        <option>MSKIN TINTMOIST CREAM 210</option>
-                                                        <option>MSKIN TINTMOIST NUDE 120</option>
-                                                        <option>MSKIN TINTMOIST PEARL 110</option>
-                                                        <option>MSKIN TINTMOIST AMBER 400</option>
-                                                        <option>MSKIN TINTMOIST ALMOND 330</option>
-                                                        <option>MSKIN TINTMOIST VANILLA 215</option>
-                                                        <option>MSKIN TINTMOIST CARAMEL 310</option>
-                                                        <option>MSKIN TINTMOIST BRONZE 350</option>
-                                                        <option>MSKIN TINTMOIST HAZELNUT 410</option>
-                                                        <option>MSKIN TINTMOIST CASHMERE 200</option>
-                                                        <option>MSKIN CONCEALER NEUTRAL 3</option>
-                                                        <option>MSKIN CONCEALER CARAMEL 4</option>
-                                                        <option>PASSIONEYES MASCARA NERO SICILIA 1</option>
-                                                        <option>PASSIONEYES MASCARA PASS DAHLIA 3</option>
-                                                        <option>PASSIONEYES MASCARA DIVINE GOLD 4</option>
-                                                        <option>PERFECT MATTE PWDR FDT CARAMEL 110</option>
-                                                        <option>PERFECT MATTE PWDR FDT TAN 140</option>
-                                                        <option>PERFECT MATTE PWDR FDT CREAMY 80</option>
-                                                        <option>SECRET VEIL PRIMER 30ML</option>
-                                                        <option>SECRET SHIELD PRIMER SPF50 30ML</option>
-                                                        <option>SHEERLIPS SPRING PEONY 3</option>
-                                                        <option>SHEERLIPS JOYFUL SUNFLOWER 4</option>
-                                                        <option>SHEERLIPS LOVELY TULIP 1</option>
-                                                        <option>SHINISSIMO LIP LACQ DAHLIA 320</option>
-                                                        <option>SHINISSIMO LIP LACQ DIAMOND 10</option>
-                                                        <option>SHINISSIMO LIP LACQ SWEET HONEY 130</option>
-                                                        <option>SHINISSIMO LIP LACQ PINK CRUSH 140</option>
-                                                        <option>SHINISSIMO LIP LACQ LOVELY KISS 230</option>
-                                                        <option>SHINISSIMO LIP LACQ POP LADY 260</option>
-                                                        <option>SHINISSIMO LIP LACQ MILL TOUCH 290</option>
-                                                        <option>SHINISSIMO LIP LACQ CORAL LUST 410</option>
-                                                        <option>SHINISSIMO LIP LACQ HEART POWER 600</option>
-                                                        <option>SHINISSIMO LIP LACQ #DGLOVER 630</option>
-                                                        <option>SHINISSIMO LIP LACQ #DGAMORE 640</option>
-                                                        <option>SHINISSIMO LIP LACQ RUBY 650</option>
-                                                        <option>SHINISSIMO LIP LACQ AMETHYST 330</option>
-                                                        <option>SHINISSIMO LIP LACQ BRONZE FEELING 390</option>
-                                                        <option>SGLOW CUSHION FDT SPF50 EMPTY CASE</option>
-                                                        <option>SGLOW ILL PWDR DUO SWEET PINK 1</option>
-                                                        <option>SGLOW TRANSLUCENT PWDR CRYSTAL 1</option>
-                                                        <option>SGLOW TRANSLUCENT PWDR SAND 2</option>
-                                                        <option>SGLOW TRANSLUCENT PWDR HONEY 3</option>
-                                                        <option>SGLOW BRONZING PWDR SUNLIGHT 00</option>
-                                                        <option>SGLOW UNIVERSAL BLURRING PWDR</option>
-                                                        <option>SGLOW CUSHION FDT SPF50 SILK 205</option>
-                                                        <option>SGLOW CUSHION FDT SPF50 NUDE 120</option>
-                                                        <option>SGLOW CUSHION FDT SPF50 PEARL 110</option>
-                                                        <option>SGLOW CUSHION FDT SPF50 SAND 220</option>
-                                                        <option>SGLOW CUSHION FDT SPF50 CARAMEL 310</option>
-                                                        <option>SGLOW CUSHION FDT SPF50 BRONZE 350</option>
-                                                        <option>SGLOW UNIVERSAL BROW STYLING GEL</option>
-                                                        <option>TOO MAT LIPSTICK SILKY NUDE 115</option>
-                                                        <option>TOO MAT LIPSTICK SWEET HONEY 130</option>
-                                                        <option>TOO MAT LIPSTICK CREAMY MOCHA 150</option>
-                                                        <option>TOO MAT LIPSTICK CANDY BABY 205</option>
-                                                        <option>TOO MAT LIPSTICK SWEET MAMMA 240</option>
-                                                        <option>TOO MAT LIPSTICK VIVID FUCHSIA 295</option>
-                                                        <option>TOO MAT LIPSTICK MILL PINK 270</option>
-                                                        <option>TOO MAT LIPSTICK PASS DAHLIA 320</option>
-                                                        <option>TOO MAT LIPSTICK CORAL SUNRISE 520</option>
-                                                        <option>TOO MAT LIPSTICK VIBRANT RED 625</option>
-                                                        <option>TOO MATTE LIPSTICK #DGAMORE 640</option>
-                                                        <option>TOO MAT LIPSTICK SPICY TOUCH 670</option>
-                                                        <option>TOO MATTE LIPSTICK CAP HEARTS 1</option>
-                                                        <option>TOO MATTE LIPSTICK CAP DOTS 4</option>
-                                                        <option>TOO MATTE LIPSTICK CAP ROSES 2</option>
-                                                        <option>TOO MAT LIPSTICK CAP ADORNMENTS 3</option>
-                                                        <option>TOO LIPSTICK SOFT ALMOND 110</option>
-                                                        <option>TOO LIPSTICK HOT SAND 120</option>
-                                                        <option>TOO LIPSTICK SWEET HONEY 130</option>
-                                                        <option>TOO LIPSTICK LOVELY TAN 140</option>
-                                                        <option>TOO LIPSTICK CREAMY MOCHA 150</option>
-                                                        <option>TOO LIPSTICK ANGELIC PINK 200</option>
-                                                        <option>TOO LIPSTICK LOVELY PEONY 220</option>
-                                                        <option>TOO LIPSTICK DG BELLEZZA 230</option>
-                                                        <option>TOO LIPSTICK SWEET MAMMA 240</option>
-                                                        <option>TOO LIPSTICK WILD ROSEWOOD 246</option>
-                                                        <option>TOO LIPSTICK JOYFUL PEACH 500</option>
-                                                        <option>TOO LIPSTICK SPICY TOUCH 670</option>
-                                                        <option>TOO LIPSTICK DG LOVER 630</option>
-                                                        <option>TOO LIPSTICK #DGAMORE 640</option>
-                                                        <option>TOO LIPSTICK HOT BURGUNDY 660</option>
-                                                        <option>TOO LIPSTICK PASS DAHLIA 320</option>
-                                                        <option>TOO LIPSTICK CAP LACE 2</option>
-                                                        <option>TOO LIPSTICK CAP ANIMALIER 4</option>
-                                                        <option>TOO SHEER - FLIRTY ROSE - 116</option>
-                                                        <option>TOO SHEER - TOUCH OF NUDE - 125</option>
-                                                        <option>TOO SHEER - SENSUAL TAN - 128</option>
-                                                        <option>TOO SHEER - SWEET MAMMA - 240</option>
-                                                        <option>TOO SHEER - SUGAR ROSEWOOD - 245</option>
-                                                        <option>TOO SHEER - CANDY PINK - 250</option>
-                                                        <option>TOO SHEER - VIVID FUCHSIA - 295</option>
-                                                        <option>TOO SHEER - PASS DAHLIA - 320</option>
-                                                        <option>TOO SHEER - SUNKISSED CORAL - 505</option>
-                                                        <option>TOO SHEER - DG QUEEN - 620</option>
-                                                        <option>TOO SHEER - JUICY STRAWBERRY - 623</option>
-                                                        <option>TOO SHEER - #DG AMORE - 640</option>
-                                                        <option>DGMU TOO SHEER - CAP ZEBRA</option>
-                                                        <option>DGMU TOO SHEER - CAP POLKA DOT</option>
-                                                        <option>VSKIN NATURAL MAT ECRU 225</option>
-                                                        <option>VSKIN NATURAL MAT PORCELAIN 100</option>
-                                                        <option>VSKIN NATURAL MAT IVORY 95</option>
-                                                        <option>VSKIN NATURAL MAT SATEEN 125</option>
-                                                        <option>VSKIN NATURAL MAT BEIGE 130</option>
-                                                        <option>VSKIN NATURAL MAT CASHMERE 200</option>
-                                                        <option>VSKIN NATURAL MAT LINEN 240</option>
-                                                        <option>VSKIN NATURAL MAT SAND 220</option>
-                                                        <option>VSKIN NATURAL MAT CREAM 210</option>
-                                                        <option>VSKIN NATURAL MAT CARAMEL 310</option>
-                                                        <option>VSKIN NATURAL MAT ALMOND 330</option>
-                                                        <option>VSKIN NATURAL MAT CAMEO 335</option>
-                                                        <option>VSKIN NATURAL MAT DESERT 340</option>
-                                                        <option>VSKIN NATURAL MAT BRONZE 350</option>
-                                                        <option>VSKIN NATURAL MAT CINNAMON 355</option>
-                                                        <option>VSKIN NATURAL MAT BISQUE 370</option>
-                                                        <option>VSKIN NATURAL MAT TAN 420</option>
-
+                                                    <select >
+                                                        <option>&nbsp;</option>
+                                                        <option *ngFor="let product of filteredProductList">{{ product.viewValue }}</option>
                                                     </select>
                                             </div>   
                                             <div class="form-field">
@@ -345,7 +34,7 @@
                                     </div>
                                     <img src="assets/action-arrow-active.svg"  style="margin-left: 10px; margin-bottom: 10px; height: 40px;"/>
                                 </div>                                 
-                            </form>
+
                         </div>
                     </div>
                     <div class="glb-table">
@@ -374,10 +63,10 @@
                                 </tr>
                                
                                 <tr>
-                                    <td>Gesamt</td>
-                                    <td>Summe Menge</td>
-                                    <td></td>
-                                    <td>Summe Umsatz</td>
+                                    <td class="total">Gesamt</td>
+                                    <td class="total">Summe Menge</td>
+                                    <td class="total"></td>
+                                    <td class="total">Summe Umsatz</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -388,7 +77,7 @@
                             <tr>
                                 <th ></th>
                                 <th colspan="2">Gesamtumsatz</th>
-                                <th colspan="2">... davon<br>Focusprodukte</th>
+                                <th colspan="2">... davon<br>Fokusprodukte</th>
                             </tr>
                             <tr>
                                 <th ></th>
@@ -400,7 +89,7 @@
                             </thead>
                             <tr>
                                 <td >Tag <strong>&#8960;</strong></td>
-                                <td></td>
+                                <td style="color: red"> <strong>680,00 €</strong></td>
                                 <td  ><strong>125,50 €</strong></td>
                                 <td></td>
                                 <td><strong>0,00 €</strong></td>

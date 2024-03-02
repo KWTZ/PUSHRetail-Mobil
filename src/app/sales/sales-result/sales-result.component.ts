@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Line } from '../../productLine';
+import { Products } from '../../products';
+
 
 @Component({
   selector: 'app-sales-result',
@@ -7,9 +10,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SalesResultComponent implements OnInit {
 
+  productline = Line;
+  productList = Products;
+  filteredProductList=Products;
+
+  selectedLine;
   constructor() { }
 
   ngOnInit(): void {
+    this.productline.sort();
+    this.productList.sort();
+  }
+
+  filterProductLine() {
+      this.filteredProductList=this.productList.filter(e => e.line==this.selectedLine)
   }
 
 }
+
+
