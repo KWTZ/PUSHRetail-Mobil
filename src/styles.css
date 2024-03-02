@@ -1,6 +1,7 @@
 :root {
   --acc-yellow: #ffd00a;
   --acc-blue: #042e50;
+  --acc-green: #4EA72E;
 }
 
 
@@ -920,8 +921,12 @@ display: none;
 }
 
 /*** Action Buttons ****/
+.action-icons-list {
+  display: flex;
+  flex-direction: row;
+}
 .action-btn {
-  height: 30px;
+  height: 40px;
 }
 
 .action-arrow-left {
@@ -929,7 +934,6 @@ display: none;
   -moz-transform: rotate(-180deg);
   transform: rotate(-180deg);
   margin-right: 0.2em;
-
 }
 /* Daily Report */
 .glb-table table, .report-table table{
