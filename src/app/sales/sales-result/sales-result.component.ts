@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Line } from '../../productLine';
+import { ProductLines } from '../../productLine';
 import { Products } from '../../products';
+import { ProductCategories } from 'src/app/productCategories';
 
 
 @Component({
@@ -10,10 +11,13 @@ import { Products } from '../../products';
 })
 export class SalesResultComponent implements OnInit {
 
-  productline = Line;
+  categoryList = ProductCategories
+  productline = ProductLines;
+  filteredProductLine=ProductLines;
   productList = Products;
   filteredProductList=Products;
 
+  selectedCategory;
   selectedLine;
   constructor() { }
 
@@ -23,7 +27,11 @@ export class SalesResultComponent implements OnInit {
   }
 
   filterProductLine() {
-      this.filteredProductList=this.productList.filter(e => e.line==this.selectedLine)
+    this.filteredProductLine=this.productline.filter(e => e.groupLine==this.selectedCategory);
+  }
+
+  filterProduct() {
+    this.filteredProductList=this.productList.filter(e=> e.line==this.selectedLine)
   }
 
 }

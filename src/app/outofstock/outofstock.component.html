@@ -5,21 +5,20 @@
             <div class="container">
                 <div class="glb-inner">
                     <div class="login-inner">
-                        <div class="glb-bottom">
-    
-                                <div>
+                        <div class="glb-form">    
+                                <div style="margin-left:20px;">
                                         <div class="form-field">
-                                            <label>Produktkategorie:</label>
-                                            <select [(ngModel)]="selectedLine" (change)="filterProduct()">
+                                            <label>Hauptkategorie:</label>
+                                            <select [(ngModel)]="selectedCategory" (change)="filterProductLine()">
                                                 <option>&nbsp;</option>
-                                                <option *ngFor="let line of productline" [ngValue]="line">{{ line }}</option>
+                                                <option *ngFor="let cat of categoryList" [ngValue]="cat">{{ cat }}</option>
                                             </select>                                
                                         </div>
                                         <div class="form-field">
                                             <label>Produktkategorie:</label>
                                             <select [(ngModel)]="selectedLine" (change)="filterProduct()">
                                                 <option>&nbsp;</option>
-                                                <option *ngFor="let line of productline" [ngValue]="line">{{ line }}</option>
+                                                <option *ngFor="let pLine of filteredProductLine" [ngValue]="pLine.line">{{ pLine.line }}</option>
                                             </select>                                
                                         </div>
                                         <div class="form-field">
@@ -30,14 +29,13 @@
                                         </select>
                                         </div>
                                         <div class="form-field">
-                                    <label>Nachbestellung,<br> Menge:</label>
-                                    <input type="text" name="txt" placeholder="">
-                                        </div>  
-                                        <div style="width: 100%; text-align: right;">
-                                            <img src="assets/action-arrow-active.svg"  style="margin-left: 10px; margin-bottom: 20px; height: 40px;"/>
-                                        </div>
-                                </div>
-                                
+                                            <label>Restmenge:</label>
+                                            <input type="number" name="qtyRemaining" placeholder="0" style="text-align: right;">
+                                         </div>  
+                                </div> 
+                                <div style="width: 100%; text-align: right; padding-right: 20px;">
+                                    <img src="assets/action-arrow-active.svg"  style="margin-left: 10px; margin-bottom: 10px; margin-right: 10px;height: 40px;"/>
+                                </div> 
 
                         </div>
                     </div>
@@ -45,7 +43,7 @@
             </div>
 
             <div class="glb-table">
-               <label>Deine Nachbestellungen:</label>
+               <label>Deine Restmengen Meldungen:</label>
                <table>
                    <thead>
                        <tr>
@@ -60,19 +58,19 @@
                            <td><a href="#" style="font-weight:bold; color:#042e50">Artikel</a></td>
                            <td>Datum</td>
                            <td>Menge</td>
-                           <td>bestellt</td>  
+                           <td><input type="checkbox" />erledigt</td>  
                        </tr>
                        <tr>
                            <td><a href="#" style="font-weight: bold; color:#042e50">Artikel</a></td>
                            <td>Datum</td>
                            <td>Menge</td>
-                           <td>geliefert</td>  
+                           <td><input type="checkbox" />erledigt</td>  
                        </tr>
                        <tr>
                            <td><a href="#" style="font-weight: bold; color:#042e50">Artikel</a></td>
                            <td>Datum</td>
                            <td>Menge</td>
-                           <td>geliefert</td>  
+                           <td><input type="checkbox" />erledigt</td>  
                        </tr>
                    </tbody>
                </table>

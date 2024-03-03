@@ -1,5 +1,6 @@
 .glb-form {
-     padding-left: 20px;
+     padding-left: 0px;
+     padding-right: 0px;
      display: flex;
      flex-direction: row;
      align-items: flex-end;
@@ -13,7 +14,12 @@
 }
 
 select, input {
-     min-width: 14em;
+     min-width: 12em;
+}
+
+input[type="checkbox"] {
+     min-width: unset;
+     margin-right: 1em;
 }
 
 .glb-table { padding: 10px;}

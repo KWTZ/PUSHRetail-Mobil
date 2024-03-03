@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Line } from '../productLine';
+import { ProductLines } from '../productLine';
+import { ProductCategories } from '../productCategories';
 import { Products } from '../products';
 
 @Component({
@@ -9,16 +10,24 @@ import { Products } from '../products';
 })
 export class OutofstockComponent implements OnInit {
 
-  productline = Line;
+  categoryList = ProductCategories;
+  productline = ProductLines;
+  filteredProductLine=ProductLines;
   productList = Products;
   filteredProductList=Products;
+  selectedCategory;
   selectedLine;
 
   constructor() { }
 
   ngOnInit(): void {
+    this.categoryList.sort();
     this.productline.sort();
     this.productList.sort();
+  }
+
+  filterProductLine() {
+    this.filteredProductLine=this.productline.filter(e => e.groupLine==this.selectedCategory);
   }
 
   filterProduct() {

@@ -29,6 +29,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private router: Router,
+    private encrypt: EncryptService,
     private modalService: NgbModal, 
     @Inject(DOCUMENT) private document: any ) { }
 
@@ -51,26 +52,26 @@ export class LoginComponent implements OnInit {
      const { username, password } = this.form;
 
     console.log("test");
-    // this.authService.login(username, this.encrypt.encryptAES256(password)).subscribe(
-    //   data => {
-    //     console.log(data);
-    //     if (data[0]['promoterNo']!=null) {
-    //       this.isLoggedIn = true;
-    //       this.isLoginFailed = false;
-    //       setTimeout(() =>  { this.openPopup() }, 2000);
-    //       // setTimeout(() =>  { this.router.navigate(['/', 'dailywork']); }, 2000);
-    //     }
-    //     else {
-    //         this.isLoggedIn=false;
-    //         this.isLoginFailed=true;
-    //     }
+    this.authService.login(username, this.encrypt.encryptAES256(password)).subscribe(
+      data => {
+        console.log(data);
+        if (data[0]['promoterNo']!=null) {
+          this.isLoggedIn = true;
+          this.isLoginFailed = false;
+          // setTimeout(() =>  { this.openPopup() }, 2000);
+          // setTimeout(() =>  { this.router.navigate(['/', 'dailywork']); }, 2000);
+        }
+        else {
+            this.isLoggedIn=false;
+            this.isLoginFailed=true;
+        }
        
-    //   },
-    //   err => {
-    //     this.errorMessage = err.error.message;
-    //     this.isLoginFailed = true;
-    //   }
-    // );
+      },
+      err => {
+        this.errorMessage = err.error.message;
+        this.isLoginFailed = true;
+      }
+    );
 
   
     

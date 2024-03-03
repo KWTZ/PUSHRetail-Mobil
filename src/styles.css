@@ -122,6 +122,11 @@ label {
 
 textarea::placeholder, input::placeholder {
   font-size: 12px !important;
+  padding: 0.5em;
+}
+
+input[type=number]::placeholder {
+  text-align: right;
 }
 
 .theme-btn{
@@ -741,12 +746,17 @@ background-color: initial;
   bottom: 50px;
 }
 
-.glb-form, .login-form, .glb-form{
-  padding-right: 52px;
+.glb-form, .login-form{
+  display:flex; 
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 20px;
+  margin-right: 20px;
+  /* padding-right: 52px; */
 }
 
 .glb-form {  
-  padding-left: 52px;
+  /* padding-left: 52px; */
 }
 
 .reg-form {

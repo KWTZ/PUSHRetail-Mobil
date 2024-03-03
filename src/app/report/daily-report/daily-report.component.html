@@ -17,19 +17,19 @@
                             <tbody>
                                 <tr>
                                     <td>Heutige Kundenfrequenz?</td>
-                                    <td><input type="number" name="valKundenfrequenz" placeholder="0" style="text-align: right; padding-right: 5px;"/></td>
+                                    <td><input type="text" name="valKundenfrequenz" placeholder="0" style="text-align: right; padding-right: 5px;"/></td>
                                 </tr>
                                 <tr>
                                     <td>... davon angesprochene Kunden?</td>
-                                    <td><input type="number" name="valLeads"  placeholder="0" style="text-align: right; padding-right: 5px;"/></td>
+                                    <td><input type="text" name="valLeads"  placeholder="0" style="text-align: right; padding-right: 5px;"/></td>
                                 </tr>
                                 <tr>                                    
                                     <td>... davon Verkaufsgespräche?</td>
-                                    <td><input type="number" name="valTalks"  placeholder="0" style="text-align: right; padding-right: 5px;"/></td>
+                                    <td><input type="text" name="valTalks"  placeholder="0" style="text-align: right; padding-right: 5px;"/></td>
                                 </tr>
                                 <tr>                                    
                                     <td>Ausgegebene Proben</td>
-                                    <td><input type="number" name="valProben"  placeholder="0" style="text-align: right; padding-right: 5px;"/></td>
+                                    <td><input type="text" name="valProben"  placeholder="0" style="text-align: right; padding-right: 5px;"/></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -67,8 +67,8 @@
                                 <tr style="height:30px;">                                   
                                     <td colspan="2">Außendienst vor Ort?</td>
                                     
-                                    <td style="white-space: nowrap;">ja   <input type="checkbox" /></td>                                          
-                                    <td style="white-space: nowrap;">nein   <input type="checkbox" /></td>                                          
+                                    <td style="white-space: nowrap; text-align: right;">ja   <input type="checkbox" /></td>                                          
+                                    <td style="white-space: nowrap; text-align:right;">nein   <input type="checkbox" /></td>                                          
                                       
                                 </tr>
                             </tbody>
@@ -79,14 +79,16 @@
                         <div class="login-inner">
                             <div class="glb-bottom">
                                 <form class="glb-form" name="form" method="post" enctype="multipart/form-data">
-                                    <div class="form-field">
-                                        <label for=""  style="margin-top: 5px; white-space: nowrap;"><strong>Tagesumsatz D&G, brutto €</strong></label>
-                                        <input type="text" name="txt" placeholder="0,00" style="width: 10em; text-align: right; padding-right: 5px;">
+                                    <div>
+                                        <div class="form-field" style="justify-content: flex-end;">
+                                            <label for=""  style="margin-top: 5px; white-space: nowrap;"><strong>Tagesumsatz D&G, brutto €</strong></label>
+                                            <input type="text" name="txt" placeholder="0,00" style="width: 8em; text-align: right; padding-right: 5px;">
+                                        </div>
+                                        <div style="margin-top:-15px;margin-right:0px; font-size:0.7em; float:right;">ohne Sonderzeichen</div>
                                     </div>
-                                    <div style="float: right; font-size: 0.7em; margin-top: -15px; padding-right:45px;">ohne Sonderzeichen</div>
 
 
-                                        <div style="display: flex; justify-content: space-between; width:98%;">
+                                        <div style="display: flex; justify-content: space-between; width:98%; margin-top: 10px;">
                                             <label for="bus_img">
                                                 <img src="assets/camera-active.svg" style="height: 40px;"/>
                                             </label>

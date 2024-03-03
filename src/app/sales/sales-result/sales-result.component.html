@@ -9,11 +9,19 @@
 
                                 <div style="display: flex; flex-direction: row; align-items: flex-end;">
                                     <div>
+                                        <div class="form-field">
+                                            <label>Hauptkategorie:</label>
+                                            <select [(ngModel)]="selectedCategory" (change)="filterProductLine()">
+                                                <option>&nbsp;</option>
+                                                <option *ngFor="let cat of categoryList" [ngValue]="cat">{{ cat }}</option>
+                                            </select>                                
+                                        </div>
+                                       
                                             <div class="form-field">
                                             <label>Produktkategorie:</label>
                                             <select [(ngModel)]="selectedLine" (change)="filterProductLine()">
                                                 <option>&nbsp;</option>
-                                                <option *ngFor="let line of productline" [ngValue]="line">{{ line }}</option>
+                                                <option *ngFor="let prd of productline" [ngValue]="prd.line">{{ prd.line }}</option>
                                             </select>                                
                                             </div>
                                             <div class="form-field">
