@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService } from 'src/app/_services/data.service';
+import { CustomUtilityService } from '../../_services/customUtilites.service';
+import { DataService } from '../../_services/data.service';
 
 @Component({
   selector: 'app-daily-working-hours',
@@ -16,7 +17,16 @@ export class DailyWorkingHoursComponent implements OnInit {
                         ', Date_Format(a.end, "%H:%m") as end  ' +
                         ' from pos_assignments a ' +
                         '  inner join pos_pointofsales p on a.internalPOSNo=p.internalPOSNo ' +
-                        ' where promoterNo="' + localStorage.getItem('promoterNo') + '"';
+                        ' where promoterNo="';
+
+  sqlStringWorkingDay: string = 'SELECT workingDay, begin, end, workingHours FROM pro_workingdays where promoterNo="@promoterNo" and workingDay="@workingDay"';
+  sqlStringBreaks: string = 'SELECT begin as breakIn, end as breakOut, duration as breakDuration FROM pro_workingbreaks where promoterNo="@promoterNo" and workingDay="@workingDay"'; 
+
+  sqlWorkingDayInsert: string = "INSERT INTO pro_workingdays(promoterNo, workingday, begin, end, workinghours, modifiedBy, modified, createdBy, created) VALUES ";
+  sqlWorkingDayUpdate: string = 'UPDATE pro_workingdays set end ="@workingEnd", workinghours="@workinghours"  where promoterNo="@promoterNo" and workingDay=CURDATE() ';
+
+  sqlBreakInsert: string = "INSERT INTO pro_workingbreaks(promoterNo, workingday, begin, end, duration, modifiedBy, modified, createdBy, created) VALUES";
+  sqlBreakUpdate: string = 'UPDATE pro_workingbreaks set end="@breakEnd", duration="@duration"  where promoterNo="@promoterNo" and workingDay=CURDATE() and end IS NULL';
 
   assignNo=0;  
   noOfAssignment=0;
@@ -28,9 +38,12 @@ export class DailyWorkingHoursComponent implements OnInit {
   currentStatus=null;
   clockInDay;
   clockOutDay;
+  totalWorkingDay;
+  totalWorkingMonth;
 
   workTime=[];
   workBreaks=[];
+  lastBreak;
   totalbreaks="";
   totalbreaksMilliDiff=0;
 
@@ -39,29 +52,90 @@ export class DailyWorkingHoursComponent implements OnInit {
   listAssignments;
   promoterNo;
 
-  constructor(private dataservice: DataService ) { }
+  constructor(private dataservice: DataService,
+    private cutil: CustomUtilityService ) { }
 
   ngOnInit(): void {
     this.getData();
   }
 
   getData() { 
-    //   this.dataservice.getAll(this.sqlString).subscribe( data => {
-    //     console.log(data);
-    //     // this.listAssignemnts=data;
-    //     this.listAssignemnts=Assignments;
-    //     this.noOfAssignment=data.length;
-    //     this.currentAssignment=data[this.assignNo];
-    //     console.log(this.currentAssignment)
-    //     this.weekdayName=weekdays[this.currentAssignment['weekdayNo']]
-    // });
+      let promoter = JSON.parse(localStorage.getItem("promoter"));
+      this.promoterNo=promoter['promoterNo']
+      this.sqlString+=this.promoterNo + '"';
+      console.log(this.sqlString);
+      this.dataservice.getAll(this.sqlString).subscribe( data => {
+        console.log(data);
+        // this.listAssignemnts=data;
+        this.listAssignments=data;
+        this.noOfAssignment=data.length;
+        this.currentAssignment=data[this.assignNo];
+        console.log(this.currentAssignment)
+        this.weekdayName=weekdays[this.currentAssignment['weekdayNo']];
 
-    this.listAssignments=Assignments;
-    console.log("assignment.",  this.listAssignments);
-    this.noOfAssignment=this.listAssignments.length;
-    this.currentAssignment=this.listAssignments[this.assignNo];
-    console.log(this.currentAssignment)
-    this.weekdayName=weekdays[this.currentAssignment['weekdayNo']]
+        this.getWorkingHours();
+    });
+  }
+
+  getWorkingHours() {
+
+    // working Day
+    let sqlString = this.sqlStringWorkingDay.replace('@promoterNo', this.promoterNo).replace('@workingDay', this.cutil.convertToSQLDate(this.currentAssignment['operationDate']));
+    let workingDay;
+    let sumBreak=0;
+    let sumWorkinghours=0;
+
+    this.dataservice.getAll(sqlString).subscribe( data => { 
+      if (data.length==1) {
+        workingDay = data[0];
+        this.clockInDay = workingDay['begin'];
+        this.clockOutDay= workingDay['end'];
+      
+        this.workTime.push({ clockInDay: workingDay['begin'], clockOutDay: workingDay['end'], workingHours: workingDay['workingHours']});
+        this.currentStatus="clockInDay";
+
+        this.workTime.forEach(item => {
+          sumWorkinghours+=item['workingHours'];
+        });
+      }
+      else {
+        this.clockInDay=null;
+        this.clockOutDay=null;
+      }
+    });
+
+
+   
+   
+
+    // breaks
+    let sqlStatement = this.sqlStringBreaks.replace('@promoterNo', this.promoterNo).replace('@workingDay', this.cutil.convertToSQLDate(this.currentAssignment['operationDate']));
+    this.dataservice.getAll(sqlStatement).subscribe(data => {  this.workBreaks=data; 
+
+      if(data.length>0) {
+        this.lastBreak = data[data.length-1];
+        if (this.lastBreak['breakOut']==null) {
+          this.currentStatus="clockInBreak";
+        }   
+        else {
+          this.currentStatus="clockInDay";
+        }     
+      }
+
+
+      this.workBreaks.forEach(item => {
+        sumBreak += item['breakDuration'];
+        item['breakDuration']=this.formatTime(item['breakDuration']);
+      });
+
+      this.totalbreaks=this.formatTime(sumBreak);
+
+      this.totalWorkingDay=this.formatTime(sumWorkinghours-sumBreak);
+      this.totalWorkingMonth=this.formatTime(sumWorkinghours-sumBreak);
+     
+    });
+    
+
   }
 
   setAssign(pos: number) {
@@ -73,7 +147,9 @@ export class DailyWorkingHoursComponent implements OnInit {
       this.assignNo=this.noOfAssignment-1;
 
     this.currentAssignment=this.listAssignments[this.assignNo]
-    this.weekdayName=weekdays[this.currentAssignment['weekdayNo']]
+    this.weekdayName=weekdays[this.currentAssignment['weekdayNo']];
+
+    this.getWorkingHours();
   }
 
   setStatus(status: string) {
@@ -91,24 +167,54 @@ export class DailyWorkingHoursComponent implements OnInit {
         this.clockOutDay=currentTime;
         let wt = this.workTime[this.workTime.length-1];
         wt.clockOutDay=currentTime;
-        wt.workingHours=this.calcTimeDifference(wt.clockInDay, wt.clockOutDay);
+        wt.workingHours=this.formatTime(this.calcTimeDifference(wt.clockInDay, wt.clockOutDay));
         break;
         
       case 'clockInBreak':
           this.workBegin = currentTime;
-          this.workBreaks.push({ breakIn: currentTime, breakOut: null, breakduration: null});
+          this.workEnd=null;
+          this.workBreaks.push({ breakIn: currentTime, breakOut: null, breakDuration: null});
+          
           break;
       case 'clockOutBreak':
         this.workEnd = currentTime;
         let wb = this.workBreaks[this.workBreaks.length-1];
         wb.breakOut=currentTime;
-        wb.breakduration=this.calcTimeDifference(wb.breakIn, wb.breakOut);
+        wb.breakDuration=this.formatTime(this.calcTimeDifference(wb.breakIn, wb.breakOut));
         break;
 
     }
 
-    console.log("dailyWork", this.workTime, (new Date('2024-01-01 23:00:00').getTime()- new Date('2024-01-01').getTime())/1000/60/60);
     console.log("breaks", this.workBreaks);
+  }
+
+  saveWorkinghours() {
+    let sqlStatement;
+    switch(this.currentStatus) {
+      case 'clockInDay':
+        sqlStatement = this.sqlWorkingDayInsert+'("' + this.promoterNo + '", CURDATE(), "' + this.clockInDay + '", null, 0, "' + this.promoterNo + '", NOW(), "' + this.promoterNo + '", NOW())';
+        break;
+      case 'clockOutDay':
+        sqlStatement = this.sqlWorkingDayUpdate;
+        sqlStatement = sqlStatement.replace('@promoterNo', this.promoterNo);
+        sqlStatement = sqlStatement.replace('@workingEnd', this.clockOutDay);
+        sqlStatement = sqlStatement.replace('@workinghours', this.calcTimeDifference(this.clockInDay, this.clockOutDay));
+        break;
+      case 'clockInBreak':
+        sqlStatement = this.sqlBreakInsert+'("' + this.promoterNo + '", CURDATE(), "' + this.workBegin + '", null, null, "' + this.promoterNo + '", NOW(), "' + this.promoterNo + '", NOW())';
+        this.currentStatus="clockInBreak";
+        break;
+      case 'clockOutBreak':
+        sqlStatement = this.sqlBreakUpdate;
+        sqlStatement = sqlStatement.replace('@promoterNo', this.promoterNo);
+        sqlStatement = sqlStatement.replace('@breakEnd', this.workEnd);
+        sqlStatement = sqlStatement.replace('@duration', this.calcTimeDifference(this.lastBreak['breakIn'], this.workEnd))
+        break;
+    }
+
+    console.log(sqlStatement);
+    this.dataservice.storeData(sqlStatement).subscribe(res => { console.log(res); });
+
   }
 
   calcTimeDifference(beginn, ende) {
@@ -129,7 +235,7 @@ export class DailyWorkingHoursComponent implements OnInit {
     this.totalbreaksMilliDiff+=milliDiff;
 
     this.totalbreaks=this.formatTime(this.totalbreaksMilliDiff);
-    return this.formatTime(milliDiff);
+    return milliDiff;
 
   }
 
@@ -159,12 +265,13 @@ export class DailyWorkingHoursComponent implements OnInit {
 
 const weekdays = [ 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag', 'Sonntag' ];
 
-const Assignments = [
-  {begin: "11:00", city: "Frankfurt", end: "19:00", externalPOSNo: "", idAssignment: 169, internalPOSNo: "109", operationDate: "07.03.2024", posName: "Douglas", posStreet: "Zeil 98-102", postalcode: "60313", weekdayNo: 3},
-  {begin: "11:00", city: "Frankfurt", end: "19:00", externalPOSNo: "", idAssignment: 169, internalPOSNo: "109", operationDate: "14.03.2024", posName: "Douglas", posStreet: "Zeil 98-102", postalcode: "60313", weekdayNo: 3},
-  {begin: "11:00", city: "Frankfurt", end: "19:00", externalPOSNo: "", idAssignment: 169, internalPOSNo: "109", operationDate: "21.03.2024", posName: "Douglas", posStreet: "Zeil 98-102", postalcode: "60313", weekdayNo: 3},
-  {begin: "11:00", city: "Frankfurt", end: "19:00", externalPOSNo: "", idAssignment: 169, internalPOSNo: "109", operationDate: "27.03.2024", posName: "Douglas", posStreet: "Zeil 98-102", postalcode: "60313", weekdayNo: 3},
-  {begin: "11:00", city: "Frankfurt", end: "19:00", externalPOSNo: "", idAssignment: 169, internalPOSNo: "109", operationDate: "28.03.2024", posName: "Douglas", posStreet: "Zeil 98-102", postalcode: "60313", weekdayNo: 3},
-  {begin: "11:00", city: "Frankfurt", end: "19:00", externalPOSNo: "", idAssignment: 169, internalPOSNo: "109", operationDate: "30.03.2024", posName: "Douglas", posStreet: "Zeil 98-102", postalcode: "60313", weekdayNo: 3}
-]
+
+// const Assignments = [
+//   {begin: "11:00", city: "Frankfurt", end: "19:00", externalPOSNo: "", idAssignment: 169, internalPOSNo: "109", operationDate: "07.03.2024", posName: "Douglas", posStreet: "Zeil 98-102", postalcode: "60313", weekdayNo: 3},
+//   {begin: "11:00", city: "Frankfurt", end: "19:00", externalPOSNo: "", idAssignment: 169, internalPOSNo: "109", operationDate: "14.03.2024", posName: "Douglas", posStreet: "Zeil 98-102", postalcode: "60313", weekdayNo: 3},
+//   {begin: "11:00", city: "Frankfurt", end: "19:00", externalPOSNo: "", idAssignment: 169, internalPOSNo: "109", operationDate: "21.03.2024", posName: "Douglas", posStreet: "Zeil 98-102", postalcode: "60313", weekdayNo: 3},
+//   {begin: "11:00", city: "Frankfurt", end: "19:00", externalPOSNo: "", idAssignment: 169, internalPOSNo: "109", operationDate: "27.03.2024", posName: "Douglas", posStreet: "Zeil 98-102", postalcode: "60313", weekdayNo: 3},
+//   {begin: "11:00", city: "Frankfurt", end: "19:00", externalPOSNo: "", idAssignment: 169, internalPOSNo: "109", operationDate: "28.03.2024", posName: "Douglas", posStreet: "Zeil 98-102", postalcode: "60313", weekdayNo: 3},
+//   {begin: "11:00", city: "Frankfurt", end: "19:00", externalPOSNo: "", idAssignment: 169, internalPOSNo: "109", operationDate: "30.03.2024", posName: "Douglas", posStreet: "Zeil 98-102", postalcode: "60313", weekdayNo: 3}
+// ]
 

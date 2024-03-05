@@ -928,6 +928,11 @@ display: none;
   margin-top: 150px;
 }
 
+.alert-danger {
+  font-size: 0.8em;
+  max-width: 20em;
+}
+
 .signup {
   margin-top: -10px;
   font-weight: bold;

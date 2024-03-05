@@ -11,21 +11,20 @@ import { PlacementComponent } from './placement/placement.component';
 import { LoginComponent } from './login/login/login.component';
 import { RegistrationComponent } from './login/registration/registration.component';
 import { OutofstockComponent } from './outofstock/outofstock.component';
+import { AuthGuardService } from './_services/auth.guard';
 
 const routes: Routes = [
   { path: '',  component: IntroComponent, pathMatch: 'full' },
-  { path: 'home',  component: HomeComponent, pathMatch: 'full' },
-  { path: 'dailywork',  component: DailyWorkingHoursComponent, pathMatch: 'full' },
-  { path: 'sales',  component: SalesResultComponent, pathMatch: 'full' },
-  { path: 'outofstock',  component: OutofstockComponent, pathMatch: 'full' },
-  { path: 'dailyreport',  component: DailyReportComponent , pathMatch: 'full' },
-  { path: 'message',  component: MessageComponent , pathMatch: 'full' },
-  { path: 'reward',  component: RewardCompetionComponent , pathMatch: 'full' },
-  { path: 'placement',  component: PlacementComponent , pathMatch: 'full' },
-  { path: 'register',  component: RegistrationComponent , pathMatch: 'full' },
-  { path: 'login',  component: LoginComponent , pathMatch: 'full' },
-
-  
+  { path: 'home',  component: HomeComponent, pathMatch: 'full', canActivate:[AuthGuardService] },
+  { path: 'dailywork',  component: DailyWorkingHoursComponent, pathMatch: 'full', canActivate:[AuthGuardService] },
+  { path: 'sales',  component: SalesResultComponent, pathMatch: 'full', canActivate:[AuthGuardService] },
+  { path: 'outofstock',  component: OutofstockComponent, pathMatch: 'full', canActivate:[AuthGuardService] }, 
+  { path: 'dailyreport',  component: DailyReportComponent , pathMatch: 'full', canActivate:[AuthGuardService]  },
+  { path: 'message',  component: MessageComponent , pathMatch: 'full' , canActivate:[AuthGuardService] },
+  { path: 'reward',  component: RewardCompetionComponent , pathMatch: 'full' , canActivate:[AuthGuardService] },
+  { path: 'placement',  component: PlacementComponent , pathMatch: 'full' , canActivate:[AuthGuardService] },
+  { path: 'register',  component: RegistrationComponent , pathMatch: 'full'  },
+  { path: 'login',  component: LoginComponent , pathMatch: 'full'  },
 
 ];
 

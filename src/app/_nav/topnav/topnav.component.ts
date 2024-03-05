@@ -7,9 +7,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TopnavComponent implements OnInit {
 
+  isLoggedIn='false';
+  userName;
+
   constructor() { }
 
   ngOnInit(): void {
+      this.isLoggedIn=localStorage.getItem("isLoggedIn");
+      let user =JSON.parse(localStorage.getItem("promoter"));
+      this.userName = user['username'];
+
+  }
+
+  setStorage() {
+    localStorage.clear();
   }
 
 }

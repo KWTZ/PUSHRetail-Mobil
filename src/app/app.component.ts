@@ -1,4 +1,5 @@
 import { Component,  OnInit} from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 
 
@@ -17,7 +18,14 @@ export class AppComponent  implements OnInit  {
 
 
   ngOnInit(): void {
-    localStorage.setItem('promoterNo', '9999');
+    if (environment.testing) {
+      localStorage.setItem("isLoggedIn", 'true');
+      localStorage.setItem("promoter", JSON.stringify( { username: 'Max Mustermann', promoterNo: '9999'} ));
+    }
+    else {
+      localStorage.setItem("isLoggedIn", 'false');
+    }
+    
   }
 
 

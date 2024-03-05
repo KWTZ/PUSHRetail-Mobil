@@ -8,7 +8,7 @@
                  <div class="login-icon">
                      <a [routerLink]="['/', 'login']"><img src="assets/user.png" alt=""></a>
                  </div>
-                 <div class="hamburger-menu hamburger-menu-on">
+                 <div *ngIf="isLoggedIn=='true'" class="hamburger-menu hamburger-menu-on">
                      <div class="burger burger-squeeze"><div class="burger-lines"></div></div>
                  </div>
                  <div class="main-menu">
@@ -21,10 +21,11 @@
                          <li><a [routerLink]="['/', 'message']">Eskalation</a></li>                                
                          <li><a [routerLink]="['/', 'reward']">Spiele & Prämien</a></li>
                          <li><a [routerLink]="['/', 'placement']">Einsätze</a></li>
-                         <li><a [routerLink]="['/', 'login']">Abmelden</a></li>
+                         <li><a [routerLink]="['/', 'login']" (click)="setStorage()">Abmelden</a></li>
                      </ul>
-                 </div>
+                 </div>                 
              </div>
+             
          </div>
          <div class="nav-line">&nbsp;</div>
      </div>

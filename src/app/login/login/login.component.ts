@@ -51,15 +51,20 @@ export class LoginComponent implements OnInit {
   onSubmit(): void {
      const { username, password } = this.form;
 
-    console.log("test");
-    this.authService.login(username, this.encrypt.encryptAES256(password)).subscribe(
+    console.log("test", username, password);
+    this.authService.login(username, password).subscribe(
       data => {
         console.log(data);
         if (data[0]['promoterNo']!=null) {
           this.isLoggedIn = true;
           this.isLoginFailed = false;
+          localStorage.setItem("promoter", JSON.stringify(data[0]));
+          localStorage.setItem("isLoggedIn", 'true');
           // setTimeout(() =>  { this.openPopup() }, 2000);
           // setTimeout(() =>  { this.router.navigate(['/', 'dailywork']); }, 2000);
+          
+        this.openPopup();
+        setTimeout(() =>  { this.router.navigate(['/', 'dailywork']); }, 1000);
         }
         else {
             this.isLoggedIn=false;
@@ -70,23 +75,11 @@ export class LoginComponent implements OnInit {
       err => {
         this.errorMessage = err.error.message;
         this.isLoginFailed = true;
+        localStorage.setItem("promoterNo", null);
+        localStorage.setItem("isLoggedIn", 'false');
+        this.reloadPage();
       }
-    );
-
-  
-    
-
-
-     // this.tokenStorage.saveToken(data.accessToken);
-        // this.tokenStorage.saveUser(data[0]);
-
-        // this.isLoginFailed = false;
-        // this.isLoggedIn = true;
-        // this.roles = this.tokenStorage.getUser().role;
-        // this.reloadPage();
-
-        this.openPopup();
-        setTimeout(() =>  { this.router.navigate(['/', 'dailywork']); }, 1000);
+    );        
   }
 
   openPopup() {
