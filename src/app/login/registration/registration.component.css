@@ -1,6 +1,16 @@
+.reg-form {
+     margin-top: 150px;
+     display: flex;
+     align-items: center;
+
+}
 .form-field {
      flex-direction: column;
 } 
+
+.form-field input {
+     width: 16em;
+}
 
 .btn {
      width: 200px;

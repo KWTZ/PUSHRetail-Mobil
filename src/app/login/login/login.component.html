@@ -11,7 +11,7 @@
                          <h2>Login:</h2>
                             <form class="login-form" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate >
                                 <div style="display:flex; flex-direction: row; align-items:center">
-                                    <div style="min-width: 320px;">
+                                    <div>
                                         <div class="form-field">
                                             <label>Benutzername:</label>
                                             <input type="text" class="form-control" name="username" [(ngModel)]="form.username" required #username="ngModel" />

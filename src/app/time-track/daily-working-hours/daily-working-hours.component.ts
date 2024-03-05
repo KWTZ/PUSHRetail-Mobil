@@ -36,7 +36,7 @@ export class DailyWorkingHoursComponent implements OnInit {
 
   currentAssignment:any=[];
 
-  listAssignemnts;
+  listAssignments;
   promoterNo;
 
   constructor(private dataservice: DataService ) { }
@@ -56,9 +56,10 @@ export class DailyWorkingHoursComponent implements OnInit {
     //     this.weekdayName=weekdays[this.currentAssignment['weekdayNo']]
     // });
 
-    this.listAssignemnts=Assignments;
-    this.noOfAssignment=this.listAssignemnts.length;
-    this.currentAssignment=this.listAssignemnts[this.assignNo];
+    this.listAssignments=Assignments;
+    console.log("assignment.",  this.listAssignments);
+    this.noOfAssignment=this.listAssignments.length;
+    this.currentAssignment=this.listAssignments[this.assignNo];
     console.log(this.currentAssignment)
     this.weekdayName=weekdays[this.currentAssignment['weekdayNo']]
   }
@@ -71,7 +72,7 @@ export class DailyWorkingHoursComponent implements OnInit {
     if (this.assignNo>=this.noOfAssignment)
       this.assignNo=this.noOfAssignment-1;
 
-    this.currentAssignment=this.listAssignemnts[this.assignNo]
+    this.currentAssignment=this.listAssignments[this.assignNo]
     this.weekdayName=weekdays[this.currentAssignment['weekdayNo']]
   }
 
@@ -90,7 +91,7 @@ export class DailyWorkingHoursComponent implements OnInit {
         this.clockOutDay=currentTime;
         let wt = this.workTime[this.workTime.length-1];
         wt.clockOutDay=currentTime;
-        wt.workingHours=this.berechnenTimeDifferenz(wt.clockInDay, wt.clockOutDay);
+        wt.workingHours=this.calcTimeDifference(wt.clockInDay, wt.clockOutDay);
         break;
         
       case 'clockInBreak':
@@ -101,7 +102,7 @@ export class DailyWorkingHoursComponent implements OnInit {
         this.workEnd = currentTime;
         let wb = this.workBreaks[this.workBreaks.length-1];
         wb.breakOut=currentTime;
-        wb.breakduration=this.berechnenTimeDifferenz(wb.breakIn, wb.breakOut);
+        wb.breakduration=this.calcTimeDifference(wb.breakIn, wb.breakOut);
         break;
 
     }
@@ -110,7 +111,7 @@ export class DailyWorkingHoursComponent implements OnInit {
     console.log("breaks", this.workBreaks);
   }
 
-  berechnenTimeDifferenz(beginn, ende) {
+  calcTimeDifference(beginn, ende) {
     var help = new Date();
     var arrStart = beginn.split(":");
     var arrEnd = ende.split(":");

@@ -17,14 +17,14 @@
                   <div class="form-field">
                     <label for="email">Email</label>
                     <input type="email" class="form-control" name="email" [(ngModel)]="form.email" required email #email="ngModel" />
-            
-                      <div class="alert alert-danger" *ngIf="email.errors && f.submitted">
-                        <div *ngIf="email.errors.required">Pflichtfeld: eMail</div>
-                        <div *ngIf="email.errors.email">Das ist keine gültige eMail Adresse</div>
-                      </div>
+                    <div class="alert alert-danger" *ngIf="email.errors && f.submitted">
+                      <div *ngIf="email.errors.required">Pflichtfeld: eMail</div>
+                      <div *ngIf="email.errors.email">Das ist keine gültige eMail Adresse</div>
+                    </div>
                   </div>
+                  
                   <div class="form-field">
-                    <label for="password">Password</label>
+                    <label for="password">Kennwort</label>
                     <input type="password" class="form-control" name="password" [(ngModel)]="form.password" minlength="10" #password="ngModel" />
             
                     <div class="alert alert-danger" *ngIf="password.errors && f.submitted">
@@ -32,6 +32,16 @@
                       <div *ngIf="password.errors.minlength">Das Password muss mindestens 10 Zeichen beinhalten!</div>
                     </div>
                   </div>
+
+                    <div class="form-field">
+                      <label for="repPassword">Kennwort</label>
+                      <input type="password" class="form-control" name="repPassword" [(ngModel)]="repeatPassword" required  #email="ngModel" />
+                      <span style="font-size:0.7em;">(zur Sicherheit wiederholen)</span>
+                      <div class="alert alert-danger" *ngIf="password.errors && f.submitted">
+                        <div *ngIf="!PWEqual">Die Kennwörter stimmen nicht überein!</div>
+                      </div>
+                    </div>
+
                   <div class="form-field">
                     <button class="btn btn-primary btn-block">Registrieren</button>
                   </div>

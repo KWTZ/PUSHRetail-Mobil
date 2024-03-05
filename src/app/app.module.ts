@@ -27,6 +27,7 @@ import { TargetModalComponent } from './target-modal/target-modal.component';
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,6 +45,7 @@ import { TargetModalComponent } from './target-modal/target-modal.component';
     FooterComponent,
     OutofstockComponent,
     TargetModalComponent,
+
 
   ],
   imports: [

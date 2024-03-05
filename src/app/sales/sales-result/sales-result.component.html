@@ -11,36 +11,36 @@
                                     <div>
                                         <div class="form-field">
                                             <label>Hauptkategorie:</label>
-                                            <select [(ngModel)]="selectedCategory" (change)="filterProductLine()">
-                                                <option>&nbsp;</option>
-                                                <option *ngFor="let cat of categoryList" [ngValue]="cat">{{ cat }}</option>
-                                            </select>                                
+                                            <select [(ngModel)]="selectedCategory" (change)="filterProductline()">
+                                                <option [ngValue]="0"></option>
+                                                <option *ngFor="let cat of listCategory" [ngValue]="cat.ID">{{ cat.viewValue }}</option>
+                                            </select>                          
                                         </div>
                                        
                                             <div class="form-field">
                                             <label>Produktkategorie:</label>
-                                            <select [(ngModel)]="selectedLine" (change)="filterProductLine()">
-                                                <option>&nbsp;</option>
-                                                <option *ngFor="let prd of productline" [ngValue]="prd.line">{{ prd.line }}</option>
-                                            </select>                                
+                                            <select [(ngModel)]="selectedLine" (change)="filterProduct()">
+                                                <option></option>
+                                                <option *ngFor="let line of filteredListLine" [ngValue]="line.ID">{{ line.viewValue }}</option>
+                                            </select>                         
                                             </div>
                                             <div class="form-field">
                                                     <label>Produkt:</label>
-                                                    <select >
-                                                        <option>&nbsp;</option>
-                                                        <option *ngFor="let product of filteredProductList">{{ product.viewValue }}</option>
-                                                    </select>
+                                                    <select [(ngModel)]="selectedProductID" (change)="setProduct()">
+                                                        <option></option>
+                                                        <option *ngFor="let product of filteredListProducts" [ngValue]="product.ID">{{ product.viewValue }}</option>
+                                                    </select> 
                                             </div>   
                                             <div class="form-field">
                                                 <label for="">Anzahl</label>
-                                                <input type="text" name="Anzahl" />
+                                                <input type="text" name="Anzahl" [(ngModel)]="quantity" />
                                             </div>  
                                             <div class="form-field">
                                                 <label for="">Preis</label>
-                                                <input type="text" name="Preis" />
+                                                <input type="text" name="Preis" [(ngModel)]="selectedProductPrice" />
                                             </div>                                  
                                     </div>
-                                    <img src="assets/action-arrow-active.svg"  style="margin-left: 10px; margin-bottom: 10px; height: 40px;"/>
+                                    <img src="assets/action-arrow-active.svg"  style="margin-left: 10px; margin-bottom: 10px; height: 40px;" (change)="doSave()"/>
                                 </div>                                 
 
                         </div>
@@ -57,25 +57,13 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>PH INTENSO EDP 200ML</td>
-                                    <td style="text-align: center;">1</td>
-                                    <td>146,00 €</td>
-                                    <td>146,00 €</td>
+                                <tr *ngFor="let sales of listSales">
+                                    <td>{{ sales.productName }}</td>
+                                    <td>{{ sales.quantity }}</td>
+                                    <td>{{ sales.price }}</td>
+                                    <td>{{ sales.total }}</td>
                                 </tr>
-                                <tr>
-                                    <td>LB EAU INTENSE EDPI 100ML</td>
-                                    <td style="text-align: center;">1</td>
-                                    <td>133,00 €</td>
-                                    <td>133,00 €</td>
-                                </tr>
-                               
-                                <tr>
-                                    <td class="total">Gesamt</td>
-                                    <td class="total">Summe Menge</td>
-                                    <td class="total"></td>
-                                    <td class="total">Summe Umsatz</td>
-                                </tr>
+                                    
                             </tbody>
                         </table>
                     </div>
@@ -95,19 +83,20 @@
                                 <th>Ist</th>
                             </tr>
                             </thead>
+                            
                             <tr>
                                 <td >Tag <strong>&#8960;</strong></td>
                                 <td style="color: red"> <strong>680,00 €</strong></td>
-                                <td  ><strong>125,50 €</strong></td>
+                                <td  ><strong>{{ dailyTotal}} €</strong></td>
                                 <td></td>
-                                <td><strong>0,00 €</strong></td>
+                                <td><strong>{{ dailyTotalFocus }} €</strong></td>
                             </tr>
                             <tr>
                                 <td > Monat</td>
                                 <td></td>
-                                <td  ><strong>725,00 €</strong></td>
+                                <td  ><strong>{{ monthlyTotal }} €</strong></td>
                                 <td></td>
-                                <td><strong>425,00 €</strong></td>
+                                <td><strong>{{ monthlyTotalFocus }} €</strong></td>
                             </tr>                            
                         </table>
                     </div>
