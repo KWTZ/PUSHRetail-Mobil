@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   versionNo:'.Beta v01',
-  apiPath: 'https://api.ddev.site'
+  apiPath: 'http://localhost/api'
 };
 
 /*

@@ -44,13 +44,13 @@
                             <div class="form-field">
                                 <label>Beginn (Uhrzeit):</label>
                                 <input type="text" name="txt" [(ngModel)]="workBegin" placeholder="">
-                                <!-- <img src="assets/action-arrow-active.svg" alt="" class="action-btn action-active" style="height:25px; margin-top: 2px; margin-left: 10px;" *ngIf="workBegin" /> -->
-                                <!-- <img src="assets/action-arrow.svg" alt="" class="action-btn action-active" style="height:25px; margin-top: 2px; margin-left: 10px;" *ngIf="!workBegin" /> -->
+                                <img src="assets/action-arrow-active.svg" alt="" class="action-btn action-active" style="height:25px; margin-top: 2px; margin-left: 10px;" *ngIf="workBegin" (click)="saveWorkinghours()" /> 
+                                <!-- <img src="assets/action-arrow.svg" alt="" class="action-btn action-active" style="height:25px; margin-top: 2px; margin-left: 10px;" *ngIf="!workBegin" (click)="saveWorkinghours()"/> -->
                             </div>
                             <div class="form-field">
                                 <label>Ende (Uhrzeit):</label>
                                 <input type="text" name="txt" [(ngModel)]="workEnd" placeholder="">
-                                <!-- <img src="assets/action-arrow-active.svg" alt="" class="action-btn action-active" style="height:25px; margin-top: 2px; margin-left: 10px;"  *ngIf="workEnd" /> -->
+                                <img src="assets/action-arrow-active.svg" alt="" class="action-btn action-active" style="height:25px; margin-top: 2px; margin-left: 10px;"  *ngIf="workEnd" (click)="saveWorkinghours()" /> 
                                 <!-- <img src="assets/action-arrow.svg" alt="" class="action-btn action-active" style="height:25px; margin-top: 2px; margin-left: 10px;"  *ngIf="!workEnd"/> -->
                             </div>
                      
@@ -70,7 +70,7 @@
                             <div class="break-table">
                                 <div class="time-table-group">
                                     <div class="time-table-item">Deine Pausen:</div>
-                                    <div class="time-table-item"><strong>{{ totalbreaks }}</strong></div>
+                                    <!-- <div class="time-table-item"><strong>{{ totalbreaks }}</strong></div> -->
                                 </div>
                                 <table>
                                     <thead>
@@ -82,7 +82,7 @@
                                         <tr *ngFor="let b of workBreaks">
                                             <td>{{ b.breakIn }}</td>
                                             <td>{{ b.breakOut }}</td>
-                                            <td>{{ b.breakduration }}</td>
+                                            <td>{{ b.breakDuration }}</td>
                                         </tr>
                                         <tr>
                                             <td class="total">Gesamt:</td>
@@ -101,11 +101,11 @@
                                 
                                  <tr>
                                      <td>Gesamt, Woche</td>
-                                     <td><strong>18:45</strong></td>
+                                     <td><strong>{{ totalWorkingDay }}</strong></td>
                                  </tr>
                                  <tr>
                                      <td>Gesamt, Monat</td>
-                                     <td><strong>48:45</strong></td>
+                                     <td><strong>{{ totalWorkingMonth}}</strong></td>
                                  </tr>
                              </table>
                          </div>

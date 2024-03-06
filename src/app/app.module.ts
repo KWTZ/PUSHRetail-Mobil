@@ -24,7 +24,7 @@ import { RegistrationComponent } from './login/registration/registration.compone
 import { FooterComponent } from './_nav/footer/footer.component';
 import { OutofstockComponent } from './outofstock/outofstock.component';
 import { TargetModalComponent } from './target-modal/target-modal.component';
-
+import { AuthGuardService } from './_services/auth.guard';
 
 
 
@@ -45,8 +45,6 @@ import { TargetModalComponent } from './target-modal/target-modal.component';
     FooterComponent,
     OutofstockComponent,
     TargetModalComponent,
-
-
   ],
   imports: [
     BrowserModule,
@@ -57,7 +55,7 @@ import { TargetModalComponent } from './target-modal/target-modal.component';
 
 
   ],
-  providers: [],
+  providers: [AuthGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

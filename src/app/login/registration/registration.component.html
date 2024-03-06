@@ -36,10 +36,8 @@
                     <div class="form-field">
                       <label for="repPassword">Kennwort</label>
                       <input type="password" class="form-control" name="repPassword" [(ngModel)]="repeatPassword" required  #email="ngModel" />
-                      <span style="font-size:0.7em;">(zur Sicherheit wiederholen)</span>
-                      <div class="alert alert-danger" *ngIf="password.errors && f.submitted">
-                        <div *ngIf="!PWEqual">Die Kennwörter stimmen nicht überein!</div>
-                      </div>
+                      <span style="font-size:0.7em;">(zur Sicherheit wiederholen)</span>                      
+                        <div class="alert alert-danger" *ngIf="PWEqual==false">Deine Kennwörter stimmen nicht überein!</div>
                     </div>
 
                   <div class="form-field">
