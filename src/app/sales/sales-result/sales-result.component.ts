@@ -58,7 +58,7 @@ export class SalesResultComponent implements OnInit {
   }
 
   doSave() {
-    this.sqlInsertSales+=this.selectedProductID + ", " + this.quantity + ", " + this.selectedProductPrice.replace(",", ".") + 
+    this.sqlInsertSales+=this.selectedProductID + ", " + this.quantity + ", " + this.selectedProductPrice.replace(",", ".") +
         "CURRENT_TIMESTAMP, 9999, 27, CURRENT_TIMESTAMP, 0, CURRENT_TIMESTAMP, 0)";
     this.dataservice.storeData(this.sqlInsertSales).subscribe(result => { console.log(result)});
 

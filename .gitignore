@@ -48,3 +48,5 @@ src/app/time-track/daily-working-hours/daily-working-hours.component.html
 src/app/time-track/daily-working-hours/daily-working-hours.component.ts
 src/app/time-track/daily-working-hours/daily-working-hours.component.html
 src/app/time-track/daily-working-hours/daily-working-hours.component.ts
+src/app/_services/data.service.ts
+src/app/environments/environment.ts
