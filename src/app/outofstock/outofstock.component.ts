@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductLines } from '../productLine';
-import { ProductCategories } from '../productCategories';
-import { Products } from '../products';
+import de from '@angular/common/locales/de';
+import { DataService } from 'src/app/_services/data.service';
+
 
 @Component({
   selector: 'app-outofstock',
@@ -10,27 +10,37 @@ import { Products } from '../products';
 })
 export class OutofstockComponent implements OnInit {
 
-  categoryList = ProductCategories;
-  productline = ProductLines;
-  filteredProductLine=ProductLines;
-  productList = Products;
-  filteredProductList=Products;
+  sqlCategory="Select idProductCategory as ID, productCategory as viewValue from prd_categories order by productCategory";
+  sqlLine="Select idProductLine as ID, productLine as viewValue, idProductCategory from prd_lines order by productline";
+  sqlProduct='Select idProduct as ID, productName as viewValue, idProductLine, replace(format(productprice,2),".", ",") as price from prd_products order by productname';
+
+  categoryList;
+  listLine;
+  listProduct;
+
   selectedCategory;
   selectedLine;
+  filteredLineList;
+  filteredProductsList;
 
-  constructor() { }
+
+  constructor(private dataservice: DataService) {  }
 
   ngOnInit(): void {
-    this.categoryList.sort();
-    this.productline.sort();
-    this.productList.sort();
+    this.getData();
   }
 
-  filterProductLine() {
-    this.filteredProductLine=this.productline.filter(e => e.groupLine==this.selectedCategory);
+  getData(){
+    this.dataservice.getAll(this.sqlCategory).subscribe(data => { this.categoryList=data; });
+    this.dataservice.getAll(this.sqlLine).subscribe(data => { this.listLine=data; this.filteredLineList=data; });
+    this.dataservice.getAll(this.sqlProduct).subscribe(data => { this.listProduct=data; this.filteredProductsList=data; });
   }
 
-  filterProduct() {
-    this.filteredProductList=this.productList.filter(e=> e.line==this.selectedLine)
+  filterProductline() {
+      this.filteredLineList= this.listLine.filter(e => e.idProductCategory==this.selectedCategory);
   }
+  filterProduct(){
+      this.filteredProductsList = this.listProduct.filter(e => e.idProductLine == this.selectedLine);
+  }
+
 }
