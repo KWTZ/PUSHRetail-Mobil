@@ -33,14 +33,15 @@
                                             </div>   
                                             <div class="form-field">
                                                 <label for="">Anzahl</label>
-                                                <input type="text" name="Anzahl" [(ngModel)]="quantity" />
+                                                <input type="text" name="Anzahl" [(ngModel)]="quantity" (change)="setQuantity()" />
                                             </div>  
                                             <div class="form-field">
                                                 <label for="">Preis</label>
                                                 <input type="text" name="Preis" [(ngModel)]="selectedProductPrice" />
                                             </div>                                  
                                     </div>
-                                    <img src="assets/action-arrow-active.svg"  style="margin-left: 10px; margin-bottom: 10px; height: 40px;" (change)="doSave()"/>
+                                    <img src="assets/action-arrow-active.svg"  style="margin-left: 10px; margin-bottom: 10px; height: 40px;"  *ngIf="flagQuantity" (click)="doSave()"/>
+                                    <img src="assets/action-arrow.svg"  style="margin-left: 10px; margin-bottom: 10px; height: 40px;" *ngIf="!flagQuantity"/>
                                 </div>                                 
 
                         </div>

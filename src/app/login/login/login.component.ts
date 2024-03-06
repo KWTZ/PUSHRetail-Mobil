@@ -5,6 +5,7 @@ import { EncryptService } from 'src/app/_services/encrypt.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DOCUMENT } from '@angular/common';
 import { TargetModalComponent } from 'src/app/target-modal/target-modal.component';
+import { DataService } from 'src/app/_services/data.service';
 
 @Component({
   selector: 'app-login',
@@ -16,6 +17,9 @@ export class LoginComponent implements OnInit {
   //declare variable
   elem: any; isFullScreen: boolean;
 
+  // sqlString: string = 'select idAssignment, idPosPlacement, internalPOSNo, operationDate from pos_assignments where promoterNo= "@promoterNo" and operationDate=CURDate()';
+  sqlString: string = 'select idAssignment, idPosPlacement, internalPOSNo, operationDate from pos_assignments where promoterNo= "@promoterNo" and operationDate="2024-03-07"';
+
   form: any = {
     username: null,
     password: null
@@ -24,13 +28,16 @@ export class LoginComponent implements OnInit {
   isLoggedIn = false;
   isLoginFailed = false;
   errorMessage = '';
-  roles: string[] = [];
+
+  
+   promoterNo;
 
   constructor(
     private authService: AuthService,
     private router: Router,
     private encrypt: EncryptService,
     private modalService: NgbModal, 
+    private dataService: DataService,
     @Inject(DOCUMENT) private document: any ) { }
 
     @HostListener('document:fullscreenchange', ['$event'])
@@ -58,13 +65,12 @@ export class LoginComponent implements OnInit {
         if (data[0]['promoterNo']!=null) {
           this.isLoggedIn = true;
           this.isLoginFailed = false;
+          this.promoterNo = data[0]['promoterNo'];
           localStorage.setItem("promoter", JSON.stringify(data[0]));
           localStorage.setItem("isLoggedIn", 'true');
-          // setTimeout(() =>  { this.openPopup() }, 2000);
-          // setTimeout(() =>  { this.router.navigate(['/', 'dailywork']); }, 2000);
-          
-        this.openPopup();
-        setTimeout(() =>  { this.router.navigate(['/', 'dailywork']); }, 1000);
+          this.getCurrentAssignment();
+          this.openPopup();
+          setTimeout(() =>  { this.router.navigate(['/', 'dailywork']); }, 1000);
         }
         else {
             this.isLoggedIn=false;
@@ -75,11 +81,18 @@ export class LoginComponent implements OnInit {
       err => {
         this.errorMessage = err.error.message;
         this.isLoginFailed = true;
-        localStorage.setItem("promoterNo", null);
+        localStorage.clear();
         localStorage.setItem("isLoggedIn", 'false');
         this.reloadPage();
       }
     );        
+  }
+
+  getCurrentAssignment() {
+       let sqlStatement = this.sqlString.replace("@promoterNo", this.promoterNo);
+       this.dataService.getAll(sqlStatement).subscribe( data => {
+        localStorage.setItem("assignment", JSON.stringify(data[0]));
+      })
   }
 
   openPopup() {

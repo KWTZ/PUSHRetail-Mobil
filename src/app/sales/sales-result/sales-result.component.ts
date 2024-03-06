@@ -16,7 +16,7 @@ export class SalesResultComponent implements OnInit {
   sqlSales = 'SELECT  p.productName, replace(format(s.quantity, 2), ".", ",") as quantity ' +
             ', replace(format(s.price, 2), ".", ",") as price , replace(format(s.quantity*s.price,2), ".", ",") as total ' +
             'FROM `prd_sales` s  left join prd_products p on s.idProduct=p.idProduct ' +
-            'where promoterNo="9999"';
+            'where promoterNo="@promoterNo"';
   sqlInsertSales='INSERT INTO `prd_sales`( `idProduct`, `quantity`, `price`, `salesdate`, `promoterNo`, `internalPosNo`, `modified`, `modifiedBy`, `created`, `createdBy`) ' +
       'VALUES(' ;
 
@@ -43,24 +43,41 @@ export class SalesResultComponent implements OnInit {
   monthlyTotal;
   monthlyTotalFocus;
 
+  promoterNo;
+  currentAssign;
+
+  flagQuantity=false;
+
   constructor(private dataservice: DataService) { }
 
   ngOnInit(): void {
-      this.getData();
-      this.calcTotals();
+    let promoter = JSON.parse(localStorage.getItem("promoter"));
+    this.promoterNo=promoter['promoterNo']
+    this.currentAssign = JSON.parse(localStorage.getItem("assignment"));
+     this.getData();
+    this.calcTotals();
+      
   }
 
   getData() {
+      let sqlSales = this.sqlSales.replace("@promoterNo", this.promoterNo);
       this.dataservice.getAll(this.sqlCategory).subscribe(data => { this.listCategory=data; });
       this.dataservice.getAll(this.sqlLine).subscribe(data => { this.listLine=data; this.filteredListLine=data});
       this.dataservice.getAll(this.sqlProduct).subscribe(data => { this.listProducts=data; this.filteredListProducts=data});
-      this.dataservice.getAll(this.sqlSales).subscribe(data => { this.listSales=data; });
+      this.dataservice.getAll(sqlSales).subscribe(data => { this.listSales=data; console.log(this.listSales)});
+
+      this.calcTotals();
   }
 
   doSave() {
+    let idPOS = this.currentAssign['internalPOSNo'];
     this.sqlInsertSales+=this.selectedProductID + ", " + this.quantity + ", " + this.selectedProductPrice.replace(",", ".") + 
-        "CURRENT_TIMESTAMP, 9999, 27, CURRENT_TIMESTAMP, 0, CURRENT_TIMESTAMP, 0)";
+        ', CURRENT_TIMESTAMP, "' + this.promoterNo + '", ' + idPOS + ', CURRENT_TIMESTAMP, 0, CURRENT_TIMESTAMP, 0)';
+    console.log(this.sqlInsertSales);
     this.dataservice.storeData(this.sqlInsertSales).subscribe(result => { console.log(result)});
+
+    this.getData();
+    this.calcTotals();
 
   }
 
@@ -77,11 +94,22 @@ export class SalesResultComponent implements OnInit {
       this.selectedProductPrice=arrProduct[0]['price'];
   }
 
+  setQuantity() {
+      if(this.quantity>0)
+        this.flagQuantity=true;
+  }
+
   calcTotals() {
-    this.dailyTotal='601,00';
-    this.dailyTotalFocus='0';
-    this.monthlyTotal='601,00';
-    this.monthlyTotalFocus='0';
+
+    this.dailyTotal=0;
+    this.dailyTotalFocus=0;
+    this.monthlyTotal=0;
+    this.monthlyTotalFocus=0;
+
+    this.listSales.forEach(element => {
+        this.dailyTotal+=element['quantity']*element['price'];
+    });
+
   }
 }
 
