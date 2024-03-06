@@ -12,17 +12,17 @@ export class DataService {
   getHeader(table: string) {
     console.log("header" , table);
     //console.log(environment.apiPath +  '/header?table=' + table);
-    return this.http.get<any>(environment.apiPath + '/header?table=' + table);
+    return this.http.get<any>(environment.apiPath + '/header.php?table=' + table);
   }
 
   getAll(table: string) {
     console.log("getAll" , table);
     //console.log(environment.apiPath + '/list?table=' + table);
-    return this.http.get<any>(environment.apiPath + '/list?table=' + table);
+    return this.http.get<any>(environment.apiPath + '/list.php?table=' + table);
   }
 
   storeData(sqlStatement) {
-    return this.http.post(environment.apiPath + '/store', { data: sqlStatement }).pipe(res=> {
+    return this.http.post(environment.apiPath + '/store.php', { data: sqlStatement }).pipe(res=> {
       return res;  });
   }
 }

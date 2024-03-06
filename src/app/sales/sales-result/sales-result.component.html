@@ -14,23 +14,23 @@
                                             <select [(ngModel)]="selectedCategory" (change)="filterProductline()">
                                                 <option [ngValue]="0"></option>
                                                 <option *ngFor="let cat of listCategory" [ngValue]="cat.ID">{{ cat.viewValue }}</option>
-                                            </select>                          
+                                            </select>
                                         </div>
-                                       
+
                                             <div class="form-field">
                                             <label>Produktkategorie:</label>
                                             <select [(ngModel)]="selectedLine" (change)="filterProduct()">
                                                 <option></option>
                                                 <option *ngFor="let line of filteredListLine" [ngValue]="line.ID">{{ line.viewValue }}</option>
-                                            </select>                         
+                                            </select>
                                             </div>
                                             <div class="form-field">
                                                     <label>Produkt:</label>
                                                     <select [(ngModel)]="selectedProductID" (change)="setProduct()">
                                                         <option></option>
                                                         <option *ngFor="let product of filteredListProducts" [ngValue]="product.ID">{{ product.viewValue }}</option>
-                                                    </select> 
-                                            </div>   
+                                                    </select>
+                                            </div>
                                             <div class="form-field">
                                                 <label for="">Anzahl</label>
                                                 <input type="text" name="Anzahl" [(ngModel)]="quantity" (change)="setQuantity()" />
@@ -38,7 +38,7 @@
                                             <div class="form-field">
                                                 <label for="">Preis</label>
                                                 <input type="text" name="Preis" [(ngModel)]="selectedProductPrice" />
-                                            </div>                                  
+                                            </div>
                                     </div>
                                     <img src="assets/action-arrow-active.svg"  style="margin-left: 10px; margin-bottom: 10px; height: 40px;"  *ngIf="flagQuantity" (click)="doSave()"/>
                                     <img src="assets/action-arrow.svg"  style="margin-left: 10px; margin-bottom: 10px; height: 40px;" *ngIf="!flagQuantity"/>
@@ -64,7 +64,7 @@
                                     <td>{{ sales.price }}</td>
                                     <td>{{ sales.total }}</td>
                                 </tr>
-                                    
+
                             </tbody>
                         </table>
                     </div>
@@ -84,7 +84,7 @@
                                 <th>Ist</th>
                             </tr>
                             </thead>
-                            
+
                             <tr>
                                 <td >Tag <strong>&#8960;</strong></td>
                                 <td style="color: red"> <strong>680,00 €</strong></td>
@@ -98,7 +98,7 @@
                                 <td  ><strong>{{ monthlyTotal }} €</strong></td>
                                 <td></td>
                                 <td><strong>{{ monthlyTotalFocus }} €</strong></td>
-                            </tr>                            
+                            </tr>
                         </table>
                     </div>
                     <div style="margin-top: 20px;">&nbsp;</div>
