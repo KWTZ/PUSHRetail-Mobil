@@ -6,10 +6,10 @@
                 <div class="glb-inner">
                     <h2>Tagesbericht:</h2>
                     <p><strong>Kundenfrequenz  <span style="color: red; font-weight: bold;">(Zahl)</span></strong></p>
-                    <div class="report-table">                       
+                    <div class="report-table">
                         <table>
                             <thead>
-                                <tr>                                    
+                                <tr>
                                     <th></th>
                                     <th>Anzahl</th>
                                 </tr>
@@ -23,11 +23,11 @@
                                     <td>... davon angesprochene Kunden?</td>
                                     <td><input type="text" name="valLeads"  placeholder="0" style="text-align: right; padding-right: 5px;"/></td>
                                 </tr>
-                                <tr>                                    
+                                <tr>
                                     <td>... davon Verkaufsgespräche?</td>
                                     <td><input type="text" name="valTalks"  placeholder="0" style="text-align: right; padding-right: 5px;"/></td>
                                 </tr>
-                                <tr>                                    
+                                <tr>
                                     <td>Ausgegebene Proben</td>
                                     <td><input type="text" name="valProben"  placeholder="0" style="text-align: right; padding-right: 5px;"/></td>
                                 </tr>
@@ -38,47 +38,47 @@
                     <div class="report-table">
                         <table>
                             <thead>
-                                <tr>                                   
-                                    <th></th>                                            
-                                    <th>OK</th>                                            
-                                    <th >nicht OK</th>                                            
-                                    <th>fehlt</th>                                            
+                                <tr>
+                                    <th></th>
+                                    <th>OK</th>
+                                    <th >nicht OK</th>
+                                    <th>fehlt</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>                                   
-                                    <td>Pop-up Display</td>  
-                                    <td><input type="checkbox" /></td>                                          
-                                    <td style="text-align:right;"><input type="checkbox" /></td>                                          
-                                    <td style="text-align:right;"><input type="checkbox" /></td>                                          
+                                <tr>
+                                    <td>Pop-up Display</td>
+                                    <td><input type="checkbox" /></td>
+                                    <td style="text-align:right;"><input type="checkbox" /></td>
+                                    <td style="text-align:right;"><input type="checkbox" /></td>
                                 </tr>
-                                <tr>                                    
-                                    <td>Namensschild</td>    
-                                    <td><input type="checkbox" /></td>                                          
-                                    <td style="text-align:right;"><input type="checkbox" /></td>                                          
-                                    <td style="text-align:right;"><input type="checkbox" /></td>                                           
+                                <tr>
+                                    <td>Namensschild</td>
+                                    <td><input type="checkbox" /></td>
+                                    <td style="text-align:right;"><input type="checkbox" /></td>
+                                    <td style="text-align:right;"><input type="checkbox" /></td>
                                 </tr>
-                                <tr>                                   
+                                <tr>
                                     <td>Ausreichende Tester</td>
-                                    <td><input type="checkbox" /></td>                                          
-                                    <td style="text-align:right;"><input type="checkbox" /></td>                                          
-                                    <td style="text-align:right;"><input type="checkbox" /></td>    
+                                    <td><input type="checkbox" /></td>
+                                    <td style="text-align:right;"><input type="checkbox" /></td>
+                                    <td style="text-align:right;"><input type="checkbox" /></td>
                                 </tr>
-                                <tr style="height:30px;">                                   
+                                <tr style="height:30px;">
                                     <td colspan="2">Außendienst vor Ort?</td>
-                                    
-                                    <td style="white-space: nowrap; text-align: right;">ja   <input type="checkbox" /></td>                                          
-                                    <td style="white-space: nowrap; text-align:right;">nein   <input type="checkbox" /></td>                                          
-                                      
+
+                                    <td style="white-space: nowrap; text-align: right;">ja   <input type="checkbox" /></td>
+                                    <td style="white-space: nowrap; text-align:right;">nein   <input type="checkbox" /></td>
+
                                 </tr>
                             </tbody>
                         </table>
                     </div>
-                    
+
                     <div class="glb-inner">
                         <div class="login-inner">
                             <div class="glb-bottom">
-                                <form class="glb-form" name="form" method="post" enctype="multipart/form-data">
+                                <form class="glb-form" name="form" method="post" enctype="multipart/form-data" (ngSubmit)="storeImg()">
                                     <div>
                                         <div class="form-field" style="justify-content: flex-end;">
                                             <label for=""  style="margin-top: 5px; white-space: nowrap;"><strong>Tagesumsatz D&G, brutto €</strong></label>
@@ -93,8 +93,11 @@
                                                 <img src="assets/camera-active.svg" style="height: 40px;"/>
                                             </label>
                                             <span style="width: 270px;">Foto Verkaufsumsatz, <br> mit Stempel und Unterschrift</span>
-                                            <input type="file" name="bus_img" id="bus_img" accept="image/*;capture=camera">
-                                            <img src="assets/action-arrow-active.svg" alt="" style="height:40px;">
+                                            <input (change)="uploadFile($event);" type="file" name="bus_img" id="bus_img" accept="image/*;capture=camera">
+                                            <input type="submit" id="subImg" name="submitImg">
+                                            <label for="subImg">
+                                              <img  src="assets/action-arrow-active.svg" alt="" style="height:40px;"  >
+                                            </label>
                                         </div>
 
                                     <div style="margin-top: 10px;">
