@@ -8,6 +8,10 @@
 }
 
 .report-table input {
+     width: 60px;
+}
+
+.report-table input[type=radio] {
      width: 40px;
 }
 
@@ -30,13 +34,17 @@
 }
 
 textarea {
-     width: 350px;
+     width: 320px;
      height: 80px;
      padding: 5px 10px;
 }
 
 p {
      margin: 5px 10px;
+}
+
+.form-field {
+     padding-bottom: 0;
 }
 
 

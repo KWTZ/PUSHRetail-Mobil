@@ -17,19 +17,19 @@
                             <tbody>
                                 <tr>
                                     <td>Heutige Kundenfrequenz?</td>
-                                    <td><input type="text" name="valKundenfrequenz" placeholder="0" style="text-align: right; padding-right: 5px;"/></td>
+                                    <td><input type="text" name="valKundenfrequenz" class="form-field" [(ngModel)]="rep.valFrequency" placeholder="0" style="text-align: right;"/></td>
                                 </tr>
                                 <tr>
                                     <td>... davon angesprochene Kunden?</td>
-                                    <td><input type="text" name="valLeads"  placeholder="0" style="text-align: right; padding-right: 5px;"/></td>
+                                    <td><input type="text" name="valLeads" class="form-field" [(ngModel)]="rep.valLeads" placeholder="0" style="text-align: right; "/></td>
                                 </tr>
                                 <tr>
                                     <td>... davon Verkaufsgespräche?</td>
-                                    <td><input type="text" name="valTalks"  placeholder="0" style="text-align: right; padding-right: 5px;"/></td>
+                                    <td><input type="text" name="valTalks"  class="form-field" [(ngModel)]="rep.valTalks" placeholder="0" style="text-align: right;"/></td>
                                 </tr>
                                 <tr>
                                     <td>Ausgegebene Proben</td>
-                                    <td><input type="text" name="valProben"  placeholder="0" style="text-align: right; padding-right: 5px;"/></td>
+                                    <td><input type="text" name="valTester"  class="form-field" [(ngModel)]="rep.valTester" placeholder="0" style="text-align: right; "/></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -48,27 +48,27 @@
                             <tbody>
                                 <tr>
                                     <td>Pop-up Display</td>
-                                    <td><input type="checkbox" /></td>
-                                    <td style="text-align:right;"><input type="checkbox" /></td>
-                                    <td style="text-align:right;"><input type="checkbox" /></td>
+                                    <td><input type="radio"  name="display" value="ok" (change)="onChange($event, 'display')"/></td>
+                                    <td style="text-align:right;"><input type="radio"  name="display" value="nicht ok" (change)="onChange($event, 'display')"/></td>
+                                    <td style="text-align:right;" ><input type="radio"  name="display" value="fehlt" (change)="onChange($event, 'display')"/></td>
                                 </tr>
                                 <tr>
                                     <td>Namensschild</td>
-                                    <td><input type="checkbox" /></td>
-                                    <td style="text-align:right;"><input type="checkbox" /></td>
-                                    <td style="text-align:right;"><input type="checkbox" /></td>
+                                    <td><input type="radio" name="nameTag" value="ok" (change)="onChange($event, 'nameTag')" /></td>
+                                    <td style="text-align:right;"><input type="radio"  name="nameTag"  value="nicht ok" (change)="onChange($event, 'nameTag')" /></td>
+                                    <td style="text-align:right;"><input type="radio"  name="nameTag" value="fehlt" (change)="onChange($event, 'nameTag')" /></td>
                                 </tr>
                                 <tr>
                                     <td>Ausreichende Tester</td>
-                                    <td><input type="checkbox" /></td>
-                                    <td style="text-align:right;"><input type="checkbox" /></td>
-                                    <td style="text-align:right;"><input type="checkbox" /></td>
+                                    <td><input type="radio" name="tester"value="ok" (change)="onChange($event, 'tester')" /></td>
+                                    <td style="text-align:right;"><input type="radio"  name="tester"  value="nicht ok" (change)="onChange($event, 'tester')"/></td>
+                                    <td style="text-align:right;"><input type="radio"  name="tester" value="fehlt" (change)="onChange($event, 'tester')"/></td>
                                 </tr>
                                 <tr style="height:30px;">
                                     <td colspan="2">Außendienst vor Ort?</td>
 
-                                    <td style="white-space: nowrap; text-align: right;">ja   <input type="checkbox" /></td>
-                                    <td style="white-space: nowrap; text-align:right;">nein   <input type="checkbox" /></td>
+                                    <td style="white-space: nowrap; text-align: right;">ja   <input type="radio" name="ASM"  value="yes" (change)="onChange($event, 'asm')"/></td>
+                                    <td style="white-space: nowrap; text-align:right;">nein   <input type="radio" name="ASM" value="no" (change)="onChange($event, 'asm')"/></td>
 
                                 </tr>
                             </tbody>
@@ -78,33 +78,35 @@
                     <div class="glb-inner">
                         <div class="login-inner">
                             <div class="glb-bottom">
-                                <form class="glb-form" name="form" method="post" enctype="multipart/form-data" (ngSubmit)="storeImg()">
+                                <div class="glb-form" name="form" method="post" enctype="multipart/form-data" (ngSubmit)="storeImg()">
                                     <div>
                                         <div class="form-field" style="justify-content: flex-end;">
                                             <label for=""  style="margin-top: 5px; white-space: nowrap;"><strong>Tagesumsatz D&G, brutto €</strong></label>
-                                            <input type="text" name="txt" placeholder="0,00" style="width: 8em; text-align: right; padding-right: 5px;">
+                                            <input type="text" name="txt" [(ngModel)]="rep.revenue" placeholder="0,00" style="width: 8em; text-align: right; padding-right: 5px;">
                                         </div>
-                                        <div style="margin-top:-15px;margin-right:0px; font-size:0.7em; float:right;">ohne Sonderzeichen</div>
+                                        <div style="margin-top:-5px;margin-right:0px; font-size:0.7em; float:right;">ohne Sonderzeichen</div>
                                     </div>
 
 
-                                        <div style="display: flex; justify-content: space-between; width:98%; margin-top: 10px;">
+                                        <div style="display: flex; justify-content: space-between; align-items: center; width:98%; margin-top: 10px;">
                                             <label for="bus_img">
-                                                <img src="assets/camera-active.svg" style="height: 40px;"/>
+                                                <img src="assets/camera-active.svg" style="height: 60px;"/>
                                             </label>
-                                            <span style="width: 270px;">Foto Verkaufsumsatz, <br> mit Stempel und Unterschrift</span>
-                                            <input (change)="uploadFile($event);" type="file" name="bus_img" id="bus_img" accept="image/*;capture=camera">
-                                            <input type="submit" id="subImg" name="submitImg">
+                                            <span style="width: 270px;padding-left: 20px;">Foto Verkaufsumsatz, <br> mit Stempel und Unterschrift</span>
+                                            <input (change)="uploadFile($event);" type="file" name="bus_img" id="bus_img" accept="image/*;capture=camera"  />
+                                            <input type="submit" id="subImg" name="submitImg" style="display: none;">
                                             <label for="subImg">
-                                              <img  src="assets/action-arrow-active.svg" alt="" style="height:40px;"  >
+                                              <img  src="assets/action-arrow-active.svg" alt="" *ngIf="isValid" style="height:40px;" (click)="doSave()" >
+                                              <img  src="assets/action-arrow.svg" alt="" *ngIf="!isValid" style="height:40px;"  >
                                             </label>
+                                            
                                         </div>
-
+                                        <div class="alert alert-info" *ngIf="dataStored">Der Report wurde versand.</div>
                                     <div style="margin-top: 10px;">
                                         <div>Sonstiges:</div>
-                                        <textarea placeholder="max. 300 Zeichen"></textarea>
+                                        <textarea [(ngModel)]="rep.comment" placeholder="max. 300 Zeichen"></textarea>
                                     </div>
-                                </form>
+                                </div>
                             </div>
                         </div>
                     </div>
