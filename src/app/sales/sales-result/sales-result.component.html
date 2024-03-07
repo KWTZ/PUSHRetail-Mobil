@@ -52,17 +52,17 @@
                             <thead>
                                 <tr>
                                     <th>Produkt</th>
-                                    <th>Anzahl</th>
-                                    <th>Einzelpreis</th>
-                                    <th>Umsatz</th>
+                                    <th style="text-align:right;">Menge</th>
+                                    <th style="text-align:right;">Einzelpreis</th>
+                                    <th style="text-align:right;">Umsatz</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr *ngFor="let sales of listSales">
-                                    <td>{{ sales.productName }}</td>
-                                    <td>{{ sales.quantity }}</td>
-                                    <td>{{ sales.price }}</td>
-                                    <td>{{ sales.total }}</td>
+                                    <td style="width: 400px;">{{ sales.productName }}</td>
+                                    <td style="text-align:right;">{{ sales.quantity  }}</td>
+                                    <td style="text-align:right;">{{ sales.price }} €</td>
+                                    <td style="text-align:right; width:95px;">{{ sales.total }} €</td>
                                 </tr>
 
                             </tbody>
@@ -88,16 +88,16 @@
                             <tr>
                                 <td >Tag <strong>&#8960;</strong></td>
                                 <td style="color: red"> <strong>680,00 €</strong></td>
-                                <td  ><strong>{{ dailyTotal}} €</strong></td>
+                                <td  ><strong>{{ dailyTotal | number:'1.2-2':'de'}} €</strong></td>
                                 <td></td>
-                                <td><strong>{{ dailyTotalFocus }} €</strong></td>
+                                <td><strong>{{ dailyTotalFocus | number:'1.2-2':'de' }} €</strong></td>
                             </tr>
                             <tr>
                                 <td > Monat</td>
                                 <td></td>
-                                <td  ><strong>{{ monthlyTotal }} €</strong></td>
+                                <td  ><strong>{{ monthlyTotal | number:'1.2-2':'de' }} €</strong></td>
                                 <td></td>
-                                <td><strong>{{ monthlyTotalFocus }} €</strong></td>
+                                <td><strong>{{ monthlyTotalFocus  | number:'1.2-2':'de'}} €</strong></td>
                             </tr>
                         </table>
                     </div>

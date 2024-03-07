@@ -21,22 +21,24 @@
                          </div>
                          <div class="action-icons-list">     
                                  <div class="item">
-                                         <img src="assets/action-arrow-active.svg" alt="" class="action-btn action-active" *ngIf="currentStatus=='clockInDay'" (click)="setStatus('clockOutDay')" />
-                                         <img src="assets/action-arrow.svg" alt="" class="action-btn" *ngIf="currentStatus!='clockInDay'" (click)="setStatus('clockInDay')" />
+                                         <img src="assets/action-arrow-active.svg" alt="" class="action-btn action-active" 
+                                                *ngIf="flagInDay" (click)="setStatus('clockInDay')" />
+                                         <img src="assets/action-arrow.svg" alt="" class="action-btn" 
+                                            *ngIf="flagOutDay" (click)="setStatus('')" />
                                  </div>
                                  <div class="item">
                                     <img src="assets/action-break-active.svg" alt="" class="action-btn action-active" style="height:60px;" 
-                                                *ngIf="currentStatus=='clockInBreak'" (click)="setStatus('clockOutBreak')" />
-                                    <img src="assets/action-break.svg" alt="" class="action-btn" style="height:50px;"  *ngIf="currentStatus!='clockInBreak'"
-                                                 (click)="setStatus('clockInBreak')" />
+                                                *ngIf="flagInBreak" (click)="setStatus('clockInBreak')" />
+                                    <img src="assets/action-break.svg" alt="" class="action-btn" style="height:50px;"  *ngIf="flagOutBreak"
+                                                 (click)="setStatus('')" />
                                  </div>
                                  <div class="item">
-                                        <img src="assets/action-end-active.svg" alt="" class="action-btn"  *ngIf="currentStatus=='clockOutDay'"  (click)="setStatus('')" />
-                                        <img src="assets/action-end.svg" alt="" class="action-btn" *ngIf="currentStatus!='clockOutDay'" (click)="setStatus('clockOutDay')" />
+                                        <img src="assets/action-end-active.svg" alt="" class="action-btn"  *ngIf="flagEndDay"  (click)="setStatus('clockOutDay')" />
+                                        <img src="assets/action-end.svg" alt="" class="action-btn" *ngIf="!flagEndDay" (click)="setStatus('')" />
                                  </div>
                                  <div class="item">
-                                    <img src="assets/action-report-active.svg" alt="" class="action-btn"  *ngIf="currentStatus=='reportDone'" (click)="setStatus('')" />
-                                    <img src="assets/action-report.svg" alt="" class="action-btn" *ngIf="currentStatus!='reportDone'" (click)="setStatus('reportDone')" />
+                                    <img src="assets/action-report-active.svg" alt="" class="action-btn"  *ngIf="flagReport" (click)="setStatus('')" />
+                                    <img src="assets/action-report.svg" alt="" class="action-btn" *ngIf="!flagReport" (click)="setStatus('')" />
                                  </div>                               
                          </div>
                     </div>

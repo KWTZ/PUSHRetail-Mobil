@@ -6,12 +6,13 @@
                 <div class="glb-inner">
                     <h2>Mitteilungen/ Ereignisse:</h2>
                     <p>Sollte mal etwas schief gehen, setze uns bitte umgehend in Kenntnis und sende <strong>bei Bekanntwerden</strong> eine Nachricht mit folgenden Inhalten:</p>
-                    <div class="login-inner">
-                        <div class="glb-bottom">
-                            <form class="glb-form" name="form" method="post">
-                                <div class="form-field">
+
+                    <div style="display: flex; flex-direction: row;">
+                        <div class="glb-form" name="form">
+                                <div class="alert alert-info" *ngIf="hasSend">Nachricht wurde gesendet.</div>
+                                <div class="form-field" (change)="setEmergency()">
                                     <label>Mitteilung-Typ:</label>
-                                    <select>
+                                    <select [(ngModel)]="mes.messageType">
                                             <option>( bitte wählen )</option>
                                             <option>Anforderung</option>
                                             <option style="color: red;">Problem</option>
@@ -20,30 +21,26 @@
                                 </div>
                                 <div class="form-field">
                                     <label>Rückrufnummer</label>
-                                    <input type="text" name="txt" placeholder="">
+                                    <input type="text" name="txt" [(ngModel)]="mes.callbackNo" placeholder="">
                                 </div>
                                 <div class="form-field">
                                     <label>Was ist passiert</label>
-                                    <input type="text" name="txt" placeholder="">
+                                    <input type="text" name="txt" [(ngModel)]="mes.subject" placeholder="">
                                 </div>
-                                <div class="form-field" style="flex-direction: column">
+                                <div class="form-field">
                                     <label>Beschreibung</label>
-                                    <textarea style="height: 160px;" placeholder="max.300 Zeichen"></textarea>
+                                    <textarea style="height: 160px;" [(ngModel)]="mes.message" placeholder="max.300 Zeichen" (change)="setSend()"></textarea>
                                 </div>
-                                <!-- <div class="form-field">
-                                    <label>Lösung vorhanden?</label>
-                                    <textarea></textarea>
-                                    
-                                </div> -->
-                                
-                            </form>
+                        </div>
+                        <div class="action-icons">
+                            <img src="assets/action-arrow-active.svg" alt="" *ngIf="isSend" (click)="sendMessage()" style="width:20px;"/>
+                            <img src="assets/action-arrow.svg" alt="" *ngIf="!isSend" style="width:20px;"/>
+                            <img src="assets/phone-red.svg" alt="" *ngIf="isEmergency" style="height:40px;" />                
                         </div>
                     </div>
+                    
+
                 </div>
-            </div>
-            <div class="whatsapp-icon">
-                <img src="assets/action-arrow-active.svg" alt="" *ngIf="isSend==false" (click)="setSend()" style="width:20px;"/>
-                <img src="assets/phone-red.svg" alt="" *ngIf="isSend" style="height:40px;" />                
             </div>
             
         </section>

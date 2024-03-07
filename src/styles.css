@@ -928,6 +928,10 @@ display: none;
   margin-top: 150px;
 }
 
+.alert-info {
+  background-color: var(--acc-yellow);
+}
+
 .alert-danger {
   font-size: 0.8em;
   max-width: 20em;

@@ -15,7 +15,7 @@ export class TopnavComponent implements OnInit {
   ngOnInit(): void {
       this.isLoggedIn=localStorage.getItem("isLoggedIn");
       let user =JSON.parse(localStorage.getItem("promoter"));
-      this.userName = user['username'];
+      // this.userName = user['username'];
 
   }
 

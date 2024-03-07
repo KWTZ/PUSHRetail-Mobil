@@ -13,7 +13,7 @@
                                 <div style="display:flex; flex-direction: row; align-items:center">
                                     <div>
                                         <div class="form-field">
-                                            <label>Benutzername:</label>
+                                            <label>Benutzername/ eMail:</label>
                                             <input type="text" class="form-control" name="username" [(ngModel)]="form.username" required #username="ngModel" />
                                             <div class="alert alert-danger" role="alert" *ngIf="username.errors && f.submitted">Benutzername erforderlich!</div>
                                         </div>
@@ -21,9 +21,10 @@
                                             <label>Kennwort:</label>
                                             <input type="password" class="form-control" name="password" [(ngModel)]="form.password" required minlength="10" #password="ngModel"/> 
                                             <div class="alert alert-danger" role="alert" *ngIf="password.errors && f.submitted">
-                                            <div *ngIf="password.errors.required">Password erforderlich</div>
-                                            <div *ngIf="password.errors.minlength"> mindestens 10 Zeichen</div>    
-                                            </div>                                        
+                                                <div *ngIf="password.errors.required">Password erforderlich</div>
+                                                <div *ngIf="password.errors.minlength"> mindestens 10 Zeichen</div> 
+                                            </div> 
+                                            <div  class="alert alert-danger" *ngIf="!isLoggedIn  && isLoginFailed">Login fehlgeschlagen!</div>                                     
                                         </div>   
                                     </div>                                   
                                     <img src="assets/action-arrow-active.svg" alt="prev" class="action-btn action-arrow-right" (click)="onSubmit()"/>

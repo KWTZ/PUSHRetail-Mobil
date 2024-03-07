@@ -35,7 +35,7 @@ export class DailyWorkingHoursComponent implements OnInit {
   workBegin;
   workEnd;
 
-  currentStatus=null;
+  currentStatus='start';
   clockInDay;
   clockOutDay;
   totalWorkingDay;
@@ -51,6 +51,13 @@ export class DailyWorkingHoursComponent implements OnInit {
 
   listAssignments;
   promoterNo;
+
+  flagInDay=true;
+  flagOutDay=false;
+  flagInBreak=false;
+  flagOutBreak=true;
+  flagEndDay=false;
+  flagReport=false;
 
   constructor(private dataservice: DataService,
     private cutil: CustomUtilityService ) { }
@@ -78,7 +85,6 @@ export class DailyWorkingHoursComponent implements OnInit {
   }
 
   getWorkingHours() {
-
     // working Day
     let sqlString = this.sqlStringWorkingDay.replace('@promoterNo', this.promoterNo).replace('@workingDay', this.cutil.convertToSQLDate(this.currentAssignment['operationDate']));
     let workingDay;
@@ -153,9 +159,40 @@ export class DailyWorkingHoursComponent implements OnInit {
   }
 
   setStatus(status: string) {
+    console.log("status", status);
+    if (status=='clockInDay' && this.currentStatus=='clockInBreak') {
+      status='clockOutBreak';
+    }
     this.currentStatus=status;
     let now = new Date();
     let currentTime =now.toLocaleString('de-DE').substring(10,15);
+    // visibility
+    switch(status) {
+        case 'clockInDay':
+        case 'clockOutBreak':
+          this.flagInDay=false;
+          this.flagOutDay=true;
+          this.flagInBreak=true;
+          this.flagOutBreak=false;
+          this.flagEndDay=true;
+          this.flagReport=true;
+          break;
+        case 'clockInBreak':
+            this.flagInDay=true;
+            this.flagOutDay=false;
+            this.flagInBreak=false;
+            this.flagOutBreak=true;
+            this.flagEndDay=false;
+            this.flagReport=false;
+            break;
+        case 'clockOutDay':
+          this.flagInDay=true;
+          this.flagOutDay=false;
+          this.flagInBreak=false;
+          this.flagOutBreak=true;
+          this.flagEndDay=false;
+          this.flagReport=true;
+    }
     switch (status) {
       case 'clockInDay':
         this.workBegin =currentTime;

@@ -21,6 +21,7 @@ export class AppComponent  implements OnInit  {
     if (environment.testing) {
       localStorage.setItem("isLoggedIn", 'true');
       localStorage.setItem("promoter", JSON.stringify( { username: 'Max Mustermann', promoterNo: '9999'} ));
+      localStorage.setItem("assignment", JSON.stringify({internalPOSNo: '27'}));
     }
     else {
       localStorage.setItem("isLoggedIn", 'false');

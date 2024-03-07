@@ -11,8 +11,10 @@ import { DataService } from 'src/app/_services/data.service';
 export class OutofstockComponent implements OnInit {
 
   sqlCategory="Select idProductCategory as ID, productCategory as viewValue from prd_categories order by productCategory";
-  sqlLine="Select idProductLine as ID, productLine as viewValue, idProductCategory from prd_lines order by productline";
-  sqlProduct='Select idProduct as ID, productName as viewValue, idProductLine, replace(format(productprice,2),".", ",") as price from prd_products order by productname';
+  sqlLine="Select idProductLine as ID, productLine as viewValue, cl.idCategory as idProductCategory from prd_lines l left join prd_categories_lines cl on l.idProductLine=cl.idLine order by productline";
+  sqlProduct='Select idProduct as ID,  concat(productName," --- ", replace(format(productprice,2),".", ","), " €")  as viewValue, idProductLine, replace(format(productprice,2),".", ",") as price from prd_products order by productname';
+ 
+  sqlInsertOOS = "INSERT INTO prd_outofstock(idProduct, internalPOSNo, promoterNo,  reportingDate, remainQuantity, modifed, modifedBy, created, createdBy) VALUES ";
 
   categoryList;
   listLine;
@@ -20,13 +22,23 @@ export class OutofstockComponent implements OnInit {
 
   selectedCategory;
   selectedLine;
+  selectedProduct;
+  remainQuantity;
   filteredLineList;
   filteredProductsList;
+
+  isValid=false;
+
+  promoterNo;
+  currentAssign;
 
 
   constructor(private dataservice: DataService) {  }
 
   ngOnInit(): void {
+    let promoter = JSON.parse(localStorage.getItem("promoter"));
+    this.promoterNo=promoter['promoterNo']
+    this.currentAssign = JSON.parse(localStorage.getItem("assignment"));
     this.getData();
   }
 
@@ -38,9 +50,21 @@ export class OutofstockComponent implements OnInit {
 
   filterProductline() {
       this.filteredLineList= this.listLine.filter(e => e.idProductCategory==this.selectedCategory);
+      this.selectedLine=null;
+      this.selectedProduct=null;
   }
   filterProduct(){
       this.filteredProductsList = this.listProduct.filter(e => e.idProductLine == this.selectedLine);
+      this.selectedProduct=null;
+  }
+
+  setSend() {
+    this.isValid = true;
+  }
+
+  doSave() {
+    let sqlInsertOOS= "(" + this.selectedProduct + ', CURRENT_TIMESTAMP, ' + this.remainQuantity + ', CURRENT_TIMESTAMP, ' ;
   }
 
 }
+

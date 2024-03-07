@@ -4,8 +4,9 @@
 
 export const environment = {
   production: false,
-  versionNo:'.Beta v01',
-  apiPath: 'http://localhost/api'
+  versionNo:'.Beta v01.01',
+  apiPath: 'http://localhost/api',
+  testing: true,
 };
 
 /*

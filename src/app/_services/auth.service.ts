@@ -18,7 +18,7 @@ export class AuthService {
     private encrypt: EncryptService) { }
 
   login(username: string, password: string): Observable<any> {
-    console.log(username, password);
+    console.log(username, this.encrypt.encryptAES256(password), password);
     return this.http.post(environment.apiPath + '/signin', { user : username, pw: this.encrypt.encryptAES256(password) }, httpOptions);
   }
 

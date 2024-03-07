@@ -1,3 +1,12 @@
+.form-field {
+     flex-direction: column;
+     width: 20em;
+}
+
+.form-field input[type="text"], .form-field input[type="password"] {
+     width: 19em;
+}
+
 .action-btn {
      margin-left: 10px;
      float: right;

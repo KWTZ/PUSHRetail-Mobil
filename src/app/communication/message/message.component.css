@@ -1,3 +1,7 @@
+
+.form-field {
+     flex-direction: column;
+}
 .form-field input[type="text"], 
 .form-field input[type="password"], 
 .form-field textarea, 
@@ -5,9 +9,16 @@
 .form-field input[type="subject"], 
 .form-field input[type="email"], 
 .form-field select {
-     width: 10em;
+     width: 19em;
 }
 .form-field textarea {
      width: 20em;
+}
+
+.action-icons {
+     display: flex;
+     flex-direction: column;
+     justify-content: flex-end;
+
 }
 

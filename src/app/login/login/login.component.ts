@@ -46,12 +46,7 @@ export class LoginComponent implements OnInit {
     @HostListener('document:MSFullscreenChange', ['$event'])
 
 
-  ngOnInit(): void {
-    // if (this.tokenStorage.getToken()) {
-    //   this.isLoggedIn = true;
-    //   this.roles = this.tokenStorage.getUser().roles;
-    // }
-  }
+  ngOnInit(): void {}
 
   
 
@@ -62,21 +57,28 @@ export class LoginComponent implements OnInit {
     this.authService.login(username, password).subscribe(
       data => {
         console.log(data);
-        if (data[0]['promoterNo']!=null) {
-          this.isLoggedIn = true;
-          this.isLoginFailed = false;
-          this.promoterNo = data[0]['promoterNo'];
-          localStorage.setItem("promoter", JSON.stringify(data[0]));
-          localStorage.setItem("isLoggedIn", 'true');
-          this.getCurrentAssignment();
-          this.openPopup();
-          setTimeout(() =>  { this.router.navigate(['/', 'dailywork']); }, 1000);
-        }
+        if(data.length>0) {
+          if (data[0]['promoterNo']!=null) {
+            this.isLoggedIn = true;
+            this.isLoginFailed = false;
+            this.promoterNo = data[0]['promoterNo'];
+            localStorage.setItem("promoter", JSON.stringify(data[0]));
+            localStorage.setItem("isLoggedIn", 'true');
+            this.getCurrentAssignment();
+            this.openPopup();
+            setTimeout(() =>  { this.router.navigate(['/', 'dailywork']); }, 1000);
+          }
+          else {
+              this.isLoggedIn=false;
+              this.isLoginFailed=true;
+          }
+        }    
         else {
-            this.isLoggedIn=false;
-            this.isLoginFailed=true;
-        }
-       
+              this.form.submitted=false;
+              console.log(this.form.submitted);
+              this.isLoggedIn=false;
+              this.isLoginFailed=true;
+        }   
       },
       err => {
         this.errorMessage = err.error.message;
