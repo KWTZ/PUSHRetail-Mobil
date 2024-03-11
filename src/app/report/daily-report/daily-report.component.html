@@ -1,11 +1,11 @@
-<app-topnav></app-topnav>
+<app-topnav title="Tages-Bericht"></app-topnav>
 <main>
     <div class="main-part">
         <section class="glb-part reward-part bg-white section-100">
-            <div class="container">
+            <div class="container">             
                 <div class="glb-inner">
-                    <h2>Tagesbericht:</h2>
-                    <p><strong>Kundenfrequenz  <span style="color: red; font-weight: bold;">(Zahl)</span></strong></p>
+                    <h2>Tagesbericht:   {{ reportDay }}</h2>
+                    <p><strong>Kundenfrequenz</strong></p>
                     <div class="report-table">
                         <table>
                             <thead>
@@ -17,19 +17,19 @@
                             <tbody>
                                 <tr>
                                     <td>Heutige Kundenfrequenz?</td>
-                                    <td><input type="text" name="valKundenfrequenz" class="form-field" [(ngModel)]="rep.valFrequency" placeholder="0" style="text-align: right;"/></td>
+                                    <td style="display:flex; "><input type="number" name="valKundenfrequenz" required class="form-field" [(ngModel)]="rep.valFrequency" placeholder="Menge" style="text-align: right;" (change)="checkIsValid()"/><span class="required">*</span></td>
                                 </tr>
                                 <tr>
                                     <td>... davon angesprochene Kunden?</td>
-                                    <td><input type="text" name="valLeads" class="form-field" [(ngModel)]="rep.valLeads" placeholder="0" style="text-align: right; "/></td>
+                                    <td style="display: flex;"><input type="number" name="valLeads" class="form-field" [(ngModel)]="rep.valLeads" placeholder="Menge" style="text-align: right; " (change)="checkIsValid()"/><span class="required">*</span></td>
                                 </tr>
                                 <tr>
                                     <td>... davon Verkaufsgespräche?</td>
-                                    <td><input type="text" name="valTalks"  class="form-field" [(ngModel)]="rep.valTalks" placeholder="0" style="text-align: right;"/></td>
+                                    <td style="display:flex; "><input type="number" name="valTalks"  class="form-field" [(ngModel)]="rep.valTalks" placeholder="Menge" style="text-align: right;" (change)="checkIsValid()"/><span class="required">*</span></td>
                                 </tr>
                                 <tr>
                                     <td>Ausgegebene Proben</td>
-                                    <td><input type="text" name="valTester"  class="form-field" [(ngModel)]="rep.valTester" placeholder="0" style="text-align: right; "/></td>
+                                    <td style="display:flex;"><input type="number" name="valTester"  class="form-field" [(ngModel)]="rep.valTester" placeholder="Menge" style="text-align: right; " (change)="checkIsValid()"/><span class="required">*</span></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -47,25 +47,25 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>Pop-up Display</td>
+                                    <td>Pop-up Display<span class="required">*</span></td>
                                     <td><input type="radio"  name="display" value="ok" (change)="onChange($event, 'display')"/></td>
                                     <td style="text-align:right;"><input type="radio"  name="display" value="nicht ok" (change)="onChange($event, 'display')"/></td>
                                     <td style="text-align:right;" ><input type="radio"  name="display" value="fehlt" (change)="onChange($event, 'display')"/></td>
                                 </tr>
                                 <tr>
-                                    <td>Namensschild</td>
+                                    <td>Namensschild<span class="required">*</span></td>
                                     <td><input type="radio" name="nameTag" value="ok" (change)="onChange($event, 'nameTag')" /></td>
                                     <td style="text-align:right;"><input type="radio"  name="nameTag"  value="nicht ok" (change)="onChange($event, 'nameTag')" /></td>
                                     <td style="text-align:right;"><input type="radio"  name="nameTag" value="fehlt" (change)="onChange($event, 'nameTag')" /></td>
                                 </tr>
                                 <tr>
-                                    <td>Ausreichende Tester</td>
+                                    <td>Tester<span class="required">*</span></td>
                                     <td><input type="radio" name="tester"value="ok" (change)="onChange($event, 'tester')" /></td>
                                     <td style="text-align:right;"><input type="radio"  name="tester"  value="nicht ok" (change)="onChange($event, 'tester')"/></td>
                                     <td style="text-align:right;"><input type="radio"  name="tester" value="fehlt" (change)="onChange($event, 'tester')"/></td>
                                 </tr>
                                 <tr style="height:30px;">
-                                    <td colspan="2">Außendienst vor Ort?</td>
+                                    <td colspan="2">Außendienst vor Ort?<span class="required">*</span></td>
 
                                     <td style="white-space: nowrap; text-align: right;">ja   <input type="radio" name="ASM"  value="yes" (change)="onChange($event, 'asm')"/></td>
                                     <td style="white-space: nowrap; text-align:right;">nein   <input type="radio" name="ASM" value="no" (change)="onChange($event, 'asm')"/></td>
@@ -82,7 +82,7 @@
                                     <div>
                                         <div class="form-field" style="justify-content: flex-end;">
                                             <label for=""  style="margin-top: 5px; white-space: nowrap;"><strong>Tagesumsatz D&G, brutto €</strong></label>
-                                            <input type="text" name="txt" [(ngModel)]="rep.revenue" placeholder="0,00" style="width: 8em; text-align: right; padding-right: 5px;">
+                                            <input type="text" name="txt" [(ngModel)]="rep.revenue" placeholder="Umsatz" style="width: 8em; text-align: right; padding-right: 5px;"><span class="required">*</span>
                                         </div>
                                         <div style="margin-top:-5px;margin-right:0px; font-size:0.7em; float:right;">ohne Sonderzeichen</div>
                                     </div>
@@ -92,20 +92,28 @@
                                             <label for="bus_img">
                                                 <img src="assets/camera-active.svg" style="height: 60px;"/>
                                             </label>
-                                            <span style="width: 270px;padding-left: 20px;">Foto Verkaufsumsatz, <br> mit Stempel und Unterschrift</span>
+                                            <span style="width: 270px;padding-left: 20px;">Foto Verkaufsumsatz, <br> mit Stempel und Unterschrift</span>                                            
                                             <input (change)="uploadFile($event);" type="file" name="bus_img" id="bus_img" accept="image/*;capture=camera"  />
                                             <input type="submit" id="subImg" name="submitImg" style="display: none;">
-                                            <label for="subImg">
-                                              <img  src="assets/action-arrow-active.svg" alt="" *ngIf="isValid" style="height:40px;" (click)="doSave()" >
-                                              <img  src="assets/action-arrow.svg" alt="" *ngIf="!isValid" style="height:40px;"  >
-                                            </label>
+                                           
                                             
                                         </div>
-                                        <div class="alert alert-info" *ngIf="dataStored">Der Report wurde versand.</div>
+                                        <div>{{ filename }}</div>
+                                        <div class="alert alert-danger" *ngIf="!isValid && selectedImg && !dataStored">Nicht alle Felder wurden ausgefüllt!</div>
+                                        <div class="alert alert-info" *ngIf="dataStored">Der Report wurde versandt.</div>
                                     <div style="margin-top: 10px;">
-                                        <div>Sonstiges:</div>
-                                        <textarea [(ngModel)]="rep.comment" placeholder="max. 300 Zeichen"></textarea>
+                                        <div>Wie reagieren die Kunden?</div>
+                                        <textarea [(ngModel)]="rep.custReaction" placeholder="max. 300 Zeichen"></textarea>
                                     </div>
+                                    <div style="margin-top: 10px;">
+                                        <div>Was würdest du ändern?</div>
+                                        <textarea [(ngModel)]="rep.requestChanges" placeholder="max. 300 Zeichen"></textarea>
+                                    </div>
+                                     <label for="subImg" style="text-align:center;">
+                                              <img  src="assets/action-save-active.svg" alt="" *ngIf="isValid" style="height:60px;"  data-toggle="modal" data-target="#exampleModal" (click)="doSave()" >
+                                              <img  src="assets/action-save.svg" alt="" *ngIf="!isValid" style="height:60px;"  >
+                                    </label>
+                                    <div class="alert alert-info" *ngIf="dataStored">Der Report wurde versandt.</div>
                                 </div>
                             </div>
                         </div>
@@ -116,3 +124,26 @@
     </div>
 </main>
 <app-footer></app-footer>
+
+
+<!-- Modal -->
+<ng-template #salesModal let-modal>
+
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Information</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    
+    <div class="modal-body">      
+        <div class="alert alert-info">Bitte erfasse erst deine Verkäufe, bevor du den Report versendest!<br>
+            Du wirst zu den Verkäufen weitergeleitet.<br>
+            Nach der Eingabe kannst du deinen Bericht abschließen und versenden!
+        </div>    
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="closeModal()">schließen</button>
+    </div>
+      
+</ng-template>

@@ -14,11 +14,11 @@
 }
 
 select, input {
-     min-width: 12em;
+     width: 10em;
 }
 
 input[type="checkbox"] {
-     min-width: unset;
+     width: 10em;
      margin-right: 1em;
 }
 

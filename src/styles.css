@@ -79,6 +79,10 @@ ul , ol {
   padding: 0px;
 }
 
+input { 
+  padding: 0.2em;
+}
+
 a , a:hover , a:focus , a:visited , input , textarea , button , img , select{
   outline: none !important;
   text-decoration: none !important;
@@ -127,6 +131,7 @@ textarea::placeholder, input::placeholder {
 
 input[type=number]::placeholder {
   text-align: right;
+  font-size: 0.2em;
 }
 
 .theme-btn{
@@ -359,6 +364,7 @@ background-color: initial;
 }
 
 .section-100{
+  margin-top: 112px;
   min-height: calc(100vh - 72px);
 }
 
@@ -721,7 +727,9 @@ background-color: initial;
 
 
 
-.form-field input[type="text"] , .form-field input[type="password"] , .form-field textarea , .form-field input[type="tel"] , .form-field input[type="subject"] , .form-field input[type="email"] , .form-field select{
+.form-field input[type="text"] , .form-field input[type="password"], .form-field input[type="checkbox"]
+, .form-field textarea , .form-field input[type="tel"] , .form-field input[type="subject"] 
+, .form-field input[type="email"] , .form-field select{
   border: 1px solid #222222;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
@@ -1023,6 +1031,12 @@ display: none;
   transform: rotate(-180deg);
   margin-right: 0.2em;
 
+}
+
+.required {
+  color: red;
+  font-weight: bold;
+  margin-left: 0.2em;
 }
 
 /* Home Network Element */

@@ -47,6 +47,10 @@ p {
      padding-bottom: 0;
 }
 
+.alert-danger {
+     font-weight: bold;
+     font-size: 1.2em;
+}
 
 
 

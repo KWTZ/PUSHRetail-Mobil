@@ -35,7 +35,7 @@
                         <div class="action-icons">
                             <img src="assets/action-arrow-active.svg" alt="" *ngIf="isSend" (click)="sendMessage()" style="width:20px;"/>
                             <img src="assets/action-arrow.svg" alt="" *ngIf="!isSend" style="width:20px;"/>
-                            <img src="assets/phone-red.svg" alt="" *ngIf="isEmergency" style="height:40px;" />                
+                            <a [href]="'tel:+49 511 543680-30'"><img src="assets/phone-red.svg" alt="" *ngIf="isEmergency" style="height:40px;" /></a>              
                         </div>
                     </div>
                     

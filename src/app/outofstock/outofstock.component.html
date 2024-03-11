@@ -1,4 +1,4 @@
-<app-topnav></app-topnav>
+<app-topnav title="Out of Stock"></app-topnav>
 <main>
     <div class="main-part">
         <section class="glb-part bg-white section-100">
@@ -33,9 +33,9 @@
                                             <input type="number" name="qtyRemaining" [(ngModel)]="remainQuantity" placeholder="0" style="text-align: right;" (change)="setSend()">
                                          </div>
                                 </div>
-                                <div style="width: 100%; text-align: right; padding-right: 20px;">
-                                    <img src="assets/action-arrow-active.svg" *ngIf="isValid"  style="margin-left: 10px; margin-bottom: 10px; margin-right: 10px;height: 40px;" (change)="doSave()"/>
-                                    <img src="assets/action-arrow.svg" *ngIf="!isValid"  style="margin-left: 10px; margin-bottom: 10px; margin-right: 10px;height: 40px;"/>
+                                <div style="width: 100%; text-align: right;">
+                                    <img src="assets/action-save-active.svg" *ngIf="isValid"  style="margin-left: 10px; margin-bottom: 10px; margin-right: 5px;height: 35px;" (click)="doSave()"/>
+                                    <img src="assets/action-save.svg" *ngIf="!isValid"  style="margin-left: 10px; margin-bottom: 10px; margin-right: 5px;height: 35px;"/>
                                 </div>
 
                         </div>
@@ -55,24 +55,12 @@
                        </tr>
                    </thead>
                    <tbody>
-                       <tr>
-                           <td><a href="#" style="font-weight:bold; color:#042e50">Artikel</a></td>
-                           <td>Datum</td>
-                           <td>Menge</td>
-                           <td><input type="checkbox" />erledigt</td>
-                       </tr>
-                       <tr>
-                           <td><a href="#" style="font-weight: bold; color:#042e50">Artikel</a></td>
-                           <td>Datum</td>
-                           <td>Menge</td>
-                           <td><input type="checkbox" />erledigt</td>
-                       </tr>
-                       <tr>
-                           <td><a href="#" style="font-weight: bold; color:#042e50">Artikel</a></td>
-                           <td>Datum</td>
-                           <td>Menge</td>
-                           <td><input type="checkbox" />erledigt</td>
-                       </tr>
+                       <tr *ngFor="let oos of listOOS">
+                           <td><a href="#" style="font-weight:bold; color:#042e50">{{ oos.productname }}</a></td>
+                           <td>{{ oos.reportdate }}</td>
+                           <td>{{ oos.remainQuantity }}</td>
+                           <td style="display:flex;"><input type="checkbox" style="white-space: nowrap; width: unset;" [checked]="oos.settledDate">erledigt</td>
+                       </tr>                      
                    </tbody>
                </table>
            </div>

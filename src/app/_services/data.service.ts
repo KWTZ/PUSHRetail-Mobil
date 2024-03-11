@@ -10,7 +10,7 @@ export class DataService {
   constructor(private http: HttpClient) { }
 
   getHeader(table: string) {
-    console.log("header" , table);
+    // console.log("header" , table);
     //console.log(environment.apiPath +  '/header?table=' + table);
     return this.http.get<any>(environment.apiPath + '/header.php?table=' + table);
   }

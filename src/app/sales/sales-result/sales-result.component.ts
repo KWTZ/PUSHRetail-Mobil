@@ -47,6 +47,7 @@ export class SalesResultComponent implements OnInit {
 
   promoterNo;
   currentAssign;
+  salesDate;
 
   flagQuantity=false;
 
@@ -58,7 +59,8 @@ export class SalesResultComponent implements OnInit {
     let promoter = JSON.parse(localStorage.getItem("promoter"));
     this.promoterNo=promoter['promoterNo']
     this.currentAssign = JSON.parse(localStorage.getItem("assignment"));
-     this.getData();
+    this.salesDate=this.currentAssign['operationDate'];
+    this.getData();
     this.calcTotals();
       
   }
@@ -79,7 +81,7 @@ export class SalesResultComponent implements OnInit {
   doSave() {
     let idPOS = this.currentAssign['internalPOSNo'];
     this.sqlInsertSales+=this.selectedProductID + ", " + this.quantity + ", " + this.selectedProductPrice.replace(",", ".") + 
-        ', CURRENT_TIMESTAMP, "' + this.promoterNo + '", ' + idPOS + ', CURRENT_TIMESTAMP, 0, CURRENT_TIMESTAMP, 0)';
+        ', "'+ this.util.convertToSQLDate(this.salesDate) + '", "' + this.promoterNo + '", ' + idPOS + ', CURRENT_TIMESTAMP, 0, CURRENT_TIMESTAMP, 0)';
     console.log(this.sqlInsertSales);
     this.dataservice.storeData(this.sqlInsertSales).subscribe(result => { console.log(result)});
 

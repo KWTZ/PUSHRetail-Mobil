@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-topnav',
@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./topnav.component.css']
 })
 export class TopnavComponent implements OnInit {
-
+  @Input() title;
   isLoggedIn='false';
   userName;
 

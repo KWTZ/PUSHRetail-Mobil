@@ -23,10 +23,10 @@ export class DailyWorkingHoursComponent implements OnInit {
   sqlStringBreaks: string = 'SELECT begin as breakIn, end as breakOut, duration as breakDuration FROM pro_workingbreaks where promoterNo="@promoterNo" and workingDay="@workingDay"'; 
 
   sqlWorkingDayInsert: string = "INSERT INTO pro_workingdays(promoterNo, workingday, begin, end, workinghours, modifiedBy, modified, createdBy, created) VALUES ";
-  sqlWorkingDayUpdate: string = 'UPDATE pro_workingdays set end ="@workingEnd", workinghours="@workinghours"  where promoterNo="@promoterNo" and workingDay=CURDATE() ';
+  sqlWorkingDayUpdate: string = 'UPDATE pro_workingdays set end ="@workingEnd", workinghours="@workinghours"  where promoterNo="@promoterNo" and workingDay="@workingDay"';
 
   sqlBreakInsert: string = "INSERT INTO pro_workingbreaks(promoterNo, workingday, begin, end, duration, modifiedBy, modified, createdBy, created) VALUES";
-  sqlBreakUpdate: string = 'UPDATE pro_workingbreaks set end="@breakEnd", duration="@duration"  where promoterNo="@promoterNo" and workingDay=CURDATE() and end IS NULL';
+  sqlBreakUpdate: string = 'UPDATE pro_workingbreaks set end="@breakEnd", duration="@duration"  where promoterNo="@promoterNo" and workingDay="@workingDay" and end IS NULL';
 
   assignNo=0;  
   noOfAssignment=0;
@@ -34,6 +34,8 @@ export class DailyWorkingHoursComponent implements OnInit {
   
   workBegin;
   workEnd;
+  breakBegin;
+  breakEnd;
 
   currentStatus='start';
   clockInDay;
@@ -52,12 +54,14 @@ export class DailyWorkingHoursComponent implements OnInit {
   listAssignments;
   promoterNo;
 
-  flagInDay=true;
+  flagInDay=false;
   flagOutDay=false;
   flagInBreak=false;
   flagOutBreak=true;
+  flagFinishBreak=false;
   flagEndDay=false;
   flagReport=false;
+  isBreak=false;
 
   constructor(private dataservice: DataService,
     private cutil: CustomUtilityService ) { }
@@ -67,16 +71,18 @@ export class DailyWorkingHoursComponent implements OnInit {
   }
 
   getData() { 
+      let sqlStatement = this.sqlString;
       let promoter = JSON.parse(localStorage.getItem("promoter"));
       this.promoterNo=promoter['promoterNo']
-      this.sqlString+=this.promoterNo + '"';
-      console.log(this.sqlString);
-      this.dataservice.getAll(this.sqlString).subscribe( data => {
-        console.log(data);
-        // this.listAssignemnts=data;
+      sqlStatement+=this.promoterNo + '"';
+  
+      this.dataservice.getAll(sqlStatement).subscribe( data => {
         this.listAssignments=data;
         this.noOfAssignment=data.length;
+        this.getcurrentAssignment();
+
         this.currentAssignment=data[this.assignNo];
+        localStorage.setItem("assignment", JSON.stringify(this.currentAssignment));
         console.log(this.currentAssignment)
         this.weekdayName=weekdays[this.currentAssignment['weekdayNo']];
 
@@ -86,8 +92,11 @@ export class DailyWorkingHoursComponent implements OnInit {
 
   getWorkingHours() {
     // working Day
+    this.clockInDay=null;
+    this.clockOutDay=null;
     let sqlString = this.sqlStringWorkingDay.replace('@promoterNo', this.promoterNo).replace('@workingDay', this.cutil.convertToSQLDate(this.currentAssignment['operationDate']));
     let workingDay;
+    let currentBreak;
     let sumBreak=0;
     let sumWorkinghours=0;
 
@@ -96,9 +105,12 @@ export class DailyWorkingHoursComponent implements OnInit {
         workingDay = data[0];
         this.clockInDay = workingDay['begin'];
         this.clockOutDay= workingDay['end'];
+
       
         this.workTime.push({ clockInDay: workingDay['begin'], clockOutDay: workingDay['end'], workingHours: workingDay['workingHours']});
         this.currentStatus="clockInDay";
+        if (this.clockOutDay>'')
+          this.currentStatus="clockOutDay";
 
         this.workTime.forEach(item => {
           sumWorkinghours+=item['workingHours'];
@@ -107,8 +119,11 @@ export class DailyWorkingHoursComponent implements OnInit {
       else {
         this.clockInDay=null;
         this.clockOutDay=null;
+        this.currentStatus="start";
       }
-    });
+
+      this.totalWorkingDay=this.formatTime(sumWorkinghours-sumBreak);
+      this.setStatus(this.currentStatus);
 
 
    
@@ -119,12 +134,17 @@ export class DailyWorkingHoursComponent implements OnInit {
     this.dataservice.getAll(sqlStatement).subscribe(data => {  this.workBreaks=data; 
 
       if(data.length>0) {
-        this.lastBreak = data[data.length-1];
+        if (data.lengt==0) {
+          this.lastBreak=data[0];
+        }
+        else {
+          this.lastBreak = data[data.length-1];
+        }
         if (this.lastBreak['breakOut']==null) {
+          this.breakBegin=this.lastBreak['breakIn'];
           this.currentStatus="clockInBreak";
         }   
         else {
-          this.currentStatus="clockInDay";
         }     
       }
 
@@ -132,16 +152,30 @@ export class DailyWorkingHoursComponent implements OnInit {
       this.workBreaks.forEach(item => {
         sumBreak += item['breakDuration'];
         item['breakDuration']=this.formatTime(item['breakDuration']);
+
+        this.setStatus(this.currentStatus);
       });
 
       this.totalbreaks=this.formatTime(sumBreak);
 
-      this.totalWorkingDay=this.formatTime(sumWorkinghours-sumBreak);
+
       this.totalWorkingMonth=this.formatTime(sumWorkinghours-sumBreak);
      
     });
+  });
     
 
+
+  }
+
+  getcurrentAssignment() {
+      let today = new Date().toLocaleDateString("de-DE", {year: 'numeric', month: '2-digit', day: '2-digit'});
+      
+      this.listAssignments.forEach((element, index) => {
+          if (element.operationDate == today) {
+            this.assignNo=index;
+          }
+      });
   }
 
   setAssign(pos: number) {
@@ -155,103 +189,135 @@ export class DailyWorkingHoursComponent implements OnInit {
     this.currentAssignment=this.listAssignments[this.assignNo]
     this.weekdayName=weekdays[this.currentAssignment['weekdayNo']];
 
+    localStorage.setItem("assignment", JSON.stringify(this.currentAssignment));
+
     this.getWorkingHours();
   }
 
   setStatus(status: string) {
     console.log("status", status);
-    if (status=='clockInDay' && this.currentStatus=='clockInBreak') {
-      status='clockOutBreak';
-    }
-    this.currentStatus=status;
     let now = new Date();
-    let currentTime =now.toLocaleString('de-DE').substring(10,15);
-    // visibility
+    let currentTime =now.toLocaleString('de-DE').substring(11,16);
     switch(status) {
-        case 'clockInDay':
-        case 'clockOutBreak':
+      case 'start':
+        if(this.clockInDay==undefined) {
           this.flagInDay=false;
-          this.flagOutDay=true;
+          this.flagEndDay=false;
+          this.flagInBreak=false;
+          this.flagOutBreak=true;
+          this.flagReport=false;
+        }
+        break;
+
+      case 'clockInDay':
+        if (this.clockInDay==undefined) {
+          this.workBegin=currentTime;
+          this.flagInDay=true;
+          this.flagInBreak=false;
+          this.flagOutBreak=false;
+          this.flagEndDay=false;
+          this.flagReport=false;
+        }
+        else {
+          this.workBegin=null;
+          this.flagInDay=true;
           this.flagInBreak=true;
           this.flagOutBreak=false;
-          this.flagEndDay=true;
+          this.flagFinishBreak=false;
+          this.flagEndDay=false;
           this.flagReport=true;
-          break;
-        case 'clockInBreak':
-            this.flagInDay=true;
-            this.flagOutDay=false;
-            this.flagInBreak=false;
-            this.flagOutBreak=true;
-            this.flagEndDay=false;
-            this.flagReport=false;
-            break;
-        case 'clockOutDay':
-          this.flagInDay=true;
-          this.flagOutDay=false;
+          this.isBreak=false;
+        }
+        break;
+
+      case 'clockInBreak':
+        if(this.breakBegin==undefined ) {
+          this.breakBegin=currentTime;
           this.flagInBreak=false;
           this.flagOutBreak=true;
           this.flagEndDay=false;
-          this.flagReport=true;
-    }
-    switch (status) {
-      case 'clockInDay':
-        this.workBegin =currentTime;
-        this.clockInDay=currentTime;
-        this.workTime.push({ clockInDay: currentTime, clockOutDay: null, workingHours: null});
-        break; 
-      case 'clockOutDay':
-        this.workEnd = currentTime;
-        this.clockOutDay=currentTime;
-        let wt = this.workTime[this.workTime.length-1];
-        wt.clockOutDay=currentTime;
-        wt.workingHours=this.formatTime(this.calcTimeDifference(wt.clockInDay, wt.clockOutDay));
+          this.flagReport=false;
+          this.isBreak=true;
+
+
+        }
+        else {
+          this.flagInDay=true;
+          this.flagOutDay=true;
+          this.flagInBreak=false;
+          this.flagOutBreak=false;
+          this.flagFinishBreak=true;
+          this.flagEndDay=false;
+          this.flagReport=false;
+          this.isBreak=true;
+          this.breakEnd=null;
+  
+        }
         break;
-        
-      case 'clockInBreak':
-          this.workBegin = currentTime;
-          this.workEnd=null;
-          this.workBreaks.push({ breakIn: currentTime, breakOut: null, breakDuration: null});
-          
-          break;
+
       case 'clockOutBreak':
-        this.workEnd = currentTime;
-        let wb = this.workBreaks[this.workBreaks.length-1];
-        wb.breakOut=currentTime;
-        wb.breakDuration=this.formatTime(this.calcTimeDifference(wb.breakIn, wb.breakOut));
+        this.breakEnd=currentTime;
         break;
 
     }
 
-    console.log("breaks", this.workBreaks);
-  }
+    // Operation Date in future
+    if(new Date(this.cutil.convertToSQLDate(this.currentAssignment['operationDate']))>new Date()) {
+      this.flagInDay=true;
+      this.flagOutDay=false;
+    }
+  }  
 
-  saveWorkinghours() {
+  saveWorkinghours(flag) {
     let sqlStatement;
-    switch(this.currentStatus) {
-      case 'clockInDay':
-        sqlStatement = this.sqlWorkingDayInsert+'("' + this.promoterNo + '", CURDATE(), "' + this.clockInDay + '", null, 0, "' + this.promoterNo + '", NOW(), "' + this.promoterNo + '", NOW())';
-        break;
-      case 'clockOutDay':
+    if (flag=='start') {
+        sqlStatement = this.sqlWorkingDayInsert+'("' + this.promoterNo + '", "' + this.cutil.convertToSQLDate(this.currentAssignment['operationDate']) + '", "' + this.workBegin + '", null, 0, "' + this.promoterNo + '", CURRENT_TIME, "' + this.promoterNo + '", CURRENT_TIME)';
+        this.clockInDay=this.workBegin;
+        this.flagInBreak=true;
+        this.flagReport=true;
+
+    }
+
+    if (flag=="end") {
         sqlStatement = this.sqlWorkingDayUpdate;
         sqlStatement = sqlStatement.replace('@promoterNo', this.promoterNo);
+        sqlStatement = sqlStatement.replace('@workingDay', this.cutil.convertToSQLDate(this.currentAssignment['operationDate']));
         sqlStatement = sqlStatement.replace('@workingEnd', this.clockOutDay);
         sqlStatement = sqlStatement.replace('@workinghours', this.calcTimeDifference(this.clockInDay, this.clockOutDay));
-        break;
-      case 'clockInBreak':
-        sqlStatement = this.sqlBreakInsert+'("' + this.promoterNo + '", CURDATE(), "' + this.workBegin + '", null, null, "' + this.promoterNo + '", NOW(), "' + this.promoterNo + '", NOW())';
-        this.currentStatus="clockInBreak";
-        break;
-      case 'clockOutBreak':
-        sqlStatement = this.sqlBreakUpdate;
-        sqlStatement = sqlStatement.replace('@promoterNo', this.promoterNo);
-        sqlStatement = sqlStatement.replace('@breakEnd', this.workEnd);
-        sqlStatement = sqlStatement.replace('@duration', this.calcTimeDifference(this.lastBreak['breakIn'], this.workEnd))
-        break;
     }
 
+
+    
     console.log(sqlStatement);
     this.dataservice.storeData(sqlStatement).subscribe(res => { console.log(res); });
+    this.getData()
 
+  }
+
+  saveBreak(flag) {
+      let sqlStatement;
+      if (flag == 'start') {
+        sqlStatement = this.sqlBreakInsert+'("' + this.promoterNo + '", "' + this.cutil.convertToSQLDate(this.currentAssignment['operationDate']) + '", "' + this.breakBegin + '", null, null, "' + this.promoterNo + '", CURRENT_TIME, "' + this.promoterNo + '", CURRENT_TIME)';
+        this.currentStatus="clockInBreak";
+        this.workBegin=null;
+       
+      }
+
+      if (flag=='end') {
+        sqlStatement = this.sqlBreakUpdate;
+        sqlStatement = sqlStatement.replace('@promoterNo', this.promoterNo);
+        sqlStatement = sqlStatement.replace('@workingDay', this.cutil.convertToSQLDate(this.currentAssignment['operationDate']));
+        sqlStatement = sqlStatement.replace('@breakEnd', this.breakEnd);
+        sqlStatement = sqlStatement.replace('@duration', this.calcTimeDifference(this.lastBreak['breakIn'], this.breakEnd));
+       
+      }
+
+      console.log(sqlStatement);
+      this.breakBegin=null;
+
+      this.dataservice.storeData(sqlStatement).subscribe(res => { console.log(res); });
+      this.getData();
+  
   }
 
   calcTimeDifference(beginn, ende) {
@@ -292,8 +358,8 @@ export class DailyWorkingHoursComponent implements OnInit {
       // Getting the number of minutes left in one hour
       const remMinutes = totalMinutes % 60;
 
-      console.log(`${("00" + totalHours).slice(-2)}:${("00"+remMinutes).slice(-2)}`);
-      console.log(`${totalHours}:${remMinutes}:${remSeconds}`);
+      // console.log(`${("00" + totalHours).slice(-2)}:${("00"+remMinutes).slice(-2)}`);
+      // console.log(`${totalHours}:${remMinutes}:${remSeconds}`);
 
       return `${("00" + totalHours).slice(-2)}:${("00"+remMinutes).slice(-2)}`
   }

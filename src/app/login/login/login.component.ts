@@ -17,8 +17,8 @@ export class LoginComponent implements OnInit {
   //declare variable
   elem: any; isFullScreen: boolean;
 
-  // sqlString: string = 'select idAssignment, idPosPlacement, internalPOSNo, operationDate from pos_assignments where promoterNo= "@promoterNo" and operationDate=CURDate()';
-  sqlString: string = 'select idAssignment, idPosPlacement, internalPOSNo, operationDate from pos_assignments where promoterNo= "@promoterNo" and operationDate="2024-03-07"';
+  sqlString: string = 'select idAssignment, idPosPlacement, internalPOSNo, operationDate from pos_assignments where promoterNo= "@promoterNo" and operationDate=CURDate()';
+  //sqlString: string = 'select idAssignment, idPosPlacement, internalPOSNo, operationDate from pos_assignments where promoterNo= "@promoterNo" and operationDate="2024-03-07"';
 
   form: any = {
     username: null,
@@ -52,8 +52,6 @@ export class LoginComponent implements OnInit {
 
   onSubmit(): void {
      const { username, password } = this.form;
-
-    console.log("test", username, password);
     this.authService.login(username, password).subscribe(
       data => {
         console.log(data);

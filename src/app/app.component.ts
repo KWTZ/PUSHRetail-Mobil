@@ -20,8 +20,8 @@ export class AppComponent  implements OnInit  {
   ngOnInit(): void {
     if (environment.testing) {
       localStorage.setItem("isLoggedIn", 'true');
-      localStorage.setItem("promoter", JSON.stringify( { username: 'Max Mustermann', promoterNo: '9999'} ));
-      localStorage.setItem("assignment", JSON.stringify({internalPOSNo: '27'}));
+      localStorage.setItem("promoter", JSON.stringify( { username: 'Max Mustermann', promoterNo: '0057'} ));
+      localStorage.setItem("assignment", JSON.stringify({internalPOSNo: '3709'}));
     }
     else {
       localStorage.setItem("isLoggedIn", 'false');

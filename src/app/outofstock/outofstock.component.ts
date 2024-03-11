@@ -16,9 +16,14 @@ export class OutofstockComponent implements OnInit {
  
   sqlInsertOOS = "INSERT INTO prd_outofstock(idProduct, internalPOSNo, promoterNo,  reportingDate, remainQuantity, modifed, modifedBy, created, createdBy) VALUES ";
 
+  sqlOOS = 'Select idOOS, tblPD.productname, internalPOSNo, promoterNo, DATE_FORMAT(oos.reportingDate, "%d.%m.%Y") as reportdate , remainQuantity, settledDate ' +
+        ' from prd_outofstock oos  left join prd_products tblPD on oos.idProduct=tblPD.idProduct ' +
+        ' where internalPOSNo=@internalPOSNo and promoterNo="@promoterNo" order by oos.reportingdate';
+
   categoryList;
   listLine;
   listProduct;
+  listOOS;
 
   selectedCategory;
   selectedLine;
@@ -46,6 +51,9 @@ export class OutofstockComponent implements OnInit {
     this.dataservice.getAll(this.sqlCategory).subscribe(data => { this.categoryList=data; });
     this.dataservice.getAll(this.sqlLine).subscribe(data => { this.listLine=data; this.filteredLineList=data; });
     this.dataservice.getAll(this.sqlProduct).subscribe(data => { this.listProduct=data; this.filteredProductsList=data; });
+    this.sqlOOS=this.sqlOOS.replace("@internalPOSNo", this.currentAssign['internalPOSNo']);
+    this.sqlOOS=this.sqlOOS.replace("@promoterNo", this.promoterNo);
+    this.dataservice.getAll(this.sqlOOS).subscribe(data => { this.listOOS=data; })
   }
 
   filterProductline() {
@@ -63,7 +71,12 @@ export class OutofstockComponent implements OnInit {
   }
 
   doSave() {
-    let sqlInsertOOS= "(" + this.selectedProduct + ', CURRENT_TIMESTAMP, ' + this.remainQuantity + ', CURRENT_TIMESTAMP, ' ;
+    let sqlInsertOOS= this.sqlInsertOOS + "(" + this.selectedProduct + ", " + this.currentAssign['internalPOSNo'] + ', "' + this.promoterNo + '"' + 
+    ', CURRENT_TIMESTAMP, ' + this.remainQuantity + ', CURRENT_TIMESTAMP, "' + this.promoterNo + '", CURRENT_TIMESTAMP,  "' + this.promoterNo + '")'; 
+    console.log(sqlInsertOOS)
+    this.dataservice.storeData(sqlInsertOOS).subscribe(res => { console.log(res) })
+    this.getData();
+
   }
 
 }
