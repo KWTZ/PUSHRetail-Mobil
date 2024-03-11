@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { DataService } from 'src/app/_services/data.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-message',
@@ -15,14 +17,14 @@ export class MessageComponent implements OnInit {
   isEmergency=false;
   mes = Message;
   promoter;
-  constructor(private dataService: DataService) { }
+  constructor(private dataService: DataService,private http:HttpClient) { }
 
   ngOnInit(): void {
     this.promoter=JSON.parse(localStorage.getItem('promoter'));
   }
 
   setSend() {
-    this.isSend=true;   
+    this.isSend=true;
   }
 
   sendMessage() {
@@ -31,13 +33,25 @@ export class MessageComponent implements OnInit {
     console.log(this.sqlInsertMessage);
 
     this.dataService.storeData(this.sqlInsertMessage).subscribe(res => { console.log(res);
-      this.hasSend=true; 
+      this.hasSend=true;
       this.mes.messageType=null;
       this.mes.subject=null;
       this.mes.callbackNo=null;
       this.mes.message=null;
     });
-  }
+
+    console.log('Message',this.mes);
+    const formData = new FormData();
+    formData.append("messageType", this.mes.messageType);
+    formData.append("subject", this.mes.subject);
+    formData.append("callbackNo", this.mes.callbackNo);
+    formData.append("message", this.mes.message);
+
+    this.http
+    .post(environment.apiPath + "/sendMail.php",formData)
+    .subscribe(
+        (res:any)=> { });
+    }
 
   setEmergency() {
     if (this.mes.messageType=="Problem") {
