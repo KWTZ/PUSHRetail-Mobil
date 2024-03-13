@@ -9,7 +9,7 @@ import { DataService } from '../../_services/data.service';
 })
 export class DailyWorkingHoursComponent implements OnInit {
 
-  sqlString: string = 'Select  a.idAssignment, a.internalPOSNo ' +
+  sqlStringAssign: string = 'Select  a.idAssignment, a.internalPOSNo ' +
                         ' , p.externalPOSNo, p.posName, p.posStreet, p.postalcode, p.city ' +
                         ', DATE_FORMAT(a.operationDate, "%d.%m.%Y") as operationDate ' +
                         ', weekday(a.operationDate) as weekdayNo ' +
@@ -21,6 +21,7 @@ export class DailyWorkingHoursComponent implements OnInit {
 
   sqlStringWorkingDay: string = 'SELECT workingDay, begin, end, workingHours FROM pro_workingdays where promoterNo="@promoterNo" and workingDay="@workingDay"';
   sqlStringBreaks: string = 'SELECT begin as breakIn, end as breakOut, duration as breakDuration FROM pro_workingbreaks where promoterNo="@promoterNo" and workingDay="@workingDay"'; 
+  sqlStringReports: string= 'select idReport from pos_reports where promoterNo="@promoterNo" and reportDate="@workingDay"';
 
   sqlWorkingDayInsert: string = "INSERT INTO pro_workingdays(promoterNo, workingday, begin, end, workinghours, modifiedBy, modified, createdBy, created) VALUES ";
   sqlWorkingDayUpdate: string = 'UPDATE pro_workingdays set end ="@workingEnd", workinghours="@workinghours"  where promoterNo="@promoterNo" and workingDay="@workingDay"';
@@ -63,6 +64,8 @@ export class DailyWorkingHoursComponent implements OnInit {
   flagReport=false;
   isBreak=false;
 
+  isFinish=false;
+
   constructor(private dataservice: DataService,
     private cutil: CustomUtilityService ) { }
 
@@ -71,7 +74,7 @@ export class DailyWorkingHoursComponent implements OnInit {
   }
 
   getData() { 
-      let sqlStatement = this.sqlString;
+      let sqlStatement = this.sqlStringAssign;
       let promoter = JSON.parse(localStorage.getItem("promoter"));
       this.promoterNo=promoter['promoterNo']
       sqlStatement+=this.promoterNo + '"';
@@ -84,7 +87,7 @@ export class DailyWorkingHoursComponent implements OnInit {
         this.currentAssignment=data[this.assignNo];
         localStorage.setItem("assignment", JSON.stringify(this.currentAssignment));
         console.log(this.currentAssignment)
-        this.weekdayName=weekdays[this.currentAssignment['weekdayNo']];
+        this.weekdayName=weekdays[this.currentAssignment['weekdayNo']];       
 
         this.getWorkingHours();
     });
@@ -100,7 +103,8 @@ export class DailyWorkingHoursComponent implements OnInit {
     let sumBreak=0;
     let sumWorkinghours=0;
 
-    this.dataservice.getAll(sqlString).subscribe( data => { 
+    // WorkingDay
+    this.dataservice.getAll(sqlString).subscribe( async data => { 
       if (data.length==1) {
         workingDay = data[0];
         this.clockInDay = workingDay['begin'];
@@ -110,61 +114,70 @@ export class DailyWorkingHoursComponent implements OnInit {
         this.workTime.push({ clockInDay: workingDay['begin'], clockOutDay: workingDay['end'], workingHours: workingDay['workingHours']});
         this.currentStatus="clockInDay";
         if (this.clockOutDay>'')
-          this.currentStatus="clockOutDay";
+            this.currentStatus="clockOutDay";
 
-        this.workTime.forEach(item => {
-          sumWorkinghours+=item['workingHours'];
-        });
-      }
-      else {
-        this.clockInDay=null;
-        this.clockOutDay=null;
-        this.currentStatus="start";
-      }
-
-      this.totalWorkingDay=this.formatTime(sumWorkinghours-sumBreak);
-      this.setStatus(this.currentStatus);
+            this.workTime.forEach(item => {
+              sumWorkinghours+=item['workingHours'];
+            });
+          }
+          else {
+            this.clockInDay=null;
+            this.clockOutDay=null;
+            this.currentStatus="start";
+          }
 
 
-   
-   
+          // reports
+          let idReport; 
+          let sqlReport = this.sqlStringReports.replace("@promoterNo", this.promoterNo);  
+          sqlReport = sqlReport.replace('@workingDay', this.cutil.convertToSQLDate(this.currentAssignment['operationDate']));
+          this.dataservice.getAll(sqlReport).subscribe(repData => { 
+            if (repData.length>0) {
+              idReport = repData[0]['idReport']; 
+              if(idReport!=undefined) {
+                this.currentStatus="clockOutDay";
+              }
+            }         
 
-    // breaks
-    let sqlStatement = this.sqlStringBreaks.replace('@promoterNo', this.promoterNo).replace('@workingDay', this.cutil.convertToSQLDate(this.currentAssignment['operationDate']));
-    this.dataservice.getAll(sqlStatement).subscribe(data => {  this.workBreaks=data; 
+              // breaks
+              let sqlStatement = this.sqlStringBreaks.replace('@promoterNo', this.promoterNo).replace('@workingDay', this.cutil.convertToSQLDate(this.currentAssignment['operationDate']));
+              this.dataservice.getAll(sqlStatement).subscribe(data => {  this.workBreaks=data; 
 
-      if(data.length>0) {
-        if (data.lengt==0) {
-          this.lastBreak=data[0];
-        }
-        else {
-          this.lastBreak = data[data.length-1];
-        }
-        if (this.lastBreak['breakOut']==null) {
-          this.breakBegin=this.lastBreak['breakIn'];
-          this.currentStatus="clockInBreak";
-        }   
-        else {
-        }     
-      }
+            if(data.length>0) {
+              if (data.lengt==0) {
+                this.lastBreak=data[0];
+              }
+              else {
+                this.lastBreak = data[data.length-1];
+              }
+              if (this.lastBreak['breakOut']==null) {
+                this.breakBegin=this.lastBreak['breakIn'];
+                this.currentStatus="clockInBreak";
+              }   
+              else {
 
-
-      this.workBreaks.forEach(item => {
-        sumBreak += item['breakDuration'];
-        item['breakDuration']=this.formatTime(item['breakDuration']);
-
-        this.setStatus(this.currentStatus);
-      });
-
-      this.totalbreaks=this.formatTime(sumBreak);
+            
+              }     
+            }
 
 
-      this.totalWorkingMonth=this.formatTime(sumWorkinghours-sumBreak);
-     
+            this.workBreaks.forEach(item => {
+              sumBreak += item['breakDuration'];
+              item['breakDuration']=this.formatTime(item['breakDuration']);
+            
+            });
+
+            this.totalbreaks=this.formatTime(sumBreak);
+            this.totalWorkingMonth=this.formatTime(sumWorkinghours-sumBreak);
+          
+            this.setStatus(this.currentStatus);
+          });
+        });  
     });
-  });
-    
 
+    
+    this.totalWorkingDay=this.formatTime(sumWorkinghours-sumBreak);
+    this.setStatus(this.currentStatus);
 
   }
 
@@ -211,10 +224,9 @@ export class DailyWorkingHoursComponent implements OnInit {
 
       case 'clockInDay':
         if (this.clockInDay==undefined) {
-          this.workBegin=currentTime;
           this.flagInDay=true;
           this.flagInBreak=false;
-          this.flagOutBreak=false;
+          this.flagOutBreak=true;
           this.flagEndDay=false;
           this.flagReport=false;
         }
@@ -229,6 +241,25 @@ export class DailyWorkingHoursComponent implements OnInit {
           this.isBreak=false;
         }
         break;
+
+      case 'clockOutDay':
+        if(this.clockOutDay==undefined) {
+          this.flagEndDay=true;
+          this.isFinish=false;
+        }
+        else {
+          this.flagEndDay=false;
+          this.isFinish=true;
+        }
+
+        this.workBegin=null;
+        this.flagInDay=true;
+
+        this.flagInBreak=false;
+        this.flagOutBreak=true;
+        this.flagReport=false;
+        break;
+
 
       case 'clockInBreak':
         if(this.breakBegin==undefined ) {
@@ -253,10 +284,12 @@ export class DailyWorkingHoursComponent implements OnInit {
           this.breakEnd=null;
   
         }
+        this.workBegin=null;
         break;
 
       case 'clockOutBreak':
         this.breakEnd=currentTime;
+        this.workBegin=null;
         break;
 
     }
@@ -282,8 +315,9 @@ export class DailyWorkingHoursComponent implements OnInit {
         sqlStatement = this.sqlWorkingDayUpdate;
         sqlStatement = sqlStatement.replace('@promoterNo', this.promoterNo);
         sqlStatement = sqlStatement.replace('@workingDay', this.cutil.convertToSQLDate(this.currentAssignment['operationDate']));
-        sqlStatement = sqlStatement.replace('@workingEnd', this.clockOutDay);
-        sqlStatement = sqlStatement.replace('@workinghours', this.calcTimeDifference(this.clockInDay, this.clockOutDay));
+        sqlStatement = sqlStatement.replace('@workingEnd', this.workEnd);
+        sqlStatement = sqlStatement.replace('@workinghours', this.calcTimeDifference(this.clockInDay, this.workEnd));
+        this.workEnd=null;
     }
 
 
@@ -319,6 +353,20 @@ export class DailyWorkingHoursComponent implements OnInit {
       this.getData();
   
   }
+
+  setDayStart() {
+    let now = new Date();
+    let currentTime =now.toLocaleString('de-DE').substring(11,16);
+    this.workBegin=currentTime;
+    this.setStatus('clockInDay');
+  }
+  setDayEnd() {
+    let now = new Date();
+    let currentTime =now.toLocaleString('de-DE').substring(11,16);
+    this.workEnd=currentTime;
+    this.setStatus('cloclOutDay');
+  }
+
 
   calcTimeDifference(beginn, ende) {
     var help = new Date();

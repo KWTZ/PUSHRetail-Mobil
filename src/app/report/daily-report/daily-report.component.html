@@ -48,27 +48,27 @@
                             <tbody>
                                 <tr>
                                     <td>Pop-up Display<span class="required">*</span></td>
-                                    <td><input type="radio"  name="display" value="ok" (change)="onChange($event, 'display')"/></td>
-                                    <td style="text-align:right;"><input type="radio"  name="display" value="nicht ok" (change)="onChange($event, 'display')"/></td>
-                                    <td style="text-align:right;" ><input type="radio"  name="display" value="fehlt" (change)="onChange($event, 'display')"/></td>
+                                    <td><input type="radio"  name="display" value="ok" [checked]="getOption('displayOK')" (change)="onChange($event, 'display')"/></td>
+                                    <td style="text-align:right;"><input type="radio"  name="display" value="nicht ok"  [checked]="getOption('displayNot')" (change)="onChange($event, 'display')"/></td>
+                                    <td style="text-align:right;" ><input type="radio"  name="display" value="fehlt"  [checked]="getOption('displayNone')" (change)="onChange($event, 'display')"/></td>
                                 </tr>
                                 <tr>
                                     <td>Namensschild<span class="required">*</span></td>
-                                    <td><input type="radio" name="nameTag" value="ok" (change)="onChange($event, 'nameTag')" /></td>
-                                    <td style="text-align:right;"><input type="radio"  name="nameTag"  value="nicht ok" (change)="onChange($event, 'nameTag')" /></td>
-                                    <td style="text-align:right;"><input type="radio"  name="nameTag" value="fehlt" (change)="onChange($event, 'nameTag')" /></td>
+                                    <td><input type="radio" name="nameTag" value="ok"  [checked]="getOption('nameTagOK')" (change)="onChange($event, 'nameTag')" /></td>
+                                    <td style="text-align:right;"><input type="radio"  name="nameTag"   [checked]="getOption('nameTagNot')" value="nicht ok" (change)="onChange($event, 'nameTag')" /></td>
+                                    <td style="text-align:right;"><input type="radio"  name="nameTag" value="fehlt"  [checked]="getOption('nameTagNone')" (change)="onChange($event, 'nameTag')" /></td>
                                 </tr>
                                 <tr>
                                     <td>Tester<span class="required">*</span></td>
-                                    <td><input type="radio" name="tester"value="ok" (change)="onChange($event, 'tester')" /></td>
-                                    <td style="text-align:right;"><input type="radio"  name="tester"  value="nicht ok" (change)="onChange($event, 'tester')"/></td>
-                                    <td style="text-align:right;"><input type="radio"  name="tester" value="fehlt" (change)="onChange($event, 'tester')"/></td>
+                                    <td><input type="radio" name="tester"value="ok"  [checked]="getOption('testerOK')" (change)="onChange($event, 'tester')" /></td>
+                                    <td style="text-align:right;"><input type="radio"  name="tester"  value="nicht ok"  [checked]="getOption('testerNot')" (change)="onChange($event, 'tester')"/></td>
+                                    <td style="text-align:right;"><input type="radio"  name="tester" value="fehlt"  [checked]="getOption('testerNone')" (change)="onChange($event, 'tester')"/></td>
                                 </tr>
                                 <tr style="height:30px;">
                                     <td colspan="2">Außendienst vor Ort?<span class="required">*</span></td>
 
-                                    <td style="white-space: nowrap; text-align: right;">ja   <input type="radio" name="ASM"  value="yes" (change)="onChange($event, 'asm')"/></td>
-                                    <td style="white-space: nowrap; text-align:right;">nein   <input type="radio" name="ASM" value="no" (change)="onChange($event, 'asm')"/></td>
+                                    <td style="white-space: nowrap; text-align: right;">ja   <input type="radio" name="ASM"  value="yes"  [checked]="getOption('asmYes')" (change)="onChange($event, 'asm')"/></td>
+                                    <td style="white-space: nowrap; text-align:right;">nein   <input type="radio" name="ASM" value="no"  [checked]="getOption('asmNo')" (change)="onChange($event, 'asm')"/></td>
 
                                 </tr>
                             </tbody>
@@ -95,10 +95,8 @@
                                             <span style="width: 270px;padding-left: 20px;">Foto Verkaufsumsatz, <br> mit Stempel und Unterschrift</span>                                            
                                             <input (change)="uploadFile($event);" type="file" name="bus_img" id="bus_img" accept="image/*;capture=camera"  />
                                             <input type="submit" id="subImg" name="submitImg" style="display: none;">
-                                           
-                                            
                                         </div>
-                                        <div>{{ filename }}</div>
+                                        <div>{{ rep.filename }}</div>
                                         <div class="alert alert-danger" *ngIf="!isValid && selectedImg && !dataStored">Nicht alle Felder wurden ausgefüllt!</div>
                                         <div class="alert alert-info" *ngIf="dataStored">Der Report wurde versandt.</div>
                                     <div style="margin-top: 10px;">

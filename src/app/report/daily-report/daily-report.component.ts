@@ -26,10 +26,10 @@ export class DailyReportComponent implements OnInit {
   dataStored=false;
 
   selectedImg;
-  filename;
   submitted=false;
   reportDay;
   showModal=false;
+
 
   constructor(private http:HttpClient,
     private dataService: DataService,
@@ -45,6 +45,9 @@ export class DailyReportComponent implements OnInit {
     this.reportDay=this.currentAssign['operationDate'];
     if (this.reportDay==undefined)
       this.reportDay="07.03.2024";
+
+    if (localStorage.getItem('report'))
+      this.rep=JSON.parse(localStorage.getItem('report'));
   }
 
 
@@ -54,12 +57,11 @@ export class DailyReportComponent implements OnInit {
     this.selectedImg = file;
     this.rep.img = file;
     console.log('file',this.selectedImg);
-    this.filename= this.selectedImg.name;
+    this.rep.filename= this.selectedImg.name;
     this.checkIsValid();
   }
 
   storeImg(){
-    console.log('file',this.selectedImg.name);
     const formData = new FormData();
     formData.append("file", this.selectedImg);
     this.http
@@ -73,6 +75,30 @@ export class DailyReportComponent implements OnInit {
     this.rep[field]=e.target.value;
     console.log(this.rep);
     this.checkIsValid();
+  }
+
+  getOption(optionType) {
+
+    
+      if(optionType=="displayOK" && this.rep['display']=="ok") return true;
+      if(optionType=="displayNot" && this.rep['display']=="nicht ok") return true;
+      if(optionType=="displayNone" && this.rep['display']=="fehlt") return true;
+        
+      if(optionType=="nameTagOK" && this.rep['nameTag']=="ok") return true;
+      if(optionType=="nameTagNot" && this.rep['nameTag']=="nicht ok") return true;
+      if(optionType=="nameTagNone" && this.rep['nameTag']=="fehlt") return true;
+
+      if(optionType=="testerOk" && this.rep['tester']=="ok") return true;
+      if(optionType=="testerNot" && this.rep['tester']=="nicht ok") return true;
+      if(optionType=="testerNone" && this.rep['tester']=="fehlt") return true;
+
+      if(optionType=="asmYes" && this.rep['asm']=="yes") return true;
+      if(optionType=="asmNo" && this.rep['asm']=="no") return true;
+
+      if (localStorage.getItem('report'))
+          this.isValid=true;
+
+      return false;
   }
 
   checkIsValid() {
@@ -105,18 +131,22 @@ export class DailyReportComponent implements OnInit {
     this.dataService.getAll(sqlStatement).subscribe(data => {
         if (data.length== 0) {
           this.modalService.open(this.salesModal);
+          localStorage.setItem('report', JSON.stringify(this.rep));
         }
         else {
 
           // save data
           this.storeImg();
           this.sqlInsertReport+='("' + this.promoterNo + '", ' +  this.currentAssign['internalPOSNo'] + ', "' + this.util.convertToSQLDate(this.reportDay) + '", ' + this.rep.valFrequency + ', ' + this.rep.valLeads + ', ' + this.rep.valTalks +
-            ', ' + this.rep.valTester + ', ' + this.rep.revenue + ', "' + this.rep.display + '", "' + this.rep.nameTag + '", "' + this.rep.tester + '", "' + this.rep.asm + '", "' + this.selectedImg.name + '", ' +
+            ', ' + this.rep.valTester + ', ' + this.rep.revenue + ', "' + this.rep.display + '", "' + this.rep.nameTag + '", "' + this.rep.tester + '", "' + this.rep.asm + '", "' + this.rep.filename + '", ' +
             '"' + this.rep.custReaction + '", "' + this.rep.requestChanges + '", ' +
             'CURRENT_TIMESTAMP, ' + this.promoterNo + ', CURRENT_TIMESTAMP, ' + this.promoterNo + ')';
           this.dataService.storeData(this.sqlInsertReport).subscribe(res => { console.log(res) });
           this.dataStored=true;
           this.isValid=false;
+          localStorage.removeItem('report');
+
+          setTimeout(() =>  { this.router.navigate(['/', 'dailywork']); }, 2000);
         }
     });
   }
@@ -139,6 +169,7 @@ const Report = {
   tester:null, 
   asm: null,
   img: null,
+  filename:null,
   custReaction: null,
   requestChanges: null
 }

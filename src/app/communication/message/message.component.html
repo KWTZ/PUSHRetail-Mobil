@@ -12,34 +12,54 @@
                                 <div class="alert alert-info" *ngIf="hasSend">Nachricht wurde gesendet.</div>
                                 <div class="form-field" (change)="setEmergency()">
                                     <label>Mitteilung-Typ:</label>
-                                    <select [(ngModel)]="mes.messageType">
+                                    <div><select [(ngModel)]="mes.messageType" [ngClass]="!isValid && mes.messageType==null?'notValid':''" >
                                             <option>( bitte wählen )</option>
                                             <option>Anforderung</option>
                                             <option style="color: red;">Problem</option>
                                             <option>Ereignis</option>
                                     </select>
+                                    <span class="required">*</span>
+                                    </div>
                                 </div>
                                 <div class="form-field">
                                     <label>Rückrufnummer</label>
-                                    <input type="text" name="txt" [(ngModel)]="mes.callbackNo" placeholder="">
+                                    <input type="text" name="txt" [(ngModel)]="mes.callbackNo">
                                 </div>
                                 <div class="form-field">
                                     <label>Was ist passiert</label>
-                                    <input type="text" name="txt" [(ngModel)]="mes.subject" placeholder="">
+                                    <div>
+                                        <input type="text" name="txt" 
+                                        [(ngModel)]="mes.subject"
+                                        [ngClass]="!isValid && mes.subject==null?'notValid':''" 
+                                        >
+                                        <span class="required">*</span>
+                                    </div>
                                 </div>
                                 <div class="form-field">
-                                    <label>Beschreibung</label>
-                                    <textarea style="height: 160px;" [(ngModel)]="mes.message" placeholder="max.300 Zeichen" (change)="setSend()"></textarea>
+                                <div>  
+                                    <label style="min-width:0; margin-right:0.5em;">Beschreibung</label>
+                                    <span class="required">*</span>
+                                </div>
+                                <textarea style="height: 160px;" 
+                                [(ngModel)]="mes.message" 
+                                [ngClass]="!isValid && mes.message==null?'notValid':''" 
+                                placeholder="max.300 Zeichen" ></textarea>
+                               
+
                                 </div>
                         </div>
                         <div class="action-icons">
-                            <img src="assets/action-arrow-active.svg" alt="" *ngIf="isSend" (click)="sendMessage()" style="width:20px;"/>
-                            <img src="assets/action-arrow.svg" alt="" *ngIf="!isSend" style="width:20px;"/>
-                            <a [href]="'tel:+49 511 543680-30'"><img src="assets/phone-red.svg" alt="" *ngIf="isEmergency" style="height:40px;" /></a>              
+                            <img src="assets/action-save-active.svg" alt="" (click)="sendMessage()" style="width:50px;"/>
                         </div>
+                        
                     </div>
                     
-
+                    <div style="text-align: center;">
+                        <!-- <img src="assets/action-arrow.svg" alt="" *ngIf="!isSend" style="width:20px;"/> -->
+                        <a [href]="'tel:+49 511 543680-30'"><img src="assets/phone.svg" alt="" *ngIf="isEmergency" style="height:40px;" /></a> 
+                        <a [href]="'tel:+49 511 543680-30'"><img src="assets/phone-red.svg" alt="" *ngIf="isEmergency && isSend" style="height:40px;" /></a> 
+                        <div *ngIf="isEmergency" style="font-size:0.8em; margin-right:5px;">(optional, bei wirklich dringenden Fällen)</div>             
+                    </div>
                 </div>
             </div>
             

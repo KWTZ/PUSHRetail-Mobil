@@ -13,6 +13,7 @@ import { RegistrationComponent } from './login/registration/registration.compone
 import { OutofstockComponent } from './outofstock/outofstock.component';
 import { AuthGuardService } from './_services/auth.guard';
 
+
 const routes: Routes = [
   { path: '',  component: IntroComponent, pathMatch: 'full' },
   { path: 'home',  component: HomeComponent, pathMatch: 'full', canActivate:[AuthGuardService] },
@@ -25,6 +26,10 @@ const routes: Routes = [
   { path: 'placement',  component: PlacementComponent , pathMatch: 'full' , canActivate:[AuthGuardService] },
   { path: 'register',  component: RegistrationComponent , pathMatch: 'full'  },
   { path: 'login',  component: LoginComponent , pathMatch: 'full'  },
+  
+    //Wild Card Route for 404 request 
+    // { path: '**', pathMatch: 'full',  component: PagenotfoundComponent }, 
+    // { path: '404', pathMatch: 'full',  component: PagenotfoundComponent }, 
 
 ];
 

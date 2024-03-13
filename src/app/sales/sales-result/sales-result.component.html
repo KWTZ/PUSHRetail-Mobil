@@ -3,12 +3,13 @@
     <div class="main-part">
         <section class="glb-part bg-white section-100">
             <div class="container">
-                <div style="font-weight: bold;">Verkaufstag: {{ salesDate }}</div>
+                <div style="display:flex; justify-content: space-between">
+                    <div style="font-weight: bold;">Verkaufstag: {{ salesDate }}</div>
+                    <div *ngIf="callbackReport"><img src="assets/action-report-active.svg"  style="width:40px;" [routerLink]="['/', 'dailyreport']"/></div>
+                </div>
                 <div class="glb-inner">
-                    <div class="login-inner">
-                        
+                    <div class="login-inner">                        
                         <div class="glb-bottom">
-
                                 <div style="display: flex; flex-direction: row; align-items: flex-end;">
                                     <div>
                                         <div class="form-field">
@@ -28,22 +29,25 @@
                                             </div>
                                             <div class="form-field">
                                                     <label>Produkt:</label>
-                                                    <select [(ngModel)]="selectedProductID" (change)="setProduct()">
+                                                    <select [(ngModel)]="selectedProductID" (change)="setProduct()" [ngClass]="!isValid && selectedProductID?'notValid':''">
                                                         <option></option>
                                                         <option *ngFor="let product of filteredListProducts" [ngValue]="product.ID">{{ product.viewValue }}</option>
-                                                    </select>
+                                                    </select><span class="required">*</span>
                                             </div>
                                             <div class="form-field">
                                                 <label for="">Anzahl</label>
-                                                <input type="text" name="Anzahl" [(ngModel)]="quantity" (change)="setQuantity()" />
+                                                <input type="text" name="Anzahl" [(ngModel)]="quantity" [ngClass]="!isValid && quantity==null?'notValid':''" />
+                                                <span class="required">*</span>
                                             </div>  
                                             <div class="form-field">
                                                 <label for="">Preis</label>
-                                                <input type="text" name="Preis" [(ngModel)]="selectedProductPrice" />
+                                                <input type="text" name="Preis" [(ngModel)]="selectedProductPrice"  
+                                                    [ngClass]="!isValid && selectedProductPrice==null?'notValid':''" />
+                                                <span class="required">*</span>
                                             </div>
                                     </div>
-                                    <img src="assets/action-save-active.svg"  style="margin-left: 10px; margin-bottom: 7px; height: 35px;"  *ngIf="flagQuantity" (click)="doSave()"/>
-                                    <img src="assets/action-save.svg"  style="margin-left: 10px; margin-bottom: 7px; height: 35px;" *ngIf="!flagQuantity"/>
+                                    <img src="assets/action-save-active.svg"  style="margin-left: 10px; margin-bottom: 7px; height: 35px;" (click)="doSave()"/>
+                                    <!-- <img src="assets/action-save.svg"  style="margin-left: 10px; margin-bottom: 7px; height: 35px;" *ngIf="!flagQuantity"/> -->
                                 </div> 
                         </div>
                     </div>
@@ -59,7 +63,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let sales of listSales">
+                                <tr *ngFor="let sales of listSalesDaily">
                                     <td style="width: 400px;">{{ sales.productName }}</td>
                                     <td style="text-align:right;">{{ sales.quantity  }}</td>
                                     <td style="text-align:right;">{{ sales.price }} €</td>

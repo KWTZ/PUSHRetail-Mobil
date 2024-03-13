@@ -22,4 +22,19 @@ input[type="checkbox"] {
      margin-right: 1em;
 }
 
-.glb-table { padding: 10px;}
+.glb-table { padding: 10px; }
+.glb-table td {
+     background-color: unset;     
+}
+
+tr:nth-child(even) {background-color: #e9ecef9c}
+tr:nth-child(odd) {background: #FFFFFF}
+
+.glb-form {
+     margin-left: 0;
+     margin-right: o;
+}
+
+.row>* {
+     width: 0;
+}

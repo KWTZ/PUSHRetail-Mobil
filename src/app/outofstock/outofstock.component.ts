@@ -32,7 +32,7 @@ export class OutofstockComponent implements OnInit {
   filteredLineList;
   filteredProductsList;
 
-  isValid=false;
+  isValid=true;
 
   promoterNo;
   currentAssign;
@@ -71,12 +71,32 @@ export class OutofstockComponent implements OnInit {
   }
 
   doSave() {
+    if(this.validate()) {
     let sqlInsertOOS= this.sqlInsertOOS + "(" + this.selectedProduct + ", " + this.currentAssign['internalPOSNo'] + ', "' + this.promoterNo + '"' + 
     ', CURRENT_TIMESTAMP, ' + this.remainQuantity + ', CURRENT_TIMESTAMP, "' + this.promoterNo + '", CURRENT_TIMESTAMP,  "' + this.promoterNo + '")'; 
     console.log(sqlInsertOOS)
     this.dataservice.storeData(sqlInsertOOS).subscribe(res => { console.log(res) })
     this.getData();
+    }
 
+  }
+
+  validate() {
+    console.log("pl", this.remainQuantity)
+    let valid=true;
+    if(this.selectedProduct==null) 
+        valid=false;
+    if(this.remainQuantity==null)
+        valid=false;
+
+    this.isValid=valid;
+
+    return valid;
+
+  }
+
+  checkRemaining() {
+    return false;
   }
 
 }

@@ -1039,6 +1039,11 @@ display: none;
   margin-left: 0.2em;
 }
 
+.notValid {
+  border-color: red;
+  background-color: rgba(255,0,0,0.1);
+} 
+
 /* Home Network Element */
 .network-inner-home {
   height: 350px;

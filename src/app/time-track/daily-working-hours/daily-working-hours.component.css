@@ -1,3 +1,7 @@
+.form-field label {
+     width: 10em;
+}
+
 .placement {
      display: flex;
      flex-direction: row;
@@ -30,4 +34,8 @@
 
 .break input {
      background-color: rgba(255, 208, 10, 0.1);
+}
+
+.alert-success {
+     margin-top: 0px;
 }

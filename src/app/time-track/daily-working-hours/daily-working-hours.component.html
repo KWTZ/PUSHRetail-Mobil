@@ -5,6 +5,7 @@
          <section class="bg-white section-100">               
                <div class="container">
                     <div class="glb-inner">
+                        <div>
                         <h3>Deine nächsten Einsätze:</h3>     
                          <div class="placement"> 
                             <div >                                
@@ -19,13 +20,15 @@
                                 <img src="assets/action-move.svg" alt="prev" class="action-btn action-arrow-right" *ngIf="assignNo==noOfAssignment-1" (click)="setAssign(1)" />
                                 <img src="assets/action-move-active.svg" alt="prev" class="action-btn action-arrow-right" *ngIf="assignNo<noOfAssignment-1" (click)="setAssign(1)" />
                             </div>
+                        </div>
+                            <div class="alert alert-success" *ngIf="isFinish">vollständig & erledigt</div>
                          </div>
                          <div class="action-icons-list">     
                                  <div class="item">
                                          <img src="assets/action-arrow-active.svg" alt="" class="action-btn action-active" 
-                                                *ngIf="!flagInDay" (click)="setStatus('clockInDay')" />
+                                                *ngIf="!flagInDay" (click)="setDayStart()" />
                                          <img src="assets/action-arrow.svg" alt="" class="action-btn" 
-                                            *ngIf="flagInDay" (click)="setStatus('clockOutDay')" />
+                                            *ngIf="flagInDay" (click)="setStatus('')" />
                                  </div>
                                  <div class="item">
                                     <img src="assets/action-break-active.svg" alt="" class="action-btn action-active" style="height:60px;" 
@@ -36,29 +39,31 @@
                                                  (click)="setStatus('clockOutBreak')" />
                                  </div>
                                  <div class="item">
-                                        <img src="assets/action-end-active.svg" alt="" class="action-btn"  *ngIf="flagEndDay"  (click)="setStatus('clockOutDay')" />
+                                        <img src="assets/action-end-active.svg" alt="" class="action-btn"  *ngIf="flagEndDay"  (click)="setDayEnd()" />
                                         <img src="assets/action-end.svg" alt="" class="action-btn" *ngIf="!flagEndDay" (click)="setStatus('')" />
                                  </div>
                                  <div class="item">
                                     <img src="assets/action-report-active.svg" alt="" class="action-btn"  *ngIf="flagReport" [routerLink]="['/', 'dailyreport']" />
                                     <img src="assets/action-report.svg" alt="" class="action-btn" *ngIf="!flagReport" (click)="setStatus('')" />
-                                 </div>                               
+                                 </div>                                  
+                             
                          </div>
                     </div>
-                    <div class="working-hours">                        
+                    <div class="working-hours">    
+                        <div>                    
                             <div class="form-field" *ngIf="!isBreak">
-                                <label>Beginn (Uhrzeit):</label>
+                                <label>Einsatz-Beginn (Uhrzeit):</label>
                                 <input type="text" name="txt" [(ngModel)]="workBegin" placeholder="">
                                 <img src="assets/action-save-active.svg" alt="" class="action-btn action-active" style="height:30px; margin-top: -2px; margin-left: 10px;" *ngIf="workBegin" (click)="saveWorkinghours('start')" /> 
                                 <!-- <img src="assets/action-arrow.svg" alt="" class="action-btn action-active" style="height:25px; margin-top: 2px; margin-left: 10px;" *ngIf="!workBegin" (click)="saveWorkinghours()"/> -->
                             </div>
                             <div class="form-field" *ngIf="!isBreak">
-                                <label>Ende (Uhrzeit):</label>
+                                <label>Einsatz-Ende (Uhrzeit):</label>
                                 <input type="text" name="txt" [(ngModel)]="workEnd" placeholder="">
                                 <img src="assets/action-save-active.svg" alt="" class="action-btn action-active" style="height:25px; margin-top: -2px; margin-left: 10px;"  *ngIf="workEnd" (click)="saveWorkinghours('end')" /> 
                                 <!-- <img src="assets/action-arrow.svg" alt="" class="action-btn action-active" style="height:25px; margin-top: 2px; margin-left: 10px;"  *ngIf="!workEnd"/> -->
                             </div>
-
+                        </div>                       
                             <div class="form-field break"  *ngIf="isBreak" >
                                 <label>Beginn Pause:</label>
                                 <input type="text" name="txt" [(ngModel)]="breakBegin"  placeholder="">
@@ -87,13 +92,13 @@
 
                             <div class="break-table">
                                 <div class="time-table-group">
-                                    <div class="time-table-item">Deine Pausen:</div>
+                                    <div class="time-table-item">Deine Pausen:<span style="margin-left: 33px; font-weight: bold;">{{ totalbreaks }}</span></div>
                                     <!-- <div class="time-table-item"><strong>{{ totalbreaks }}</strong></div> -->
                                 </div>
                                 <table>
                                     <thead>
-                                        <th>Beginn</th>
-                                        <th>Ende</th>
+                                        <th>Pause Beginn</th>
+                                        <th>Pause Ende</th>
                                         <th>Std.</th>
                                     </thead>
                                     <tbody>

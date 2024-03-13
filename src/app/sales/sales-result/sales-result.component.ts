@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { registerLocaleData } from '@angular/common';
 import { DataService } from 'src/app/_services/data.service';
 import { CustomUtilityService } from 'src/app/_services/customUtilites.service';
+
 import de from '@angular/common/locales/de';
 
 
@@ -26,6 +27,7 @@ export class SalesResultComponent implements OnInit {
   listLine;
   listProducts;
   listSales;
+  listSalesDaily;
 
 
   filteredListLine;
@@ -50,6 +52,8 @@ export class SalesResultComponent implements OnInit {
   salesDate;
 
   flagQuantity=false;
+  isValid=true;
+  callbackReport=false;
 
   constructor(private dataservice: DataService,
     private util:CustomUtilityService) { }
@@ -72,18 +76,23 @@ export class SalesResultComponent implements OnInit {
       this.dataservice.getAll(this.sqlProduct).subscribe(data => { this.listProducts=data; this.filteredListProducts=data});
       this.dataservice.getAll(sqlSales).subscribe(data => { 
         this.listSales=data;
+        this.listSalesDaily=data.filter(e=> e.salesdate==this.util.convertToSQLDate(this.currentAssign['operationDate']));
         this.calcTotals(); 
       });
+
+      if(localStorage.getItem('report'))
+        this.callbackReport=true;
 
       
   }
 
   doSave() {
+    if(this.validate()) {
     let idPOS = this.currentAssign['internalPOSNo'];
-    this.sqlInsertSales+=this.selectedProductID + ", " + this.quantity + ", " + this.selectedProductPrice.replace(",", ".") + 
+    let sqlInsert = this.sqlInsertSales + this.selectedProductID + ", " + this.quantity + ", " + this.selectedProductPrice.replace(",", ".") + 
         ', "'+ this.util.convertToSQLDate(this.salesDate) + '", "' + this.promoterNo + '", ' + idPOS + ', CURRENT_TIMESTAMP, 0, CURRENT_TIMESTAMP, 0)';
     console.log(this.sqlInsertSales);
-    this.dataservice.storeData(this.sqlInsertSales).subscribe(result => { console.log(result)});
+    this.dataservice.storeData(sqlInsert).subscribe(result => { console.log(result)});
 
     this.getData();
     this.calcTotals();
@@ -92,6 +101,23 @@ export class SalesResultComponent implements OnInit {
     this.selectedLine=null;
     this.selectedProduct=null;
     this.selectedProductID=null;
+    }
+
+  }
+
+  validate() {
+    console.log("pl", this.selectedProductID)
+    let valid=true;
+    if(this.selectedProductID==null) 
+        valid=false;
+    if(this.quantity==null)
+        valid=false;
+    if(this.selectedProductPrice==undefined)
+      valid=false;
+
+    this.isValid=valid;
+
+    return valid;
 
   }
 
@@ -111,10 +137,6 @@ export class SalesResultComponent implements OnInit {
       this.selectedProductPrice=arrProduct[0]['price'];
   }
 
-  setQuantity() {
-      if(this.quantity>0)
-        this.flagQuantity=true;
-  }
 
   calcTotals() {
     this.dailyTotal=0;
@@ -130,7 +152,8 @@ export class SalesResultComponent implements OnInit {
 
       this.listSales.forEach(element => {
           let sdate = new Date(element['salesdate']);
-          if(sdate.getDate()==today) {
+          console.log(element['salesdate'], this.util.convertToSQLDate(this.currentAssign['operationDate']))
+          if(element['salesdate']==this.util.convertToSQLDate(this.currentAssign['operationDate'])) {
             this.dailyTotal+=this.util.convertToNumberDOT(element['quantity'])*this.util.convertToNumberDOT(element['price']);
           }
           if (sdate.getMonth()==month) {
