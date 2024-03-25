@@ -23,7 +23,7 @@ export class AuthService {
   }
 
   register(username: string, email: string, password: string): Observable<any> {
-    console.log(password);
+    console.log(username, email, password);
     //return this.http.post(environment.apiPath + '/signup', { user: username, email:email, pw: password  },httpOptions);
     return this.http.post(environment.apiPath + '/signup', { user: username, email:email, pw: this.encrypt.encryptAES256(password)  },httpOptions);
   }

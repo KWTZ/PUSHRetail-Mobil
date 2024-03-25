@@ -134,6 +134,15 @@ input[type=number]::placeholder {
   font-size: 0.2em;
 }
 
+.wrapper-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  margin-top: 25%;
+}
+
 .theme-btn{
   display: inline-block;
   width: auto;

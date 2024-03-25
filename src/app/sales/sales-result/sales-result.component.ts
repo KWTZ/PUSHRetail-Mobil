@@ -76,7 +76,7 @@ export class SalesResultComponent implements OnInit {
       this.dataservice.getAll(this.sqlProduct).subscribe(data => { this.listProducts=data; this.filteredListProducts=data});
       this.dataservice.getAll(sqlSales).subscribe(data => { 
         this.listSales=data;
-        this.listSalesDaily=data.filter(e=> e.salesdate==this.util.convertToSQLDate(this.currentAssign['operationDate']));
+        this.listSalesDaily=data.filter(e=> e.salesdate.substring(0,10)==this.util.convertToSQLDate(this.currentAssign['operationDate']));
         this.calcTotals(); 
       });
 
@@ -152,8 +152,8 @@ export class SalesResultComponent implements OnInit {
 
       this.listSales.forEach(element => {
           let sdate = new Date(element['salesdate']);
-          console.log(element['salesdate'], this.util.convertToSQLDate(this.currentAssign['operationDate']))
-          if(element['salesdate']==this.util.convertToSQLDate(this.currentAssign['operationDate'])) {
+          console.log(element['salesdate'].substring(0,10), this.util.convertToSQLDate(this.currentAssign['operationDate']))
+          if(element['salesdate'].substring(0,10)==this.util.convertToSQLDate(this.currentAssign['operationDate'])) {
             this.dailyTotal+=this.util.convertToNumberDOT(element['quantity'])*this.util.convertToNumberDOT(element['price']);
           }
           if (sdate.getMonth()==month) {

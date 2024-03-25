@@ -9,6 +9,8 @@ export class PlacementComponent implements OnInit {
 
   constructor() { }
 
+  // sqlString: string "Select "
+
   ngOnInit(): void {
   }
 

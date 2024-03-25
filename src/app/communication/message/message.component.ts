@@ -36,16 +36,16 @@ export class MessageComponent implements OnInit {
         this.dataService.storeData(this.sqlInsertMessage).subscribe(res => { console.log(res);
           this.hasSend=true;
           this.mes.messageType=null;
-          this.mes.subject=null;
+          this.mes.subject="Eskalation";
           this.mes.callbackNo=null;
-          this.mes.message=null;
+          this.mes.message="von: " + this.promoter['email']+"<br><br>";
         });
 
         console.log('Message',this.mes);
         const formData = new FormData();
         formData.append("messageType", this.mes.messageType);
         formData.append("subject", this.mes.subject + ", " + this.promoter['username']  + " - POS: " + this.currentAssign['internalPOSNo']);
-        formData.append("callbackNo", this.mes.callbackNo);
+        formData.append("callbackNo", this.mes.callbackNo+"<br>");
         formData.append("message", this.mes.message);
 
         this.http

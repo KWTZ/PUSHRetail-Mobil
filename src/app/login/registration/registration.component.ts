@@ -36,6 +36,7 @@ export class RegistrationComponent implements OnInit {
     }
     else {
         const { username, email, password } = this.form;
+        console.log(username, email, password);
         this.authService.register(username, email, password).subscribe(
           data => {
             console.log(data);

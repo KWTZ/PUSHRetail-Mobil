@@ -25,6 +25,7 @@ import { FooterComponent } from './_nav/footer/footer.component';
 import { OutofstockComponent } from './outofstock/outofstock.component';
 import { TargetModalComponent } from './target-modal/target-modal.component';
 import { AuthGuardService } from './_services/auth.guard';
+import { TestpwComponent } from './login/testpw/testpw.component';
 
 
 
@@ -46,6 +47,7 @@ import { AuthGuardService } from './_services/auth.guard';
     FooterComponent,
     OutofstockComponent,
     TargetModalComponent,
+    TestpwComponent,
   ],
   imports: [
     BrowserModule,

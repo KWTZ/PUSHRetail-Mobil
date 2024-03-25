@@ -18,7 +18,7 @@ export class OutofstockComponent implements OnInit {
 
   sqlOOS = 'Select idOOS, tblPD.productname, internalPOSNo, promoterNo, DATE_FORMAT(oos.reportingDate, "%d.%m.%Y") as reportdate , remainQuantity, settledDate ' +
         ' from prd_outofstock oos  left join prd_products tblPD on oos.idProduct=tblPD.idProduct ' +
-        ' where internalPOSNo=@internalPOSNo and promoterNo="@promoterNo" order by oos.reportingdate';
+        ' where internalPOSNo=@internalPOSNo order by oos.reportingdate';
 
   categoryList;
   listLine;
@@ -52,7 +52,7 @@ export class OutofstockComponent implements OnInit {
     this.dataservice.getAll(this.sqlLine).subscribe(data => { this.listLine=data; this.filteredLineList=data; });
     this.dataservice.getAll(this.sqlProduct).subscribe(data => { this.listProduct=data; this.filteredProductsList=data; });
     this.sqlOOS=this.sqlOOS.replace("@internalPOSNo", this.currentAssign['internalPOSNo']);
-    this.sqlOOS=this.sqlOOS.replace("@promoterNo", this.promoterNo);
+    // this.sqlOOS=this.sqlOOS.replace("@promoterNo", this.promoterNo);
     this.dataservice.getAll(this.sqlOOS).subscribe(data => { this.listOOS=data; })
   }
 
